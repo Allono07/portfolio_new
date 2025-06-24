@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            <span class="logo-text">Developer X</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    <main>
+        <section id="home">
+            <div class="home-content large">
+                <img id="profile-photo" class="large-photo" src="allen.jpeg" alt="Your Photo" />
+                <div class="home-text">
+                    <h1 id="name">Your Name</h1>
+                    <h2 id="typing-title" class="typing">Software Engineer - Mobile Application Developer & Backend Developer</h2>
+                    <p id="description">I am passionate about building scalable mobile and backend solutions.</p>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div class="about-banner">
+                <h2>About Me</h2>
+                <p id="about-banner-desc">I am a software engineer with experience in mobile and backend development, passionate about technology and innovation.</p>
+            </div>
+            <div class="about-flex">
+                <div>
+                    <h3>Experience</h3>
+                    <ul id="experience-list">
+                        <li><div class="experience-card">Mobile App Developer at [Company]<br><span>Developed cross-platform mobile apps using Flutter. Led a team of 3 engineers. 2021-2023</span></div></li>
+                        <li><div class="experience-card">Backend Developer at [Company]<br><span>Designed scalable REST APIs and microservices. Maintained CI/CD pipelines. 2019-2021</span></div></li>
+                        <li><div class="experience-card">Intern - Software Engineer<br><span>Worked on automation scripts and backend tasks. 2018-2019</span></div></li>
+                    </ul>
+                </div>
+                <div class="skills-section">
+                    <h3>Skills</h3>
+                    <div class="skills-cards">
+                        <div class="skill-card">Flutter</div>
+                        <div class="skill-card">React Native</div>
+                        <div class="skill-card">Node.js</div>
+                        <div class="skill-card">Python</div>
+                        <div class="skill-card">REST APIs</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="projects">
+            <div class="projects-banner">
+                <h2>Projects</h2>
+                <p id="projects-banner-desc">Here are some of the projects I have worked on, showcasing my skills in mobile and backend development.</p>
+            </div>
+            <div id="projects-grid" class="projects-grid">
+                <!-- Project cards will be rendered here by JS as a grid -->
+            </div>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <form id="contact-form">
+                <input type="text" id="contact-name" placeholder="Your Name" required />
+                <input type="email" id="contact-email" placeholder="Your Email" required />
+                <textarea id="contact-message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html> 
