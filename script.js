@@ -123,4 +123,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // --- Fade-in animation for sections/cards/footer ---
+    const fadeEls = [
+        ...document.querySelectorAll('section, .about-banner, .projects-banner, .footer, .project-card, .skill-card, .experience-card')
+    ];
+    const fadeInObserver = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeInObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    fadeEls.forEach(el => fadeInObserver.observe(el));
 });

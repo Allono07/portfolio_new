@@ -7,6 +7,8 @@ body {
 }
 nav {
     background: rgba(31, 28, 44, 0.95);
+    color: #fff;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
     padding: 1.2rem 2.5rem 1.2rem 2rem;
     position: fixed;
     top: 0;
@@ -20,7 +22,6 @@ nav {
     align-items: center;
     justify-content: space-between;
     border-radius: 0 0 24px 24px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
     flex-wrap: wrap;
     overflow-x: visible;
     padding-right: 2.5rem;
@@ -32,6 +33,7 @@ nav .logo {
     margin-right: 2.5rem;
     font-size: 1.1rem;
     white-space: nowrap;
+    color: #fff;
 }
 
 nav ul {
@@ -63,11 +65,30 @@ nav a {
     display: block;
     white-space: nowrap;
     flex-shrink: 0; /* Prevent shrinking */
+    background: transparent;
+    position: relative;
+    overflow: hidden;
 }
 
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.2em;
+    width: 100%;
+    height: 2px;
+    background: #64b5f6;
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    transform-origin: left;
+}
+
+nav a:hover::after, nav a.active::after {
+    transform: scaleX(1);
+}
 
 nav a:hover, nav a.active {
-    color: #928dab;
+    color: #64b5f6;
     background: #232136;
 }
 main {
@@ -75,6 +96,7 @@ main {
     margin: 6rem auto 0 auto;
     padding: 2rem;
     background: transparent;
+    color: #fff;
     border-radius: 0;
     box-shadow: none;
     position: relative;
@@ -86,6 +108,15 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: transparent;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+section.visible {
+    opacity: 1;
+    transform: none;
 }
 .home-content {
     display: flex;
@@ -103,6 +134,7 @@ section {
     margin: 0 0 0.5rem 0;
     font-size: 2.2rem;
     font-weight: 700;
+    color: #fff;
 }
 #description {
     font-size: 1.2rem;
@@ -148,48 +180,85 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 3rem 1rem 4rem 1rem;
+    background: linear-gradient(120deg, rgba(100,181,246,0.10) 0%, rgba(31,28,44,0.18) 100%);
+    border-radius: 24px;
+    box-shadow: 0 4px 32px 0 rgba(100,181,246,0.10);
+    margin-bottom: 2rem;
+    position: relative;
+    min-width: 0;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+#contact.visible {
+    opacity: 1;
+    transform: none;
+}
+#contact h2 {
+    margin-bottom: 0.5rem;
+    font-size: 2.1rem;
+    color: #64b5f6;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+#contact h2::before {
+    content: '\2709';
+    font-size: 1.5rem;
+    color: #64b5f6;
+    display: inline-block;
 }
 #contact-form {
-    background: rgba(35, 33, 54, 0.92);
+    background: rgba(31, 28, 44, 0.92);
+    color: #fff;
+    box-shadow: 0 2px 16px rgba(100,181,246,0.13);
     padding: 2.5rem 2rem 2rem 2rem;
     border-radius: 18px;
-    box-shadow: 0 2px 16px rgba(146, 141, 171, 0.13);
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
     max-width: 420px;
     width: 100%;
     margin-top: 1.5rem;
+    border-left: 6px solid #64b5f6;
+    position: relative;
 }
 #contact-form input, #contact-form textarea {
-    padding: 0.9rem;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    background: #2c5364;
+    background: #232136;
     color: #fff;
-    resize: none;
+    border: 1.5px solid #64b5f6;
+    padding: 1.1rem;
+    border-radius: 8px;
+    font-size: 1.08rem;
     box-shadow: 0 1px 4px #23213622;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+#contact-form input:focus, #contact-form textarea:focus {
+    border: 1.5px solid #42a5f5;
+    outline: none;
+    box-shadow: 0 2px 8px #64b5f633;
 }
 #contact-form textarea {
-    min-height: 100px;
+    min-height: 110px;
 }
 #contact-form button {
     background: #64b5f6;
-    color: #203a43;
+    color: #232136;
     border: none;
-    border-radius: 6px;
-    padding: 0.7rem 1.5rem;
-    font-weight: 600;
+    border-radius: 8px;
+    padding: 1rem 0;
+    font-size: 1.15rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s;
-    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 8px #64b5f633;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 #contact-form button:hover {
     background: #42a5f5;
-}
-#contact h2 {
-    margin-bottom: 0.5rem;
+    color: #fff;
+    box-shadow: 0 4px 16px #64b5f655;
 }
 
 /* Typing title fix: allow wrapping, hide border on wrap */
@@ -238,6 +307,7 @@ section {
     gap: 3rem;
     min-height: 70vh;
     background: none;
+    color: #fff;
     border-radius: 0;
     box-shadow: none;
     padding: 3rem 2rem;
@@ -271,6 +341,7 @@ section {
     font-size: 2.8rem;
     font-weight: 700;
     letter-spacing: 1px;
+    color: #fff;
 }
 #description {
     color: #b0bec5;
@@ -281,15 +352,24 @@ section {
 /* About Banner and Skills Cards */
 .about-banner {
     background: rgba(31, 28, 44, 0.7);
+    color: #fff;
     padding: 2rem 2rem 1rem 2rem;
     border-radius: 18px;
     margin-bottom: 2rem;
     box-shadow: 0 2px 12px rgba(0,0,0,0.10);
     text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.about-banner.visible {
+    opacity: 1;
+    transform: none;
 }
 .about-banner h2 {
     margin: 0 0 0.5rem 0;
     font-size: 2rem;
+    color: #fff;
 }
 .about-banner p {
     color: #b0bec5;
@@ -325,6 +405,14 @@ section {
     position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
     margin-left: 0.5rem;
+    border: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.experience-card.visible {
+    opacity: 1;
+    transform: none;
 }
 .experience-card:hover {
     transform: translateY(-4px) scale(1.03);
@@ -368,6 +456,15 @@ section {
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
     white-space: nowrap;
     transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    border-left: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.skill-card.visible {
+    opacity: 1;
+    transform: none;
 }
 .skill-card:hover {
     transform: scale(1.07);
@@ -385,7 +482,7 @@ section {
     background: #232136;
     color: #fff;
     border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -394,6 +491,14 @@ section {
     gap: 1rem;
     min-height: 220px;
     margin: 0;
+    border: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.project-card.visible {
+    opacity: 1;
+    transform: none;
 }
 .project-card h3 {
     margin: 0 0 0.5rem 0;
@@ -508,15 +613,24 @@ html {
 
 .projects-banner {
     background: rgba(31, 28, 44, 0.7);
+    color: #fff;
     padding: 2rem 2rem 1rem 2rem;
     border-radius: 18px;
     margin-bottom: 2rem;
     box-shadow: 0 2px 12px rgba(0,0,0,0.10);
     text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.projects-banner.visible {
+    opacity: 1;
+    transform: none;
 }
 .projects-banner h2 {
     margin: 0 0 0.5rem 0;
     font-size: 2rem;
+    color: #fff;
 }
 .projects-banner p {
     color: #b0bec5;
@@ -602,4 +716,98 @@ html {
     nav ul.nav-links li:last-child a {
         padding-right: 1.2rem;
     }
+}
+
+::-webkit-scrollbar-thumb {
+    background: #64b5f6;
+}
+::-webkit-scrollbar-track {
+    background: #232136;
+}
+
+.footer {
+    background: rgba(31, 28, 44, 0.95);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 1rem 1rem 1rem;
+    margin-top: 3rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.footer.visible {
+    opacity: 1;
+    transform: none;
+}
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+.footer-icon {
+    color: #fff;
+    transition: color 0.2s, transform 0.3s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.footer-icon:hover {
+    color: #64b5f6;
+    transform: translateY(-6px) scale(1.15) rotate(-6deg);
+}
+.footer-copy {
+    font-size: 1rem;
+    color: #b0bec5;
+    margin-top: 0.5rem;
+}
+
+/* Card hover scale/shine */
+.project-card, .skill-card, .experience-card {
+    transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+.project-card:hover, .skill-card:hover, .experience-card:hover {
+    transform: translateY(-8px) scale(1.035);
+    box-shadow: 0 8px 32px 0 rgba(100,181,246,0.18);
+    background: rgba(100,181,246,0.08);
+}
+.project-card::after, .skill-card::after, .experience-card::after {
+    content: '';
+    position: absolute;
+    top: -75%;
+    left: -75%;
+    width: 150%;
+    height: 150%;
+    background: linear-gradient(120deg, rgba(100,181,246,0.08) 0%, rgba(255,255,255,0.01) 60%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.project-card:hover::after, .skill-card:hover::after, .experience-card:hover::after {
+    opacity: 1;
+}
+
+.footer-resume-btn {
+    display: inline-block;
+    margin: 0.5rem auto 0 auto;
+    padding: 0.8rem 2.2rem;
+    background: #64b5f6;
+    color: #232136;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 8px #64b5f633;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+.footer-resume-btn:hover {
+    background: #42a5f5;
+    color: #fff;
+    box-shadow: 0 4px 16px #64b5f655;
 }
