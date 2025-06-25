@@ -31,7 +31,7 @@ body.light-mode .skill-card,
 body.light-mode .experience-card {
     background: #fff;
     color: #232323;
-    box-shadow: 0 2px 8px rgba(100,181,246,0.10);
+    box-shadow: 0 4px 24px 0 rgba(50,50,50,0.18), 0 2px 8px 0 rgba(100,181,246,0.13);
 }
 body.light-mode .project-card h3,
 body.light-mode .skill-card,
@@ -39,7 +39,7 @@ body.light-mode .experience-card {
     color: #38d39f;
 }
 body.light-mode .footer-copy {
-    color: #232323;
+    color: #fff !important;
 }
 body.light-mode .social-pallet {
     background: rgba(255,255,255,0.85);
@@ -458,7 +458,7 @@ section.visible {
     border-radius: 10px;
     font-weight: 500;
     font-size: 1.05rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    box-shadow: 0 4px 24px 0 rgba(50,50,50,0.18), 0 2px 8px 0 rgba(100,181,246,0.13);
     margin-bottom: 1.5rem;
     position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -474,7 +474,7 @@ section.visible {
 }
 .experience-card:hover {
     transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 6px 18px rgba(146, 141, 171, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(50,50,50,0.28), 0 4px 16px 0 rgba(100,181,246,0.18);
 }
 #experience-list li {
     position: relative;
@@ -511,7 +511,7 @@ section.visible {
     border-radius: 10px;
     font-weight: 600;
     font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    box-shadow: 0 4px 24px 0 rgba(50,50,50,0.18), 0 2px 8px 0 rgba(100,181,246,0.13);
     white-space: nowrap;
     transition: transform 0.2s, box-shadow 0.2s;
     border: none;
@@ -526,7 +526,7 @@ section.visible {
 }
 .skill-card:hover {
     transform: scale(1.07);
-    box-shadow: 0 6px 18px rgba(146, 141, 171, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(50,50,50,0.28), 0 4px 16px 0 rgba(100,181,246,0.18);
 }
 
 /* Projects Grid */
