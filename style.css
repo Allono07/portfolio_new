@@ -569,11 +569,13 @@ section.visible {
         justify-content: flex-start;
         align-items: flex-end;
     }
-    .nav-links.open {
+    nav ul.nav-links.open {
         display: flex !important;
-        width: 60vw;
-        right: 1.5rem;
-        left: auto;
+        width: 90vw;
+        min-width: 160px;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
     }
     .hamburger {
         margin-left: 1.5rem;
@@ -810,4 +812,14 @@ html {
     background: #42a5f5;
     color: #fff;
     box-shadow: 0 4px 16px #64b5f655;
+}
+
+#contact-form {
+    max-width: 100%;
+    width: 100%;
+}
+@media (max-width: 600px) {
+    #contact-form {
+        padding: 1.2rem 0.5rem;
+    }
 }
