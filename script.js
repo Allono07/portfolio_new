@@ -3,9 +3,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger');
     const navLinksUl = document.querySelector('.nav-links');
     const mobileBackdrop = document.querySelector('.mobile-nav-backdrop');
+    const navLinks = document.querySelectorAll('.nav-link');
+    // Log all nav-link elements at load
+    console.log('[DEBUG] nav-link elements at load:', navLinks);
     function openMobileNav() {
         navLinksUl.classList.add('open');
         if (mobileBackdrop) mobileBackdrop.classList.add('active');
+        // Log when menu is opened and nav-links are visible
+        setTimeout(() => {
+            const visibleLinks = document.querySelectorAll('.nav-links.open .nav-link');
+            console.log('[DEBUG] Hamburger menu opened. Visible nav-links:', visibleLinks);
+        }, 100);
     }
     function closeMobileNav() {
         navLinksUl.classList.remove('open');
@@ -19,14 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             openMobileNav();
         }
     });
-    // Close menu on nav link click (mobile)
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 900) {
-                closeMobileNav();
-            }
-        });
-    });
     // Close menu if clicking outside nav on mobile
     document.addEventListener('click', function(e) {
         if (window.innerWidth <= 900 && navLinksUl.classList.contains('open')) {
@@ -35,9 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    // Global click logger for debugging
+    document.addEventListener('click', function(e) {
+        console.log('[DEBUG] Global click:', e.target, 'Class:', e.target.className);
+    });
     // Close menu if clicking the backdrop
     if (mobileBackdrop) {
-        mobileBackdrop.addEventListener('click', closeMobileNav);
+        mobileBackdrop.addEventListener('click', function(e) {
+            console.log('[DEBUG] Backdrop clicked');
+            closeMobileNav();
+        });
     }
 
     // Typing animation for the title
@@ -126,16 +133,37 @@ document.addEventListener('DOMContentLoaded', function() {
     renderProjectsGrid();
 
     // Ensure smooth scroll on nav click
-    const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 60,
-                    behavior: 'smooth'
-                });
+            const href = this.getAttribute('href');
+            const target = document.querySelector(href);
+            console.log('[NAV] Link clicked:', href);
+            // If mobile, close menu first, then scroll after a short delay
+            if (window.innerWidth <= 900) {
+                closeMobileNav();
+                console.log('[NAV] Mobile menu closed');
+                setTimeout(() => {
+                    if (target) {
+                        console.log('[NAV] Scrolling to:', href, 'Offset:', target.offsetTop - 60);
+                        window.scrollTo({
+                            top: target.offsetTop - 60,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        console.log('[NAV] Target not found for:', href);
+                    }
+                }, 220); // delay to allow menu to close
+            } else {
+                if (target) {
+                    console.log('[NAV] Scrolling to:', href, 'Offset:', target.offsetTop - 60);
+                    window.scrollTo({
+                        top: target.offsetTop - 60,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    console.log('[NAV] Target not found for:', href);
+                }
             }
         });
     });

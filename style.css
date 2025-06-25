@@ -198,16 +198,20 @@ section.visible {
 #contact h2 {
     margin-bottom: 0.5rem;
     font-size: 2.1rem;
-    color: #64b5f6;
+    color: #1d3749;
     display: flex;
     align-items: center;
     gap: 0.7rem;
+    gap: 0.5rem; /* smaller gap for better alignment */
+    line-height: 1.1; /* helps with vertical alignment */
 }
 #contact h2::before {
     content: '\2709';
-    font-size: 1.5rem;
-    color: #64b5f6;
+    font-size: 3.7rem;
+    color: #0c2434;
     display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 5%;
 }
 #contact-form {
     background: transparent;
@@ -226,7 +230,7 @@ section.visible {
 #contact-form input, #contact-form textarea {
     background: #232136;
     color: #fff;
-    border: 1.5px solid #64b5f6;
+    border: 1.5px solid #5dade2;
     padding: 1.1rem;
     border-radius: 8px;
     font-size: 1.08rem;
@@ -234,15 +238,15 @@ section.visible {
     transition: border 0.2s, box-shadow 0.2s;
 }
 #contact-form input:focus, #contact-form textarea:focus {
-    border: 1.5px solid #42a5f5;
+    border: 1.5px solid #4fc3f7;
     outline: none;
-    box-shadow: 0 2px 8px #64b5f633;
+    box-shadow: 0 2px 8px #4fc3f733;
 }
 #contact-form textarea {
     min-height: 110px;
 }
 #contact-form button {
-    background: #64b5f6;
+    background: #604eff22;
     color: #232136;
     border: none;
     border-radius: 8px;
@@ -251,13 +255,13 @@ section.visible {
     font-weight: 700;
     cursor: pointer;
     margin-top: 0.5rem;
-    box-shadow: 0 2px 8px #64b5f633;
+    box-shadow: 0 2px 8px #5dade233;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 #contact-form button:hover {
-    background: #42a5f5;
+    background: #dbe2e5;
     color: #fff;
-    box-shadow: 0 4px 16px #64b5f655;
+    box-shadow: 0 4px 16px #4fc3f755;
 }
 
 /* Typing title fix: allow wrapping, hide border on wrap */
@@ -579,7 +583,9 @@ section.visible {
         margin-top: 0;
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 2px 8px 0 rgba(100,181,246,0.10);
         border-radius: 0 0 18px 18px;
-        z-index: 12000;
+        z-index: 13000;
+        pointer-events: auto;
+        overflow: hidden;
     }
     nav ul.nav-links li a {
         width: 100%;
@@ -592,19 +598,9 @@ section.visible {
         overflow-x: hidden;
         text-overflow: ellipsis;
     }
-    /* Optional: add a backdrop for clarity */
-    .mobile-nav-backdrop {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(31,28,44,0.35);
-        z-index: 11999;
-    }
     .mobile-nav-backdrop.active {
         display: block;
+        z-index: 12000;
     }
     .hamburger {
         margin-left: 1.5rem;
@@ -803,8 +799,8 @@ html {
     display: inline-block;
     margin: 0.5rem auto 0 auto;
     padding: 0.8rem 2.2rem;
-    background: #64b5f6;
-    color: #232136;
+    background: #604eff22;
+    color: #8987a1;
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
