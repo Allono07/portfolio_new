@@ -2,16 +2,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
     const navLinksUl = document.querySelector('.nav-links');
+    const mobileBackdrop = document.querySelector('.mobile-nav-backdrop');
+    function openMobileNav() {
+        navLinksUl.classList.add('open');
+        if (mobileBackdrop) mobileBackdrop.classList.add('active');
+    }
+    function closeMobileNav() {
+        navLinksUl.classList.remove('open');
+        if (mobileBackdrop) mobileBackdrop.classList.remove('active');
+    }
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
-        navLinksUl.classList.toggle('open');
-        console.log('Hamburger clicked, nav-links open:', navLinksUl.classList.contains('open'));
+        if (navLinksUl.classList.contains('open')) {
+            closeMobileNav();
+        } else {
+            openMobileNav();
+        }
     });
     // Close menu on nav link click (mobile)
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 900) {
-                navLinksUl.classList.remove('open');
+                closeMobileNav();
             }
         });
     });
@@ -19,10 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         if (window.innerWidth <= 900 && navLinksUl.classList.contains('open')) {
             if (!navLinksUl.contains(e.target) && !hamburger.contains(e.target)) {
-                navLinksUl.classList.remove('open');
+                closeMobileNav();
             }
         }
     });
+    // Close menu if clicking the backdrop
+    if (mobileBackdrop) {
+        mobileBackdrop.addEventListener('click', closeMobileNav);
+    }
 
     // Typing animation for the title
     const typingTitle = document.getElementById('typing-title');
@@ -138,3 +154,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.15 });
     fadeEls.forEach(el => fadeInObserver.observe(el));
 });
+ 

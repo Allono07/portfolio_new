@@ -181,9 +181,9 @@ section.visible {
     flex-direction: column;
     align-items: center;
     padding: 3rem 1rem 4rem 1rem;
-    background: linear-gradient(120deg, rgba(100,181,246,0.10) 0%, rgba(31,28,44,0.18) 100%);
-    border-radius: 24px;
-    box-shadow: 0 4px 32px 0 rgba(100,181,246,0.10);
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
     margin-bottom: 2rem;
     position: relative;
     min-width: 0;
@@ -210,19 +210,18 @@ section.visible {
     display: inline-block;
 }
 #contact-form {
-    background: rgba(31, 28, 44, 0.92);
+    background: transparent;
+    box-shadow: none;
+    border-left: none;
+    border-radius: 0;
     color: #fff;
-    box-shadow: 0 2px 16px rgba(100,181,246,0.13);
     padding: 2.5rem 2rem 2rem 2rem;
-    border-radius: 18px;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
     max-width: 420px;
     width: 100%;
     margin-top: 1.5rem;
-    border-left: 6px solid #64b5f6;
-    position: relative;
 }
 #contact-form input, #contact-form textarea {
     background: #232136;
@@ -551,31 +550,61 @@ section.visible {
         margin-right: 0;
     }
     nav ul.nav-links {
-        margin-left: auto;
-        margin-right: 0;
         display: none;
-        position: absolute;
-        top: 100%;
-        right: 1.5rem;
+        position: fixed;
+        top: 64px; /* height of navbar, adjust if needed */
+        right: 2vw;
         left: auto;
+        margin-top: 0;
         background: rgba(31, 28, 44, 0.98);
         flex-direction: column;
         gap: 0;
-        min-width: 160px;
-        border-radius: 0 0 16px 16px;
-        box-shadow: 0 8px 32px rgba(31,38,135,0.13);
-        padding: 0.5rem 0;
-        z-index: 201;
+        min-width: 180px;
+        width: max-content;
+        max-width: 92vw;
+        border-radius: 0 0 18px 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 2px 8px 0 rgba(100,181,246,0.10);
+        padding: 0.7rem 0;
+        z-index: 12000;
         justify-content: flex-start;
-        align-items: flex-end;
     }
     nav ul.nav-links.open {
         display: flex !important;
-        width: 90vw;
-        min-width: 160px;
-        right: 0;
-        left: 0;
+        flex-direction: column;
+        width: max-content;
+        min-width: 180px;
+        right: 2vw;
+        left: auto;
         margin: 0 auto;
+        margin-top: 0;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 2px 8px 0 rgba(100,181,246,0.10);
+        border-radius: 0 0 18px 18px;
+        z-index: 12000;
+    }
+    nav ul.nav-links li a {
+        width: 100%;
+        padding: 1rem 2rem;
+        font-size: 1.12rem;
+        border-radius: 0;
+        margin: 0;
+        text-align: center;
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+    /* Optional: add a backdrop for clarity */
+    .mobile-nav-backdrop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(31,28,44,0.35);
+        z-index: 11999;
+    }
+    .mobile-nav-backdrop.active {
+        display: block;
     }
     .hamburger {
         margin-left: 1.5rem;
@@ -670,28 +699,6 @@ html {
 
 @media (max-width: 900px) {
     .hamburger {
-        display: flex;
-    }
-
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0; /* updated for edge alignment */
-        background: rgba(31, 28, 44, 0.98);
-        flex-direction: column;
-        gap: 0;
-        min-width: 160px;
-        width: max-content;
-        max-width: 90vw; /* prevent overflow */
-        border-radius: 0 0 16px 16px;
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.13);
-        padding: 0.5rem 0;
-        z-index: 150;
-        overflow-x: hidden;
-    }
-
-    .nav-links.open {
         display: flex;
     }
 
@@ -821,5 +828,52 @@ html {
 @media (max-width: 600px) {
     #contact-form {
         padding: 1.2rem 0.5rem;
+    }
+}
+
+.social-pallet {
+    position: fixed;
+    top: 50%;
+    right: 2vw;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(31, 28, 44, 0.18);
+    border-radius: 18px;
+    padding: 1.2rem 0.7rem;
+    z-index: 1200;
+    box-shadow: 0 2px 16px rgba(100,181,246,0.10);
+    align-items: center;
+    transition: background 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(2px);
+}
+.social-icon {
+    color: #fff;
+    opacity: 0.85;
+    font-size: 1.7rem;
+    transition: color 0.2s, transform 0.2s, opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0.3rem;
+    background: none;
+}
+.social-icon:hover {
+    color: #64b5f6;
+    opacity: 1;
+    transform: scale(1.18) translateY(-3px) rotate(-8deg);
+    background: rgba(100,181,246,0.08);
+}
+@media (max-width: 700px) {
+    .social-pallet {
+        right: 0.5vw;
+        padding: 0.7rem 0.2rem;
+        gap: 1rem;
+    }
+    .social-icon {
+        font-size: 1.3rem;
+        padding: 0.15rem;
     }
 }
