@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Typing animation for the title
     const typingTitle = document.getElementById('typing-title');
-    const typingText = 'Software Engineer - Mobile Application Developer & Backend Developer';
+    const typingText = 'Application and Backend Developer';
     let typingIndex = 0;
     let typingTimeout;
     function typeTitle() {
@@ -90,40 +90,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Projects grid (edit projects in code only)
     const projects = [
         {
-            title: 'Mobile Banking App',
-            description: 'A secure and modern mobile banking application built with Flutter and Node.js backend.\n\nFeatures:\n- Biometric authentication\n- Real-time notifications\n- Transaction history and analytics',
-            link: '#',
+            title: 'Sonno Music Player',
+            description: 'Music player where you can set a timer or schedule for the music to stop playing automatically. Built on Expo, uses React Native Track Player for music control and notifications.',
+            links: [
+                { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.sonno.music' },
+                { label: 'View Project', url: 'https://github.com/yourusername/sonno-music-player' }
+            ]
         },
         {
-            title: 'E-commerce Backend',
-            description: 'Scalable backend for an e-commerce platform using Node.js, Express, and MongoDB.\n\nHighlights:\n- Product catalog management\n- Order processing\n- Payment gateway integration',
-            link: '#',
+            title: 'Attendance Tracking Mobile Application - Composable',
+            description: 'Attendance tracking app that generates QR codes for students and fetches real-time attendance records from the backend. Technologies: Jetpack Compose (Mobile), Spring Boot Kotlin (Backend)',
+            links: [
+                { label: 'View Project', url: 'https://github.com/yourusername/attendance-tracking-app' }
+            ]
         },
         {
-            title: 'Chat App',
-            description: 'Real-time chat application with push notifications and group chat features.\n\nTech Stack:\n- WebSockets\n- User presence\n- Media sharing',
-            link: '#',
+            title: 'Corpcon Backend Application',
+            description: `Written and maintained the backend for Corpcon WebApplication.
+· Technologies: Kafka for event synchronization, Git, Docker, Kotlin, Spring Boot, Deployed on Google Cloud`,
+            links: [
+                { label: 'View Project', url: 'https://github.com/yourusername/corpcon-backend' }
+            ]
         },
         {
-            title: 'Portfolio Website',
-            description: 'Personal portfolio website to showcase my projects and skills.\n\nIncludes:\n- Responsive design\n- Interactive UI\n- Contact form',
-            link: '#',
+            title: 'Food Delivery App - Flutter',
+            description: 'Delivery app built on Flutter. Firebase Auth SDK (User Authentication), Firestore SDK (Backend/DB). Design: MVVM Architecture.',
+            links: [
+                { label: 'View Project', url: 'https://github.com/yourusername/food-delivery-flutter' }
+            ]
         },
         {
-            title: 'Fitness Tracker',
-            description: 'A mobile app to track workouts, nutrition, and progress.\n\nFeatures:\n- Step counter\n- Workout planner\n- Progress analytics',
-            link: '#',
-        },
-        {
-            title: 'Weather Dashboard',
-            description: 'A web dashboard for real-time weather updates and forecasts.\n\nHighlights:\n- Location-based weather\n- 7-day forecast\n- Animated weather icons',
-            link: '#',
-        },
-        {
-            title: 'Task Manager',
-            description: 'A productivity app for managing daily tasks and to-dos.\n\nFeatures:\n- Task lists\n- Reminders\n- Calendar integration',
-            link: '#',
-        },
+            title: 'Automatic Billing Machine - IoT',
+            description: 'Billing machine using image recognition and ML for item billing. Hardware: Raspberry Pi 3b+, Load Cell 5Kg, HX711-Load Cell amplifier, Webcam.',
+            links: [
+                { label: 'View Project', url: 'https://github.com/yourusername/automatic-billing-machine' }
+            ]
+        }
     ];
     function renderProjectsGrid() {
         const grid = document.getElementById('projects-grid');
@@ -132,7 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
         projects.forEach(proj => {
             const card = document.createElement('div');
             card.className = 'project-card';
-            card.innerHTML = `<h3>${proj.title}</h3><p>${proj.description.replace(/\n/g, '<br>')}</p>${proj.link ? `<a href=\"${proj.link}\" target=\"_blank\">View Project</a>` : ''}`;
+            card.innerHTML = `<h3>${proj.title}</h3><p>${proj.description.replace(/\n/g, '<br>')}</p>` +
+                (proj.links ? proj.links.map(link => `<a href="${link.url}" target="_blank">${link.label}</a>`).join(' ') : '');
             grid.appendChild(card);
         });
     }
@@ -215,5 +218,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const isLight = document.body.classList.contains('light-mode');
         setMode(isLight ? 'dark' : 'light');
     });
+
+    // Show loader on contact form submit
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function() {
+            const loaderOverlay = document.getElementById('loader-overlay');
+            if (loaderOverlay) {
+                loaderOverlay.style.display = 'flex';
+                loaderOverlay.classList.remove('hidden');
+            }
+        });
+    }
 });
  

@@ -188,6 +188,7 @@ section.visible {
     font-size: 2.2rem;
     font-weight: 700;
     color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 #description {
     font-size: 1.2rem;
@@ -322,7 +323,7 @@ section.visible {
     font-size: 1.5rem;
     font-family: 'Fira Mono', monospace;
     color: #928dab;
-    min-height: 5.2em;
+    min-height: 3em;
     max-width: 100%;
     width: 100%;
     overflow-wrap: break-word;
@@ -1035,5 +1036,53 @@ body.light-mode #contact h2 {
 }
 
 body.light-mode .projects-banner p {
+    color: #b0b7bc !important;
+}
+
+.exp-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem 1.2rem;
+    margin-bottom: 0.3em;
+    font-size: 1.08rem;
+    font-weight: 600;
+}
+.exp-role {
+    color: #604eff;
+    font-weight: 700;
+    font-size: 1.08rem;
+}
+.exp-company {
+    color: #ced2d1;
+    font-weight: 600;
+    font-size: 1.08rem;
+}
+.exp-location {
+    color: #928dab;
+    font-size: 1.01rem;
+    font-weight: 500;
+}
+.exp-dates {
+    margin-left: auto;
+    color: #b0bec5;
+    font-size: 0.98rem;
+    font-weight: 400;
+}
+.exp-bullets {
+    list-style: disc inside;
+    margin: 0.2em 0 0 0.5em;
+    padding-left: 0;
+}
+/* Remove custom bullet styling */
+.exp-bullets li::before { display: none !important; content: none !important; }
+body.light-mode .exp-role,
+body.light-mode .exp-company {
+    color: #232323 !important;
+}
+body.light-mode .exp-location {
+    color: #b0b7bc !important;
+}
+body.light-mode .exp-dates {
     color: #b0b7bc !important;
 }
