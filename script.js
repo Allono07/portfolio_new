@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Hide loader overlay
+    const loaderOverlay = document.getElementById('loader-overlay');
+    if (loaderOverlay) {
+        loaderOverlay.classList.add('hidden');
+        setTimeout(() => loaderOverlay.style.display = 'none', 600);
+    }
     // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
     const navLinksUl = document.querySelector('.nav-links');
@@ -54,15 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let typingTimeout;
     function typeTitle() {
         typingTitle.classList.remove('done');
-        typingTitle.textContent = '';
         typingIndex = 0;
         function type() {
             if (typingIndex <= typingText.length) {
-                typingTitle.textContent = typingText.slice(0, typingIndex);
-                typingIndex++;
+                typingTitle.innerHTML = typingText.slice(0, typingIndex) + '<span class="caret">|</span>';
                 typingTitle.classList.remove('done');
-                typingTimeout = setTimeout(type, 45);
+                typingIndex++;
+                typingTimeout = setTimeout(type, 90);
             } else {
+                typingTitle.textContent = typingText;
                 typingTitle.classList.add('done');
                 typingTimeout = setTimeout(() => {
                     typingTitle.textContent = '';
@@ -181,5 +187,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, { threshold: 0.15 });
     fadeEls.forEach(el => fadeInObserver.observe(el));
+
+    // Add dark/light mode toggle to social pallet
+    const socialPallet = document.querySelector('.social-pallet');
+    const modeToggle = document.createElement('button');
+    modeToggle.id = 'mode-toggle';
+    modeToggle.setAttribute('aria-label', 'Toggle dark/light mode');
+    modeToggle.innerHTML = '<span class="mode-icon">🌙</span>';
+    if (socialPallet) socialPallet.appendChild(modeToggle);
+
+    function setMode(mode) {
+        if (mode === 'light') {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+            modeToggle.innerHTML = '<span class="mode-icon">☀️</span>';
+        } else {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+            modeToggle.innerHTML = '<span class="mode-icon">🌙</span>';
+        }
+        localStorage.setItem('theme', mode);
+    }
+    // On load, set mode from localStorage or default to dark
+    const savedMode = localStorage.getItem('theme');
+    setMode(savedMode === 'light' ? 'light' : 'dark');
+    modeToggle.addEventListener('click', function() {
+        const isLight = document.body.classList.contains('light-mode');
+        setMode(isLight ? 'dark' : 'light');
+    });
 });
  
