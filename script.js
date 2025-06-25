@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Sonno Music Player',
             description: 'Music player where you can set a timer or schedule for the music to stop playing automatically. Built on Expo, uses React Native Track Player for music control and notifications.',
             links: [
-                { label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.sonno.music' },
+                { label: 'Play Store', url: '', disabled: true },
                 { label: 'View Project', url: 'https://github.com/yourusername/sonno-music-player' }
             ]
         },
@@ -134,8 +134,29 @@ document.addEventListener('DOMContentLoaded', function() {
         projects.forEach(proj => {
             const card = document.createElement('div');
             card.className = 'project-card';
-            card.innerHTML = `<h3>${proj.title}</h3><p>${proj.description.replace(/\n/g, '<br>')}</p>` +
-                (proj.links ? proj.links.map(link => `<a href="${link.url}" target="_blank">${link.label}</a>`).join(' ') : '');
+            card.innerHTML = `<h3>${proj.title}</h3><p>${proj.description.replace(/\n/g, '<br>')}</p>`;
+            if (proj.links) {
+                proj.links.forEach(link => {
+                    if (link.disabled) {
+                        const btn = document.createElement('a');
+                        btn.className = 'disabled-link';
+                        btn.textContent = link.label;
+                        btn.href = 'javascript:void(0)';
+                        btn.title = 'Will be available soon';
+                        btn.addEventListener('click', e => {
+                            e.preventDefault();
+                            alert('Play Store link will be available soon!');
+                        });
+                        card.appendChild(btn);
+                    } else {
+                        const a = document.createElement('a');
+                        a.href = link.url;
+                        a.target = '_blank';
+                        a.textContent = link.label;
+                        card.appendChild(a);
+                    }
+                });
+            }
             grid.appendChild(card);
         });
     }
