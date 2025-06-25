@@ -1086,3 +1086,21 @@ body.light-mode .exp-location {
 body.light-mode .exp-dates {
     color: #b0b7bc !important;
 }
+
+.disabled-link {
+    color: #b0b7bc !important;
+    background: #e0e0e0 !important;
+    border-radius: 6px;
+    padding: 0.4em 1em;
+    margin-right: 0.7em;
+    text-decoration: none;
+    cursor: not-allowed !important;
+    pointer-events: auto;
+    opacity: 0.7;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+.disabled-link:hover {
+    background: #cccccc !important;
+    color: #888 !important;
+}
