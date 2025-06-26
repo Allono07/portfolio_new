@@ -1,10 +1,39 @@
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Firebase and Analytics using CDN scripts
+    const firebaseConfig = {
+        apiKey: "AIzaSyD0v66rpnRlf5s_TO2CxBEBPSt2CJwx2vg",
+        authDomain: "portfolio-website-c899e.firebaseapp.com",
+        projectId: "portfolio-website-c899e",
+        storageBucket: "portfolio-website-c899e.firebasestorage.app",
+        messagingSenderId: "955465981238",
+        appId: "1:955465981238:web:48be745bc5c5da4107e797",
+        measurementId: "G-EL2LSGW7SV"
+      };
+    if (window.firebase && firebase.initializeApp && firebase.analytics) {
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    }
+
     // Hide loader overlay
     const loaderOverlay = document.getElementById('loader-overlay');
     if (loaderOverlay) {
         loaderOverlay.classList.add('hidden');
         setTimeout(() => loaderOverlay.style.display = 'none', 600);
     }
+
+    // const firebaseConfig = {
+    //     apiKey: "x2vg",
+    //     authDomain: "portp.com",
+    //     projectId: "portfsite-c899e",
+    //     storageBucket: "portebasestorage.app",
+    //     messagingSenderId: "955465981238",
+    //     appId: "1:955465981238:w7SV"
+    //   };
+    // const app = initializeApp(firebaseConfig);
+    // const analytics = getAnalytics(app);
     // Splash screen logic
     const splash = document.getElementById('splash-screen');
     const progressBar = document.getElementById('splash-progressbar');
@@ -107,10 +136,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     typeTitle();
     const homeNav = document.querySelector('a[href="#home"]');
-    homeNav.addEventListener('click', () => {
-        clearTimeout(typingTimeout);
-        setTimeout(typeTitle, 500);
-    });
+    if (homeNav) {
+        homeNav.addEventListener('click', () => {
+            clearTimeout(typingTimeout);
+            setTimeout(typeTitle, 500);
+        });
+    }
 
     // Projects grid (edit projects in code only)
     const projects = [
@@ -260,10 +291,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // On load, set mode from localStorage or default to dark
     const savedMode = localStorage.getItem('theme');
     setMode(savedMode === 'light' ? 'light' : 'dark');
-    modeToggle.addEventListener('click', function() {
-        const isLight = document.body.classList.contains('light-mode');
-        setMode(isLight ? 'dark' : 'light');
-    });
+    if (modeToggle) {
+        modeToggle.addEventListener('click', function() {
+            const isLight = document.body.classList.contains('light-mode');
+            setMode(isLight ? 'dark' : 'light');
+        });
+    }
 
     // Show loader on contact form submit
     const contactForm = document.getElementById('contact-form');
