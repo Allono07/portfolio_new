@@ -569,7 +569,7 @@ section.visible {
     font-size: 1.05rem;
 }
 .project-card a {
-    color: #64b5f6;
+    color: #928dab;
     text-decoration: none;
     font-weight: 600;
     margin-top: 0.5rem;
@@ -855,8 +855,8 @@ html {
     display: inline-block;
     margin: 0.5rem auto 0 auto;
     padding: 0.8rem 2.2rem;
-    background: #604eff22;
-    color: #8987a1;
+    background: #ffffff9d;
+    color: #373737;
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -1049,7 +1049,7 @@ body.light-mode .projects-banner p {
     font-weight: 600;
 }
 .exp-role {
-    color: #604eff;
+    color: #8c8b8b;
     font-weight: 700;
     font-size: 1.08rem;
 }
@@ -1081,10 +1081,10 @@ body.light-mode .exp-company {
     color: #232323 !important;
 }
 body.light-mode .exp-location {
-    color: #b0b7bc !important;
+    color: #232323 !important;
 }
 body.light-mode .exp-dates {
-    color: #b0b7bc !important;
+    color: #232323 !important;
 }
 
 .disabled-link {
@@ -1218,22 +1218,3 @@ body.light-mode .exp-dates {
     0% { transform: translateY(0) scale(1) rotate(var(--doodle-rot, 0deg)); }
     100% { transform: translateY(-18px) scale(1.08) rotate(var(--doodle-rot, 0deg)); }
 }
-
-.site-doodles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-}
-.site-doodles .doodle-icon {
-    position: absolute;
-    font-size: 2.2rem;
-    opacity: 0.32;
-    user-select: none;
-    filter: drop-shadow(0 0 2px #b0bec5);
-    animation: doodle-float 4.5s ease-in-out infinite alternate;
-}
-/* Remove all .site-doodles .doodle-icon:nth-child(N) rules for position and color. */
