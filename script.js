@@ -321,5 +321,71 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // --- AI Resume Analysis Logic ---
+    const resumeForm = document.getElementById('resume-form');
+    const resumeFileInput = document.getElementById('resume-file');
+    const resumeResultDiv = document.getElementById('resume-analysis-result');
+
+    if (resumeForm && resumeFileInput && resumeResultDiv) {
+        resumeForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            resumeResultDiv.textContent = 'Extracting text from PDF...';
+            const file = resumeFileInput.files[0];
+            if (!file || file.type !== 'application/pdf') {
+                resumeResultDiv.textContent = 'Please upload a PDF file.';
+                return;
+            }
+            try {
+                if (!window.pdfjsLib) {
+                    resumeResultDiv.textContent = 'PDF.js library failed to load. Please check your internet connection or try again later.';
+                    return;
+                }
+                window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+
+                // Read PDF as ArrayBuffer
+                const arrayBuffer = await file.arrayBuffer();
+                // Load PDF with pdf.js
+                const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                let fullText = '';
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const pageText = content.items.map(item => item.str).join(' ');
+                    fullText += pageText + '\n';
+                }
+                resumeResultDiv.textContent = 'Analyzing resume with AI...';
+                // Call Hugging Face Router API for DeepSeek model (replace YOUR_HF_TOKEN with your actual token)
+                const hfToken = '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'; // <-- Replace this!
+                const deepseekPrompt = `Analyze this resume and extract key skills, experience summary, and suggest improvements.\n\nResume:\n${fullText}`;
+                const deepseekResponse = await fetch('https://router.huggingface.co/fireworks-ai/inference/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${hfToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            { role: 'user', content: deepseekPrompt }
+                        ],
+                        model: 'accounts/fireworks/models/deepseek-r1',
+                        stream: false
+                    })
+                });
+                if (!deepseekResponse.ok) throw new Error('DeepSeek API error');
+                const deepseekData = await deepseekResponse.json();
+                // Parse the response for the answer
+                let aiText = 'No analysis returned.';
+                if (deepseekData.choices && deepseekData.choices[0]?.message?.content) {
+                    aiText = deepseekData.choices[0].message.content;
+                } else if (deepseekData.error) {
+                    aiText = 'Error: ' + deepseekData.error;
+                }
+                resumeResultDiv.innerHTML = `<strong>AI Analysis:</strong><br><pre style="white-space: pre-wrap;">${aiText}</pre>`;
+            } catch (err) {
+                resumeResultDiv.textContent = 'Error: ' + err.message;
+            }
+        });
+    }
 });
  
