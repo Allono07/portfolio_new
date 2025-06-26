@@ -150,14 +150,14 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Music player where you can set a timer or schedule for the music to stop playing automatically. Built on Expo, uses React Native Track Player for music control and notifications.',
             links: [
                 { label: 'Play Store', url: '', disabled: true },
-                { label: 'View Project', url: 'https://github.com/yourusername/sonno-music-player' }
+                { label: 'View Project', url: 'https://github.com/allenThomsonNetcore/music-player-sonno' }
             ]
         },
         {
             title: 'Attendance Tracking Mobile Application - Composable',
             description: 'Attendance tracking app that generates QR codes for students and fetches real-time attendance records from the backend. Technologies: Jetpack Compose (Mobile), Spring Boot Kotlin (Backend)',
             links: [
-                { label: 'View Project', url: 'https://github.com/yourusername/attendance-tracking-app' }
+                { label: 'View Project', url: 'https://github.com/Allono07/attendance_composable' }
             ]
         },
         {
@@ -165,21 +165,21 @@ document.addEventListener('DOMContentLoaded', function() {
             description: `Written and maintained the backend for Corpcon WebApplication.
 · Technologies: Kafka for event synchronization, Git, Docker, Kotlin, Spring Boot, Deployed on Google Cloud`,
             links: [
-                { label: 'View Project', url: 'https://github.com/yourusername/corpcon-backend' }
+                { label: 'View Project', url: 'https://corpcon.in/' }
             ]
         },
         {
             title: 'Food Delivery App - Flutter',
             description: 'Delivery app built on Flutter. Firebase Auth SDK (User Authentication), Firestore SDK (Backend/DB). Design: MVVM Architecture.',
             links: [
-                { label: 'View Project', url: 'https://github.com/yourusername/food-delivery-flutter' }
+                { label: 'View Project', url: 'https://github.com/Allono07/restaurant_app_flutter' }
             ]
         },
         {
             title: 'Automatic Billing Machine - IoT',
             description: 'Billing machine using image recognition and ML for item billing. Hardware: Raspberry Pi 3b+, Load Cell 5Kg, HX711-Load Cell amplifier, Webcam.',
             links: [
-                { label: 'View Project', url: 'https://github.com/yourusername/automatic-billing-machine' }
+                { label: 'View Project', url: 'https://github.com/Allono07/autobillproject' }
             ]
         }
     ];
