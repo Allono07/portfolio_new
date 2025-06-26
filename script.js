@@ -5,6 +5,31 @@ document.addEventListener('DOMContentLoaded', function() {
         loaderOverlay.classList.add('hidden');
         setTimeout(() => loaderOverlay.style.display = 'none', 600);
     }
+    // Splash screen logic
+    const splash = document.getElementById('splash-screen');
+    const progressBar = document.getElementById('splash-progressbar');
+    const mainContent = document.getElementById('main-content');
+    if (splash) {
+        // Fade in
+        splash.classList.add('show');
+        setTimeout(() => {
+            if (progressBar) progressBar.style.width = '100%';
+        }, 50); // allow DOM to apply .show first
+        // Show main content when progress bar is halfway (1s)
+        setTimeout(() => {
+            if (mainContent) mainContent.style.display = '';
+        }, 1000);
+        // Hide splash after 2s
+        setTimeout(() => {
+            splash.classList.remove('show');
+            splash.classList.add('hide');
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 700);
+        }, 2000);
+    } else {
+        if (mainContent) mainContent.style.display = '';
+    }
     // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
     const navLinksUl = document.querySelector('.nav-links');
