@@ -193,7 +193,19 @@ document.addEventListener('DOMContentLoaded', function() {
             card.innerHTML = `<h3>${proj.title}</h3><p>${proj.description.replace(/\n/g, '<br>')}</p>`;
             if (proj.links) {
                 proj.links.forEach(link => {
-                    if (link.disabled) {
+                    if (link.disabled && link.label === 'Play Store') {
+                        const btn = document.createElement('a');
+                        btn.className = 'disabled-link';
+                        btn.textContent = link.label;
+                        btn.href = 'javascript:void(0)';
+                        btn.title = 'Will be available soon';
+                        btn.addEventListener('click', e => {
+                            e.preventDefault();
+                            alert('Play Store link is not live yet. You can download the app from Google Drive.');
+                            window.open('https://drive.google.com/file/d/1JFeMZl858jQ0tmwd5FtX6w6s2IqZxTiW/view?usp=drive_link', '_blank');
+                        });
+                        card.appendChild(btn);
+                    } else if (link.disabled) {
                         const btn = document.createElement('a');
                         btn.className = 'disabled-link';
                         btn.textContent = link.label;
