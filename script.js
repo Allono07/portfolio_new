@@ -309,5 +309,50 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // --- Doodle icon randomizer for site background (grid-based for even spread, responsive for mobile) ---
+    const doodleColors = [
+        '#fff', '#f8f8f8', '#ececec', '#e0e0e0', '#d6d6d6', '#cfd8dc', '#bdbdbd', '#b0bec5'
+    ];
+    const siteDoodles = document.querySelectorAll('.site-doodles .doodle-icon');
+    let iconCount = siteDoodles.length;
+    let showCount = iconCount;
+    if (window.innerWidth <= 700) {
+        showCount = 6;
+    }
+    // Hide extra icons on mobile
+    siteDoodles.forEach((icon, i) => {
+        icon.style.display = (i < showCount) ? '' : 'none';
+    });
+    // Calculate grid size (as square as possible)
+    const gridCols = Math.ceil(Math.sqrt(showCount));
+    const gridRows = Math.ceil(showCount / gridCols);
+    // Generate grid cells
+    let cells = [];
+    for (let r = 0; r < gridRows; r++) {
+        for (let c = 0; c < gridCols; c++) {
+            cells.push({ row: r, col: c });
+        }
+    }
+    // Shuffle cells
+    for (let i = cells.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cells[i], cells[j]] = [cells[j], cells[i]];
+    }
+    // Assign each visible icon to a cell
+    let visibleIcons = Array.from(siteDoodles).slice(0, showCount);
+    visibleIcons.forEach((icon, i) => {
+        const cell = cells[i];
+        const rowSize = 90 / gridRows;
+        const colSize = 90 / gridCols;
+        const minTop = 5 + cell.row * rowSize;
+        const minLeft = 5 + cell.col * colSize;
+        const top = minTop + Math.random() * (rowSize - 10);
+        const left = minLeft + Math.random() * (colSize - 10);
+        icon.style.top = top + '%';
+        icon.style.left = left + '%';
+        icon.style.color = doodleColors[Math.floor(Math.random() * doodleColors.length)];
+        icon.style.animationDelay = (Math.random() * 2.5).toFixed(2) + 's';
+    });
 });
  

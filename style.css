@@ -1218,3 +1218,22 @@ body.light-mode .exp-dates {
     0% { transform: translateY(0) scale(1) rotate(var(--doodle-rot, 0deg)); }
     100% { transform: translateY(-18px) scale(1.08) rotate(var(--doodle-rot, 0deg)); }
 }
+
+.site-doodles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+.site-doodles .doodle-icon {
+    position: absolute;
+    font-size: 2.2rem;
+    opacity: 0.32;
+    user-select: none;
+    filter: drop-shadow(0 0 2px #b0bec5);
+    animation: doodle-float 4.5s ease-in-out infinite alternate;
+}
+/* Remove all .site-doodles .doodle-icon:nth-child(N) rules for position and color. */
