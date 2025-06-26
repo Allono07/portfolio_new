@@ -8,168 +8,188 @@
     <link rel="icon" type="image/jpeg" href="A.png">
 </head>
 <body>
-    <div id="loader-overlay" style="display:none;">
-        <div class="loader"></div>
-    </div>
-    <nav>
-        <div class="logo">
-            <span class="logo-icon">&lt;/&gt;</span>
-            <span class="logo-text">ALLƎN</span>
+    <div id="splash-screen">
+        <div class="splash-doodles">
+            <span class="doodle-icon">💻</span>
+            <span class="doodle-icon">📱</span>
+            <span class="doodle-icon">☕</span>
+            <span class="doodle-icon">🛠️</span>
+            <span class="doodle-icon">⚡</span>
+            <span class="doodle-icon">🌐</span>
+            <span class="doodle-icon">🧑‍💻</span>
+            <span class="doodle-icon">🔧</span>
+            <span class="doodle-icon">📊</span>
+            <span class="doodle-icon">🧩</span>
         </div>
-        <ul class="nav-links">
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
-    <div class="mobile-nav-backdrop"></div>
-    <div class="social-pallet">
-        <a href="https://www.instagram.com/allen.thomson7?igsh=OXlvZW8yanQ0NWR4" target="_blank" aria-label="Instagram" class="social-icon">
-            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.974-.974 2.241-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.131 4.659.425 3.678 1.406c-.98.98-1.274 2.092-1.333 3.374C2.013 5.741 2 6.151 2 12c0 5.849.013 6.259.072 7.54.059 1.282.353 2.394 1.333 3.374.98.98 2.092 1.274 3.374 1.333C8.259 23.987 8.669 24 12 24s3.741-.013 4.948-.072c1.282-.059 2.394-.353 3.374-1.333.98-.98 1.274-2.092 1.333-3.374.059-1.281.072-1.691.072-7.54 0-5.849-.013-6.259-.072-7.54-.059-1.282-.353-2.394-1.333-3.374-.98-.98-2.092-1.274-3.374-1.333C15.741.013 15.331 0 12 0z"/><path d="M12 5.838A6.162 6.162 0 0 0 5.838 12 6.162 6.162 0 0 0 12 18.162 6.162 6.162 0 0 0 18.162 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A3.999 3.999 0 1 1 12 8a3.999 3.999 0 0 1 0 7.999z"/><circle cx="18.406" cy="5.594" r="1.44"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/allen-thomson-5b1309110/" target="_blank" aria-label="LinkedIn" class="social-icon">
-            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.868-3.063-1.868 0-2.156 1.459-2.156 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
-        </a>
-        <a href="https://github.com/Allono07" target="_blank" aria-label="GitHub" class="social-icon">
-            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.563.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z"/></svg>
-        </a>
-        <a href="https://leetcode.com/u/AllenThomson/" target="_blank" aria-label="LeetCode" class="social-icon">
-            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.205 17.978c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-8.205-15.978c-5.514 0-10 4.486-10 10s4.486 10 10 10c2.652 0 5.093-1.032 6.949-2.899.195-.195.195-.512 0-.707-.195-.195-.512-.195-.707 0-1.646 1.646-3.833 2.606-6.242 2.606-4.962 0-9-4.038-9-9s4.038-9 9-9c2.409 0 4.596.96 6.242 2.606.195.195.512.195.707 0 .195-.195.195-.512 0-.707-1.856-1.867-4.297-2.899-6.949-2.899zm8.205 13.978c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2.205-2.978c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2-2c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2-2c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2-2c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713z"/></svg>
-        </a>
+        <span class="splash-text">ALLEN THOMSON</span>
+        <div class="splash-progressbar-container">
+            <div class="splash-progressbar" id="splash-progressbar"></div>
+        </div>
     </div>
-    <main>
-        <section id="home">
-            <div class="home-content large">
-                <img id="profile-photo" class="large-photo" src="allen.jpeg" alt="Your Photo" />
-                <div class="home-text">
-                    <h1 id="name">Allen Thomson</h1>
-                    <h2 id="typing-title" class="typing">Software Engineer - Mobile Application Developer & Backend Developer</h2>
-                    <p id="description">I am passionate about building and solving problems.</p>
-                </div>
+    <div id="main-content" style="display:none;">
+        <div id="loader-overlay" style="display:none;">
+            <div class="loader"></div>
+        </div>
+        <nav>
+            <div class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span class="logo-text">ALLƎN</span>
             </div>
-        </section>
-        <section id="about">
-            <div class="about-banner">
-                <h2>About Me</h2>
-                <p id="about-banner-desc">Software engineer with over two years of experience in mobile and backend development, passionate about technology and innovation.</p>
-            </div>
-            <div class="about-flex">
-                <div>
-                    <h3>Experience</h3>
-                    <ul id="experience-list">
-                        <li><div class="experience-card">
-                            <div class="exp-header">
-                                <span class="exp-role">Software Engineer - Mobile</span>
-                                <span class="exp-company">Netcore Cloud</span>
-                                <span class="exp-location">Bengaluru, India</span>
-                                <span class="exp-dates">Sep 2024 - Present</span>
-                            </div>
-                            <ul class="exp-bullets">
-                                <li>Maintained and developed Android, Flutter, React Native, and Cordova solutions.</li>
-                                <li>Automated SDK integration, reducing onboarding by 15 days.</li>
-                                <li>Built internal tools for support and integration automation (React, Flask).</li>
-                                <li>Optimized codebases, debugged complex issues, and collaborated cross-functionally.</li>
-                            </ul>
-                        </div></li>
-                        <li><div class="experience-card">
-                            <div class="exp-header">
-                                <span class="exp-role">Technical Account Manager</span>
-                                <span class="exp-company">WebEngage</span>
-                                <span class="exp-location">Bengaluru, India</span>
-                                <span class="exp-dates">Sep 2023 - Sep 2024</span>
-                            </div>
-                            <ul class="exp-bullets">
-                                <li>Managed technical relationships and delivered custom solutions for high-value clients.</li>
-                                <li>Provided strategic technical guidance and ensured seamless integration.</li>
-                            </ul>
-                        </div></li>
-                        <li><div class="experience-card">
-                            <div class="exp-header">
-                                <span class="exp-role">Product Support Engineer</span>
-                                <span class="exp-company">WebEngage</span>
-                                <span class="exp-location">Bengaluru, India</span>
-                                <span class="exp-dates">Dec 2022 - Sep 2023</span>
-                            </div>
-                            <ul class="exp-bullets">
-                                <li>Developed plugin SDKs for Flutter WebApps and provided TAM support.</li>
-                                <li>Diagnosed and resolved SDK integration issues for Web and Android.</li>
-                                <li>Led live bug-fixing sessions and documented onboarding processes.</li>
-                            </ul>
-                        </div></li>
-                    </ul>
-                </div>
-                <div class="skills-section">
-                    <h3>Skills</h3>
-                    <div class="skills-cards">
-                        <div class="skill-card">Spring Boot</div>
-                        <div class="skill-card">Native Android (Java, Kotlin)</div>
-                        <div class="skill-card">Flutter</div>
-                        <div class="skill-card">React Native</div>
-                        <div class="skill-card">SQL (MySQL, Postgres)</div>
-                        <div class="skill-card">MongoDB</div>
-                        <div class="skill-card">Kafka</div>
-                        <div class="skill-card">Data Structures</div>
-                        <div class="skill-card">Node.js</div>
-                        <div class="skill-card">Git</div>
-                        <div class="skill-card">REST APIs</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+        <div class="mobile-nav-backdrop"></div>
+        <div class="social-pallet">
+            <a href="https://www.instagram.com/allen.thomson7?igsh=OXlvZW8yanQ0NWR4" target="_blank" aria-label="Instagram" class="social-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.974-.974 2.241-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.131 4.659.425 3.678 1.406c-.98.98-1.274 2.092-1.333 3.374C2.013 5.741 2 6.151 2 12c0 5.849.013 6.259.072 7.54.059 1.282.353 2.394 1.333 3.374.98.98 2.092 1.274 3.374 1.333C8.259 23.987 8.669 24 12 24s3.741-.013 4.948-.072c1.282-.059 2.394-.353 3.374-1.333.98-.98 1.274-2.092 1.333-3.374.059-1.281.072-1.691.072-7.54 0-5.849-.013-6.259-.072-7.54-.059-1.282-.353-2.394-1.333-3.374-.98-.98-2.092-1.274-3.374-1.333C15.741.013 15.331 0 12 0z"/><path d="M12 5.838A6.162 6.162 0 0 0 5.838 12 6.162 6.162 0 0 0 12 18.162 6.162 6.162 0 0 0 18.162 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A3.999 3.999 0 1 1 12 8a3.999 3.999 0 0 1 0 7.999z"/><circle cx="18.406" cy="5.594" r="1.44"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/allen-thomson-5b1309110/" target="_blank" aria-label="LinkedIn" class="social-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.868-3.063-1.868 0-2.156 1.459-2.156 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
+            </a>
+            <a href="https://github.com/Allono07" target="_blank" aria-label="GitHub" class="social-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.563.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://leetcode.com/u/AllenThomson/" target="_blank" aria-label="LeetCode" class="social-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.205 17.978c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-8.205-15.978c-5.514 0-10 4.486-10 10s4.486 10 10 10c2.652 0 5.093-1.032 6.949-2.899.195-.195.195-.512 0-.707-.195-.195-.512-.195-.707 0-1.646 1.646-3.833 2.606-6.242 2.606-4.962 0-9-4.038-9-9s4.038-9 9-9c2.409 0 4.596.96 6.242 2.606.195.195.512.195.707 0 .195-.195.195-.512 0-.707-1.856-1.867-4.297-2.899-6.949-2.899zm8.205 13.978c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2.205-2.978c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2-2c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2-2c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713zm-2-2c-.197-.197-.516-.197-.713 0-.197.197-.197.516 0 .713.197.197.516.197.713 0 .197-.197.197-.516 0-.713z"/></svg>
+            </a>
+        </div>
+        <main>
+            <section id="home">
+                <div class="home-content large">
+                    <img id="profile-photo" class="large-photo" src="allen.jpeg" alt="Your Photo" />
+                    <div class="home-text">
+                        <h1 id="name">Allen Thomson</h1>
+                        <h2 id="typing-title" class="typing">Software Engineer - Mobile Application Developer & Backend Developer</h2>
+                        <p id="description">I am passionate about building and solving problems.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section id="projects">
-            <div class="projects-banner">
-                <h2>Projects</h2>
-                <p id="projects-banner-desc">Here are some of the projects I have worked on, showcasing my skills in mobile and backend development.</p>
-            </div>
-            <div id="projects-grid" class="projects-grid">
-                <div class="project-card">
-                    <h3>Sonno Music Player</h3>
-                    <p>Music player where you can set a timer or schedule for the music to stop playing automatically. Built on Expo, uses React Native Track Player for music control and notifications.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.sonno.music" target="_blank">Play Store</a>
-                    <a href="https://github.com/yourusername/sonno-music-player" target="_blank">View Project</a>
+            </section>
+            <section id="about">
+                <div class="about-banner">
+                    <h2>About Me</h2>
+                    <p id="about-banner-desc">Software engineer with over two years of experience in mobile and backend development, passionate about technology and innovation.</p>
                 </div>
-                <div class="project-card">
-                    <h3>Attendance Tracking Mobile Application - Composable</h3>
-                    <p>Attendance tracking app that generates QR codes for students and fetches real-time attendance records from the backend.<br>Technologies: Jetpack Compose (Mobile), Spring Boot Kotlin (Backend)</p>
-                    <a href="https://github.com/yourusername/attendance-tracking-app" target="_blank">View Project</a>
+                <div class="about-flex">
+                    <div>
+                        <h3>Experience</h3>
+                        <ul id="experience-list">
+                            <li><div class="experience-card">
+                                <div class="exp-header">
+                                    <span class="exp-role">Software Engineer - Mobile</span>
+                                    <span class="exp-company">Netcore Cloud</span>
+                                    <span class="exp-location">Bengaluru, India</span>
+                                    <span class="exp-dates">Sep 2024 - Present</span>
+                                </div>
+                                <ul class="exp-bullets">
+                                    <li>Maintained and developed Android, Flutter, React Native, and Cordova solutions.</li>
+                                    <li>Automated SDK integration, reducing onboarding by 15 days.</li>
+                                    <li>Built internal tools for support and integration automation (React, Flask).</li>
+                                    <li>Optimized codebases, debugged complex issues, and collaborated cross-functionally.</li>
+                                </ul>
+                            </div></li>
+                            <li><div class="experience-card">
+                                <div class="exp-header">
+                                    <span class="exp-role">Technical Account Manager</span>
+                                    <span class="exp-company">WebEngage</span>
+                                    <span class="exp-location">Bengaluru, India</span>
+                                    <span class="exp-dates">Sep 2023 - Sep 2024</span>
+                                </div>
+                                <ul class="exp-bullets">
+                                    <li>Managed technical relationships and delivered custom solutions for high-value clients.</li>
+                                    <li>Provided strategic technical guidance and ensured seamless integration.</li>
+                                </ul>
+                            </div></li>
+                            <li><div class="experience-card">
+                                <div class="exp-header">
+                                    <span class="exp-role">Product Support Engineer</span>
+                                    <span class="exp-company">WebEngage</span>
+                                    <span class="exp-location">Bengaluru, India</span>
+                                    <span class="exp-dates">Dec 2022 - Sep 2023</span>
+                                </div>
+                                <ul class="exp-bullets">
+                                    <li>Developed plugin SDKs for Flutter WebApps and provided TAM support.</li>
+                                    <li>Diagnosed and resolved SDK integration issues for Web and Android.</li>
+                                    <li>Led live bug-fixing sessions and documented onboarding processes.</li>
+                                </ul>
+                            </div></li>
+                        </ul>
+                    </div>
+                    <div class="skills-section">
+                        <h3>Skills</h3>
+                        <div class="skills-cards">
+                            <div class="skill-card">Spring Boot</div>
+                            <div class="skill-card">Native Android (Java, Kotlin)</div>
+                            <div class="skill-card">Flutter</div>
+                            <div class="skill-card">React Native</div>
+                            <div class="skill-card">SQL (MySQL, Postgres)</div>
+                            <div class="skill-card">MongoDB</div>
+                            <div class="skill-card">Kafka</div>
+                            <div class="skill-card">Data Structures</div>
+                            <div class="skill-card">Node.js</div>
+                            <div class="skill-card">Git</div>
+                            <div class="skill-card">REST APIs</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <h3>Corpcon Backend Application - GCP</h3>
-                    <p>Backend for Corpcon WebApplication.<br>Technologies: Kafka for event sync, Git, Docker, Kotlin, Spring Boot</p>
-                    <a href="https://github.com/yourusername/corpcon-backend" target="_blank">View Project</a>
+            </section>
+            <section id="projects">
+                <div class="projects-banner">
+                    <h2>Projects</h2>
+                    <p id="projects-banner-desc">Here are some of the projects I have worked on, showcasing my skills in mobile and backend development.</p>
                 </div>
-                <div class="project-card">
-                    <h3>Food Delivery App - Flutter</h3>
-                    <p>Delivery app built on Flutter.<br>Firebase Auth SDK (User Authentication), Firestore SDK (Backend/DB).<br>Design: MVVM Architecture.</p>
-                    <a href="https://github.com/yourusername/food-delivery-flutter" target="_blank">View Project</a>
+                <div id="projects-grid" class="projects-grid">
+                    <div class="project-card">
+                        <h3>Sonno Music Player</h3>
+                        <p>Music player where you can set a timer or schedule for the music to stop playing automatically. Built on Expo, uses React Native Track Player for music control and notifications.</p>
+                        <a href="" target="_blank">Play Store</a>
+                        <a href="https://github.com/yourusername/sonno-music-player" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Attendance Tracking Mobile Application - Composable</h3>
+                        <p>Attendance tracking app that generates QR codes for students and fetches real-time attendance records from the backend.<br>Technologies: Jetpack Compose (Mobile), Spring Boot Kotlin (Backend)</p>
+                        <a href="https://github.com/Allono07/attendance_composable" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Corpcon Backend Application - GCP</h3>
+                        <p>Backend for Corpcon WebApplication.<br>Technologies: Kafka for event sync, Git, Docker, Kotlin, Spring Boot</p>
+                        <a href="" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Food Delivery App - Flutter</h3>
+                        <p>Delivery app built on Flutter.<br>Firebase Auth SDK (User Authentication), Firestore SDK (Backend/DB).<br>Design: MVVM Architecture.</p>
+                        <a href="https://github.com/Allono07/restaurant_app_flutter" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Automatic Billing Machine - IoT</h3>
+                        <p>Billing machine using image recognition and ML for item billing.<br>Hardware: Raspberry Pi 3b+, Load Cell 5Kg, HX711-Load Cell amplifier, Webcam.</p>
+                        <a href="https://github.com/Allono07/autobillproject" target="_blank">View Project</a>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <h3>Automatic Billing Machine - IoT</h3>
-                    <p>Billing machine using image recognition and ML for item billing.<br>Hardware: Raspberry Pi 3b+, Load Cell 5Kg, HX711-Load Cell amplifier, Webcam.</p>
-                    <a href="https://github.com/yourusername/automatic-billing-machine" target="_blank">View Project</a>
-                </div>
-            </div>
-        </section>
-        <section id="contact">
-            <h2>Let's Talk</h2>
-            <form id="contact-form" action="https://formsubmit.co/allono.at@gmail.com" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required />
-                <input type="email" name="email" placeholder="Your Email" required />
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send</button>
-            </form>
-        </section>
-    </main>
-    <footer class="footer">
-        <a href="allenresume_25_05.pdf" class="footer-resume-btn" download>Download Resume</a>
-        <div class="footer-copy">&copy; ALLEN - Hit Me Up</div>
-    </footer>
+            </section>
+            <section id="contact">
+                <h2>Let's Talk</h2>
+                <form id="contact-form" action="https://formsubmit.co/allono.at@gmail.com" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="email" name="email" placeholder="Your Email" required />
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </section>
+        </main>
+        <footer class="footer">
+            <a href="allenresume_25_05.pdf" class="footer-resume-btn" download>Download Resume</a>
+            <div class="footer-copy">&copy; ALLEN - Hit Me Up</div>
+        </footer>
+    </div>
     <script src="script.js"></script>
 </body>
 </html> 
