@@ -531,10 +531,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     fullText += pageText + '\n';
                 }
                 resumeResultDiv.textContent = 'Analyzing resume with AI...';
-                // Call Hugging Face Router API for DeepSeek model (replace YOUR_HF_TOKEN with your actual token)
-                const hfToken = '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'; // <-- Replace this!
+                // Call Hugging Face Router API for DeepSeek model
+                const hfToken = config.HF_TOKEN;
                 const deepseekPrompt = `Analyze this resume and extract key skills, experience summary, and suggest improvements.\n\nResume:\n${fullText}`;
-                const deepseekResponse = await fetch('https://router.huggingface.co/fireworks-ai/inference/v1/chat/completions', {
+                const deepseekResponse = await fetch(config.API_ENDPOINTS.DEEPSEEK, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${hfToken}`,
@@ -544,7 +544,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         messages: [
                             { role: 'user', content: deepseekPrompt }
                         ],
-                        model: 'accounts/fireworks/models/deepseek-r1',
+                        model: config.API_ENDPOINTS.MODEL,
                         stream: false
                     })
                 });
