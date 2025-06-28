@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
         nudgeTooltip.id = 'resume-nudge-tooltip';
         nudgeTooltip.innerHTML = `
             <div class="nudge-content">
-                <span class="nudge-text">🤖 Try our<br>AI Resume Analysis!</span>
+                <span class="nudge-text"> Try my<br>AI Resume Analysis!</span>
                 <button class="nudge-close" aria-label="Close nudge">×</button>
             </div>
             <div class="nudge-arrow"></div>
