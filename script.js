@@ -1,6 +1,3 @@
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Firebase and Analytics using CDN scripts
     const firebaseConfig = {
@@ -24,16 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => loaderOverlay.style.display = 'none', 600);
     }
 
-    // const firebaseConfig = {
-    //     apiKey: "x2vg",
-    //     authDomain: "portp.com",
-    //     projectId: "portfsite-c899e",
-    //     storageBucket: "portebasestorage.app",
-    //     messagingSenderId: "955465981238",
-    //     appId: "1:955465981238:w7SV"
-    //   };
-    // const app = initializeApp(firebaseConfig);
-    // const analytics = getAnalytics(app);
     // Splash screen logic
     const splash = document.getElementById('splash-screen');
     const progressBar = document.getElementById('splash-progressbar');
@@ -326,6 +313,195 @@ document.addEventListener('DOMContentLoaded', function() {
     const resumeForm = document.getElementById('resume-form');
     const resumeFileInput = document.getElementById('resume-file');
     const resumeResultDiv = document.getElementById('resume-analysis-result');
+
+    // --- Resume Analysis Nudge Feature ---
+    const resumeAnalysisNudge = () => {
+        const resumeNavLink = document.querySelector('a[href="#resume-analysis"]');
+        if (!resumeNavLink) return;
+
+        // Create nudge tooltip
+        const nudgeTooltip = document.createElement('div');
+        nudgeTooltip.id = 'resume-nudge-tooltip';
+        nudgeTooltip.innerHTML = `
+            <div class="nudge-content">
+                <span class="nudge-text">🤖 Try our<br>AI Resume Analysis!</span>
+                <button class="nudge-close" aria-label="Close nudge">×</button>
+            </div>
+            <div class="nudge-arrow"></div>
+        `;
+        nudgeTooltip.style.cssText = `
+            position: absolute;
+            background: linear-gradient(135deg, #64b5f6, #38d39f);
+            color: #232136;
+            padding: ${window.innerWidth <= 900 ? '0.6rem 0.8rem' : '0.8rem 1rem'};
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: ${window.innerWidth <= 900 ? '0.8rem' : '0.9rem'};
+            box-shadow: 0 4px 20px rgba(100,181,246,0.3);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+        `;
+
+        // Style the nudge content
+        const nudgeContent = nudgeTooltip.querySelector('.nudge-content');
+        nudgeContent.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        `;
+
+        const nudgeClose = nudgeTooltip.querySelector('.nudge-close');
+        nudgeClose.style.cssText = `
+            background: none;
+            border: none;
+            color: #232136;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem;
+            font-weight: bold;
+        `;
+
+        const nudgeArrow = nudgeTooltip.querySelector('.nudge-arrow');
+        const isMobile = window.innerWidth <= 900;
+        
+        if (isMobile) {
+            // Arrow pointing right on mobile (towards hamburger)
+            nudgeArrow.style.cssText = `
+                position: absolute;
+                right: -8px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 0;
+                height: 0;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 8px solid #38d39f;
+            `;
+        } else {
+            // Arrow pointing up on desktop (towards Resume Analysis tab)
+            nudgeArrow.style.cssText = `
+                position: absolute;
+                top: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-bottom: 8px solid #38d39f;
+            `;
+        }
+
+        // Add to navigation container instead of body
+        const nav = document.querySelector('nav');
+        if (nav) {
+            nav.appendChild(nudgeTooltip);
+        } else {
+            document.body.appendChild(nudgeTooltip);
+        }
+
+        // Position the tooltip
+        const positionTooltip = () => {
+            const isMobile = window.innerWidth <= 900;
+            
+            if (isMobile) {
+                // On mobile, position relative to hamburger button
+                const hamburger = document.getElementById('hamburger');
+                const hamburgerRect = hamburger ? hamburger.getBoundingClientRect() : null;
+                const navRect = nav ? nav.getBoundingClientRect() : { left: 0, top: 0 };
+                
+                if (hamburgerRect) {
+                    const tooltipWidth = 140;
+                    const tooltipHeight = 70;
+                    
+                    // Position to the left of hamburger button with more space
+                    let tooltipLeft = hamburgerRect.left - navRect.left - tooltipWidth - 40;
+                    let tooltipTop = hamburgerRect.top - navRect.top + hamburgerRect.height/2 - tooltipHeight/2;
+                    
+                    // Ensure it doesn't go off-screen
+                    tooltipLeft = Math.max(10, tooltipLeft);
+                    tooltipTop = Math.max(10, Math.min(tooltipTop, window.innerHeight - tooltipHeight - 10));
+                    
+                    nudgeTooltip.style.left = `${tooltipLeft}px`;
+                    nudgeTooltip.style.top = `${tooltipTop}px`;
+                }
+            } else {
+                // Desktop positioning - relative to Resume Analysis tab
+                const rect = resumeNavLink.getBoundingClientRect();
+                const navRect = nav ? nav.getBoundingClientRect() : { left: 0, top: 0 };
+                const tooltipWidth = 160;
+                const tooltipHeight = 80;
+                
+                let tooltipLeft = rect.left - navRect.left + rect.width/2 - tooltipWidth/2;
+                let tooltipTop = rect.bottom - navRect.top + 15;
+                
+                const maxLeft = window.innerWidth - tooltipWidth - 40;
+                tooltipLeft = Math.max(20, Math.min(tooltipLeft, maxLeft));
+                
+                const maxTop = window.innerHeight - tooltipHeight - 20;
+                if (tooltipTop > maxTop) {
+                    tooltipTop = rect.top - navRect.top - tooltipHeight - 15;
+                }
+                tooltipTop = Math.max(20, tooltipTop);
+                
+                nudgeTooltip.style.left = `${tooltipLeft}px`;
+                nudgeTooltip.style.top = `${tooltipTop}px`;
+            }
+        };
+
+        positionTooltip();
+
+        // Show with animation
+        setTimeout(() => {
+            nudgeTooltip.style.opacity = '1';
+            nudgeTooltip.style.transform = 'translateY(0)';
+            nudgeTooltip.style.pointerEvents = 'auto';
+        }, 100);
+
+        // Close functionality
+        const closeNudge = () => {
+            nudgeTooltip.style.opacity = '0';
+            nudgeTooltip.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                if (nudgeTooltip.parentNode) {
+                    nudgeTooltip.parentNode.removeChild(nudgeTooltip);
+                }
+            }, 300);
+        };
+
+        nudgeClose.addEventListener('click', closeNudge);
+        nudgeTooltip.addEventListener('click', (e) => {
+            if (e.target === nudgeTooltip) closeNudge();
+        });
+
+        // Auto-close after 8 seconds
+        setTimeout(closeNudge, 8000);
+
+        // Reposition on window resize and scroll
+        window.addEventListener('resize', positionTooltip);
+        window.addEventListener('scroll', positionTooltip);
+    };
+
+    // Show nudge after 7 seconds, but check if tab is visible first
+    setTimeout(() => {
+        const resumeNavLink = document.querySelector('a[href="#resume-analysis"]');
+        if (resumeNavLink) {
+            const rect = resumeNavLink.getBoundingClientRect();
+            const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+            
+            if (!isVisible) {
+                // Scroll to the navigation area first
+                resumeNavLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(resumeAnalysisNudge, 1000);
+            } else {
+                resumeAnalysisNudge();
+            }
+        }
+    }, 7000);
 
     if (resumeForm && resumeFileInput && resumeResultDiv) {
         resumeForm.addEventListener('submit', async function(e) {
