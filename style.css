@@ -642,17 +642,16 @@ section.visible {
         z-index: 13000;
         pointer-events: auto;
         overflow: hidden;
+        align-items: flex-start;
+        text-align: left;
     }
-    nav ul.nav-links li a {
+    nav ul.nav-links.open li {
         width: 100%;
-        padding: 1rem 2rem;
-        font-size: 1.12rem;
-        border-radius: 0;
-        margin: 0;
-        text-align: center;
-        white-space: nowrap;
-        overflow-x: hidden;
-        text-overflow: ellipsis;
+    }
+    nav ul.nav-links.open li a {
+        text-align: left;
+        justify-content: flex-start;
+        padding-left: 1.2rem;
     }
     .mobile-nav-backdrop.active {
         display: block;
@@ -1257,8 +1256,12 @@ body.light-mode .exp-dates {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.7rem;
-    margin-bottom: 1rem;
+    justify-content: center;
+}
+#resume-file, #resume-form button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 #resume-file {
     padding: 0.7em 1em;
@@ -1345,20 +1348,16 @@ body.light-mode .exp-dates {
         max-width: 280px;
         padding: 0.6em 1.5em;
         font-size: 1rem;
-        margin-right: 15px;
     }
     #resume-file {
         max-width: 100%;
         padding: 0.6em 0.8em;
         font-size: 0.9rem;
-        margin-right: 14px;
-
     }
     #resume-analysis-result {
         padding: 0.6em 0.6em;
         margin-top: 0.6em;
         font-size: 0.9rem;
-        margin-right: 30px;
     }
 }
 
@@ -1373,22 +1372,31 @@ body.light-mode .exp-dates {
         overflow-x: hidden;
     }
     #resume-analysis {
-        padding: 0.8rem 0.6rem;
-        max-width: 98vw;
-        width: 98vw;
-        margin: 1rem auto 1.5rem auto;
-        box-sizing: border-box;
-        overflow: hidden;
+        padding-left: 0 !important;
+    }
+    #resume-form {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        align-items: flex-start !important;
+    }
+    #resume-file, #resume-form button, #resume-analysis-result {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
     }
     #resume-analysis h2 {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
         word-wrap: break-word;
+        text-align: center;
     }
     #resume-form {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     #resume-form button {
         max-width: 100%;
@@ -1396,6 +1404,7 @@ body.light-mode .exp-dates {
         padding: 0.5em 1em;
         font-size: 0.95rem;
         box-sizing: border-box;
+        margin: 0 auto;
     }
     #resume-file {
         padding: 0.5em 0.6em;
@@ -1403,6 +1412,8 @@ body.light-mode .exp-dates {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
+        margin: 0 auto;
+        text-align: center;
     }
     #resume-analysis-result {
         padding: 0.5em 0.5em;
@@ -1410,16 +1421,15 @@ body.light-mode .exp-dates {
         width: 100%;
         box-sizing: border-box;
         overflow-wrap: break-word;
+        text-align: center;
     }
 }
 
 body.light-mode #resume-analysis {
-    background: linear-gradient(135deg, #fff 60%, #ffe066 100%);
     color: #232136;
-    border: 1.5px solid #38d39f;
 }
 body.light-mode #resume-analysis h2 {
-    color: #38d39f;
+    color: #1b1f1d;
     text-shadow: 0 2px 8px #ffe06633;
 }
 body.light-mode #resume-file {
