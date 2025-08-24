@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         btn.addEventListener('click', e => {
                             e.preventDefault();
                             alert('Play Store link is not live yet. You can download the app from Google Drive.');
-                            window.open('https://drive.google.com/file/d/1JFeMZl858jQ0tmwd5FtX6w6s2IqZxTiW/view?usp=drive_link', '_blank');
+                            window.open('https://drive.google.com/file/d/1355GwBnwC64lZV1XY-z8kbp_NxXL-bqA/view?usp=drive_link', '_blank');
                         });
                         card.appendChild(btn);
                     } else if (link.disabled) {
