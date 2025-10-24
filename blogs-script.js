@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Check if link is external (index.html or index.html#anchor)
-            if (href.includes('.html')) {
+            // Check if link is external (index.html or index.html#anchor, or paths like /index or /)
+            if (href.includes('.html') || (href && !href.startsWith('#'))) {
                 // Prevent default, close menu, add fade-out, then navigate
                 e.preventDefault();
                 if (window.innerWidth <= 900) {

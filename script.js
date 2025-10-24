@@ -224,8 +224,8 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Check if link is external (blogs.html)
-            if (href.includes('.html')) {
+            // Check if link is external (contains .html or is a path like /blogs)
+            if (href.includes('.html') || (href && !href.startsWith('#'))) {
                 // Prevent default, add fade-out to main content only, then navigate
                 e.preventDefault();
                 const mainContent = document.getElementById('main-content');
