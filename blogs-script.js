@@ -161,13 +161,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const blogContent = blogCard.querySelector('.blog-content');
                 
                 if (blogContent) {
-                    const isHidden = blogContent.style.display === 'none';
-                    if (isHidden) {
-                        blogContent.style.display = 'block';
+                    const isCollapsed = blogContent.classList.contains('collapsed');
+                    if (isCollapsed) {
+                        blogContent.classList.remove('collapsed');
                         this.textContent = 'Read Less ↑';
                         this.style.color = '#38d39f';
                     } else {
-                        blogContent.style.display = 'none';
+                        blogContent.classList.add('collapsed');
                         this.textContent = 'Read More →';
                         this.style.color = '#64b5f6';
                     }

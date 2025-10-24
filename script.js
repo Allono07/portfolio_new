@@ -21,11 +21,18 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => loaderOverlay.style.display = 'none', 600);
     }
 
-    // Splash screen logic
+    // Splash screen logic - only show on first load
     const splash = document.getElementById('splash-screen');
     const progressBar = document.getElementById('splash-progressbar');
     const mainContent = document.getElementById('main-content');
-    if (splash) {
+    
+    // Check if splash has already been shown in this session
+    const splashShown = sessionStorage.getItem('splashShown');
+    
+    if (splash && !splashShown) {
+        // Mark splash as shown for this session
+        sessionStorage.setItem('splashShown', 'true');
+        
         // Fade in
         splash.classList.add('show');
         setTimeout(() => {
@@ -44,6 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 700);
         }, 2000);
     } else {
+        // Splash already shown or doesn't exist, hide it immediately
+        if (splash) {
+            splash.style.display = 'none';
+        }
         if (mainContent) mainContent.style.display = '';
     }
     // Hamburger menu toggle
