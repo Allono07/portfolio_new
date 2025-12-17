@@ -1,0 +1,173 @@
+/* Vintage Newspaper Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Vintage Newspaper Color Palette */
+  --paper-bg: #f4f1e8;
+  --paper-aged: #e8e3d6;
+  --ink-black: #1a1a1a;
+  --ink-faded: #4a4a4a;
+  --border-color: #2a2a2a;
+  --accent-red: #8b0000;
+  --accent-gold: #d4af37;
+  
+  /* Typography */
+  --font-headline: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-mono: 'Courier New', monospace;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--paper-bg);
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(0, 0, 0, .02) 25%, rgba(0, 0, 0, .02) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, .02) 75%, rgba(0, 0, 0, .02) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(0, 0, 0, .02) 25%, rgba(0, 0, 0, .02) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, .02) 75%, rgba(0, 0, 0, .02) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  color: var(--ink-black);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Add vintage paper texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(ellipse at top left, rgba(139, 0, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-top: 4px double var(--border-color);
+  border-bottom: 4px double var(--border-color);
+  padding: 0.5rem 0;
+  margin: 1rem 0;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.3rem;
+  margin: 1.5rem 0 1rem;
+}
+
+h3 {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  margin: 1rem 0 0.5rem;
+}
+
+p {
+  text-align: justify;
+  hyphens: auto;
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--accent-red);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-red);
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--ink-black);
+  border-bottom-style: solid;
+}
+
+/* Newspaper column layout utility */
+.newspaper-columns {
+  column-count: 1;
+  column-gap: 2rem;
+  column-rule: 1px solid var(--border-color);
+}
+
+@media (min-width: 768px) {
+  .newspaper-columns {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  .newspaper-columns {
+    column-count: 3;
+  }
+}
+
+/* Ornamental divider */
+.ornamental-divider {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+}
+
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: '❦';
+  margin: 0 1rem;
+}
+
+/* Vintage button style */
+.vintage-btn {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  background: var(--ink-black);
+  color: var(--paper-bg);
+  border: 2px solid var(--ink-black);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.vintage-btn:hover {
+  background: var(--paper-bg);
+  color: var(--ink-black);
+  border-bottom: 2px solid var(--ink-black);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-aged);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink-faded);
+  border: 2px solid var(--paper-aged);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-black);
+}

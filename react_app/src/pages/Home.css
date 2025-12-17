@@ -1,0 +1,135 @@
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+.headline-section {
+  border: 3px solid var(--border-color);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background: var(--paper-aged);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.main-headline {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  text-align: center;
+  margin: 0;
+  line-height: 1.1;
+  border-top: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  padding: 1rem 0;
+}
+
+.subheadline {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  text-align: center;
+  font-style: italic;
+  margin: 1rem 0 0;
+  color: var(--ink-faded);
+}
+
+.front-page-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.lead-story {
+  border-right: 2px solid var(--border-color);
+  padding-right: 2rem;
+}
+
+.sidebar {
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  background: var(--paper-aged);
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted var(--border-color);
+  font-size: 0.95rem;
+}
+
+.skills-list li:last-child {
+  border-bottom: none;
+}
+
+.skills-list li::before {
+  content: '▪';
+  margin-right: 0.5rem;
+  color: var(--accent-red);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: var(--paper-bg);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: var(--ink-black);
+  color: var(--paper-bg);
+  border-bottom: 1px solid var(--ink-black);
+}
+
+.call-to-action {
+  text-align: center;
+  margin: 3rem 0 2rem;
+  padding: 2rem;
+  border: 2px dashed var(--border-color);
+}
+
+.cta-headline {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 968px) {
+  .front-page-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .lead-story {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .headline-section {
+    padding: 1rem;
+  }
+}

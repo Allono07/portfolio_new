@@ -1,0 +1,124 @@
+.contact {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px double var(--border-color);
+}
+
+.classified-section {
+  border: 4px double var(--border-color);
+  padding: 2rem;
+  background: var(--paper-aged);
+  margin-bottom: 2rem;
+}
+
+.classified-title {
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.contact-card {
+  border: 2px solid var(--border-color);
+  padding: 1.5rem;
+  background: var(--paper-bg);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  background: var(--ink-black);
+  color: var(--paper-bg);
+}
+
+.contact-card:hover a {
+  color: var(--accent-gold);
+  border-bottom-color: var(--accent-gold);
+}
+
+.contact-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.contact-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.contact-form {
+  border: 2px solid var(--border-color);
+  padding: 2rem;
+  background: var(--paper-bg);
+}
+
+.form-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color);
+  background: var(--paper-aged);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--ink-black);
+  background: var(--paper-bg);
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .contact-methods {
+    grid-template-columns: 1fr;
+  }
+}

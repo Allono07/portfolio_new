@@ -1,0 +1,126 @@
+.projects {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px double var(--border-color);
+}
+
+.projects-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.project-article {
+  border: 2px solid var(--border-color);
+  padding: 2rem;
+  background: var(--paper-aged);
+  transition: all 0.3s ease;
+}
+
+.project-article:hover {
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  transform: translate(-2px, -2px);
+}
+
+.project-headline {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.project-byline {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tech-tag {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  background: var(--paper-bg);
+  text-transform: uppercase;
+}
+
+.project-description {
+  margin: 1.5rem 0;
+  line-height: 1.8;
+}
+
+.project-features {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.project-features li {
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.project-features li::before {
+  content: '▸';
+  position: absolute;
+  left: -1.2rem;
+  color: var(--accent-red);
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.project-link {
+  padding: 0.5rem 1.5rem;
+  border: 2px solid var(--ink-black);
+  font-family: var(--font-headline);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  background: var(--ink-black);
+  color: var(--paper-bg);
+  border-bottom: 2px solid var(--ink-black);
+}
+
+@media (max-width: 768px) {
+  .project-article {
+    padding: 1.5rem;
+  }
+  
+  .project-headline {
+    font-size: 1.5rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+  }
+  
+  .project-link {
+    text-align: center;
+  }
+}

@@ -1,0 +1,83 @@
+.header {
+  border-bottom: 4px double var(--border-color);
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  background: var(--paper-aged);
+}
+
+.masthead {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.newspaper-name {
+  font-family: var(--font-headline);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  color: var(--ink-black);
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.newspaper-tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+  font-style: italic;
+  color: var(--ink-faded);
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.issue-date {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-faded);
+  margin: 0.5rem 0 1rem;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.3rem 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-black);
+  border-bottom: 2px solid transparent;
+  padding: 0.3rem 0;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  border-bottom-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 0;
+  }
+  
+  .navigation {
+    gap: 1rem;
+  }
+  
+  .nav-link {
+    font-size: 0.85rem;
+  }
+}
