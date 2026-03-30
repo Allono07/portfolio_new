@@ -1,0 +1,14 @@
+export const blogPosts = [
+  {
+    id: 'test-blog',
+    title: 'Test Blog',
+    date: 'March 31, 2026',
+    excerpt:
+      'This is a simple placeholder entry for testing the blog library and reader experience.',
+    content: [
+      `This is a test blog entry used to verify the Kindle-inspired reading experience inside the portfolio.`,
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
+    ],
+  },
+];
