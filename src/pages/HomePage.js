@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects.js';
+import ProjectLinkIcon from '../components/ProjectLinkIcon.js';
 import { workExperience } from '../data/workExperience.js';
 import ExperienceList from '../components/ExperienceList.js';
 import portrait from '../../allen.jpeg';
@@ -79,14 +80,7 @@ export default function HomePage() {
               <div className="feature-copy">
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
-                <a
-                  className="text-link"
-                  href={project.link}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {project.linkLabel}
-                </a>
+                <ProjectLinkIcon href={project.link} title={project.title} />
               </div>
             </article>
           ))}

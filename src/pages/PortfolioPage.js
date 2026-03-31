@@ -1,3 +1,4 @@
+import ProjectLinkIcon from '../components/ProjectLinkIcon.js';
 import ProjectPreview from '../components/ProjectPreview.js';
 import { projects } from '../data/projects.js';
 
@@ -22,14 +23,7 @@ export default function PortfolioPage() {
                 </p>
                 <h2 className="library-title">{project.title}</h2>
                 <p className="library-description">{project.description}</p>
-                <a
-                  className="text-link"
-                  href={project.link}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {project.linkLabel}
-                </a>
+                <ProjectLinkIcon href={project.link} title={project.title} />
               </div>
             </article>
           </li>
