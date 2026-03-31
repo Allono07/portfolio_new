@@ -3,7 +3,7 @@ import { projects } from '../data/projects.js';
 import { workExperience } from '../data/workExperience.js';
 import ExperienceList from '../components/ExperienceList.js';
 import portrait from '../../allen.jpeg';
-import engineeringVideo from '../data/video/engineeringvideo.mp4';
+import engineeringVideo from '../data/video/engineeringvideo.webm';
 
 const researchPublications = [
   {
