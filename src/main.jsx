@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.js';
 import { KindleProvider } from './context/KindleContext.js';
 import './styles.css';
+import "./firebase"; // just importing initializes it
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
