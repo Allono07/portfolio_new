@@ -5,10 +5,9 @@ export default function PortfolioPage() {
   return (
     <section className="page">
       <p className="page-kicker">Portfolio Library</p>
-      <h1 className="page-title">Projects arranged like articles on a Kindle home screen.</h1>
+      <h1 className="page-title">Projects</h1>
       <p className="page-lead">
-        Each entry focuses on the work itself: the problem, the shape of the
-        build, and where to read more.
+        A hobbyist&apos;s collection of projects, experiments, and prototypes.
       </p>
 
       <ol className="library-list library-list--projects" aria-label="Project list">

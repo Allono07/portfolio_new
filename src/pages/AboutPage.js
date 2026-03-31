@@ -68,17 +68,12 @@ export default function AboutPage() {
 
         <div className="about-copy">
           <p>
-            I enjoy building things that feel useful, calm, and dependable.
+            I enjoy building things. I like to understand how things work, and then use that understanding to make something new.
             That mindset carries through both my work and the way I approach
             everyday life: stay curious, keep learning, and make complicated
             things easier for other people to use.
           </p>
-          <p>
-            A lot of my thinking is shaped by problem solving, patience with
-            detail, and the satisfaction of making an experience feel simpler
-            than it was before. That is true whether I am working on a mobile
-            flow, a backend system, or a small internal tool.
-          </p>
+      
         </div>
       </section>
     </section>

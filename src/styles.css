@@ -402,18 +402,21 @@ textarea {
   min-height: 280px;
   overflow: hidden;
   border: 0;
-  
+  border-radius: 1rem;
+  background: #f3f1ec;
+  isolation: isolate;
 }
 
-.hero-art-image {
+.hero-art-media {
   display: block;
   width: 100%;
   height: 100%;
   min-height: 280px;
   object-fit: contain;
-  
+  background: #f3f1ec;
+  border-radius: 0;
   filter: grayscale(100%) contrast(0.92);
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
 }
 
 .portfolio-name {
@@ -517,6 +520,91 @@ textarea {
   margin: 0;
   font-size: 0.97rem;
   line-height: 1.62;
+}
+
+.experience-tree {
+  --tree-column: 92px;
+  position: relative;
+  margin-top: 22px;
+  padding: 8px 0;
+}
+
+.experience-tree::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--rule-strong);
+  transform: translateX(-0.5px);
+}
+
+.experience-tree-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--tree-column) minmax(0, 1fr);
+  margin: 0;
+  padding: 18px 0;
+}
+
+.experience-tree-item + .experience-tree-item {
+  margin-top: 10px;
+}
+
+.experience-tree-node {
+  position: relative;
+  width: min(100%, 550px);
+  padding: 18px 20px 16px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 20px;
+  background: var(--paper);
+}
+
+.experience-tree-item--left .experience-tree-node {
+  grid-column: 1;
+  justify-self: end;
+}
+
+.experience-tree-item--right .experience-tree-node {
+  grid-column: 3;
+  justify-self: start;
+}
+
+.experience-tree-node::before {
+  content: '';
+  position: absolute;
+  top: 34px;
+  width: calc(var(--tree-column) / 2);
+  height: 1px;
+  background: var(--rule-strong);
+}
+
+.experience-tree-node::after {
+  content: '';
+  position: absolute;
+  top: 28px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.experience-tree-item--left .experience-tree-node::before {
+  right: calc(var(--tree-column) / -2);
+}
+
+.experience-tree-item--left .experience-tree-node::after {
+  right: calc((var(--tree-column) / -2) - 6px);
+}
+
+.experience-tree-item--right .experience-tree-node::before {
+  left: calc(var(--tree-column) / -2);
+}
+
+.experience-tree-item--right .experience-tree-node::after {
+  left: calc((var(--tree-column) / -2) - 6px);
 }
 
 .experience-toggle {
@@ -693,6 +781,11 @@ textarea {
   grid-template-columns: 118px minmax(0, 1fr);
   gap: 12px;
   align-items: start;
+}
+
+.feature-row--text-only {
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
 .feature-copy h3,
@@ -1141,6 +1234,36 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .experience-tree {
+    --tree-column: 38px;
+    padding-left: 2px;
+  }
+
+  .experience-tree::before {
+    left: 18px;
+    transform: none;
+  }
+
+  .experience-tree-item {
+    grid-template-columns: var(--tree-column) minmax(0, 1fr);
+  }
+
+  .experience-tree-item--left .experience-tree-node,
+  .experience-tree-item--right .experience-tree-node {
+    grid-column: 2;
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .experience-tree-node::before {
+    left: calc(var(--tree-column) * -1);
+    width: var(--tree-column);
+  }
+
+  .experience-tree-node::after {
+    left: calc((var(--tree-column) * -1) - 6px);
+  }
+
   .feature-list--compact {
     grid-template-columns: 1fr;
     gap: 0;
@@ -1151,7 +1274,7 @@ textarea {
   }
 
   .hero-art-panel,
-  .hero-art-image {
+  .hero-art-media {
     min-height: 220px;
   }
 }
@@ -1213,6 +1336,45 @@ textarea {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
+  }
+
+  .experience-tree {
+    margin-top: 18px;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .experience-tree::before {
+    display: none;
+  }
+
+  .experience-tree-item {
+    display: block;
+    margin: 0;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .experience-tree-item + .experience-tree-item {
+    margin-top: 0;
+  }
+
+  .experience-tree-item--left .experience-tree-node,
+  .experience-tree-item--right .experience-tree-node {
+    width: 100%;
+    justify-self: auto;
+  }
+
+  .experience-tree-node {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .experience-tree-node::before,
+  .experience-tree-node::after {
+    display: none;
   }
 
   .experience-toggle {

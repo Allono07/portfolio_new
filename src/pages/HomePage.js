@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom';
 import { projects } from '../data/projects.js';
 import { workExperience } from '../data/workExperience.js';
 import ExperienceList from '../components/ExperienceList.js';
-import ProjectPreview from '../components/ProjectPreview.js';
 import portrait from '../../allen.jpeg';
-import engineeringImage from '../data/images/engineering.png';
+import engineeringVideo from '../data/video/engineeringvideo.mp4';
 
 const researchPublications = [
   {
@@ -39,19 +38,22 @@ export default function HomePage() {
             </div>
 
             <p className="intro-copy">
-              Hello! I&apos;m Allen, a software engineer building calm mobile
-              products, developer tooling, and dependable backend systems.
-              Welcome to my portfolio.
+              Hello! I&apos;m Allen, a software engineer. I love to build and solve problems.
             </p>
           </div>
         </div>
 
-        <aside className="hero-art-panel" aria-label="Engineering illustration">
-          <img
-            className="hero-art-image"
-            src={engineeringImage}
-            alt="Monochrome engineering artwork"
-          />
+        <aside className="hero-art-panel" aria-label="Engineering animation">
+          <video
+            autoPlay
+            className="hero-art-media"
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src={engineeringVideo} type="video/mp4" />
+          </video>
         </aside>
       </section>
 
@@ -70,9 +72,10 @@ export default function HomePage() {
 
         <div className="feature-list feature-list--compact">
           {featuredProjects.map((project) => (
-            <article className="feature-row feature-row--compact" key={project.id}>
-              <ProjectPreview type={project.preview} />
-
+            <article
+              className="feature-row feature-row--compact feature-row--text-only"
+              key={project.id}
+            >
               <div className="feature-copy">
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
