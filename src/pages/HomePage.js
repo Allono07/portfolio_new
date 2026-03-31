@@ -80,10 +80,16 @@ export default function HomePage() {
               <div className="feature-copy">
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
-                <ProjectLinkIcon href={project.link} title={project.title} />
+                <ProjectLinkIcon project={project} />
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="view-more-row">
+          <Link className="text-link" to="/portfolio">
+            View More Projects &gt;
+          </Link>
         </div>
       </section>
 

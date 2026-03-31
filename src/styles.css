@@ -96,13 +96,11 @@ textarea {
   font-size: calc(15px * var(--font-scale, 1));
   background:
     linear-gradient(180deg, var(--paper), var(--paper-shadow)),
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       rgba(0, 0, 0, 0.014) 0,
       rgba(0, 0, 0, 0.014) 1px,
       transparent 1px,
-      transparent 5px
-    );
+      transparent 5px);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
@@ -119,13 +117,11 @@ textarea {
   flex-shrink: 0;
   background:
     linear-gradient(180deg, var(--paper), var(--paper-shadow)),
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       rgba(0, 0, 0, 0.014) 0,
       rgba(0, 0, 0, 0.014) 1px,
       transparent 1px,
-      transparent 5px
-    );
+      transparent 5px);
 }
 
 .status-time {
@@ -233,13 +229,11 @@ textarea {
   flex-shrink: 0;
   background:
     linear-gradient(180deg, var(--paper), var(--paper-shadow)),
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       rgba(0, 0, 0, 0.014) 0,
       rgba(0, 0, 0, 0.014) 1px,
       transparent 1px,
-      transparent 5px
-    );
+      transparent 5px);
 }
 
 .nav-theme-toggle {
@@ -305,9 +299,7 @@ textarea {
 .screen-content {
   flex: 1 0 auto;
   padding:
-    clamp(24px, 3vw, 34px)
-    clamp(20px, 7vw, 82px)
-    clamp(28px, 4vw, 42px);
+    clamp(24px, 3vw, 34px) clamp(20px, 7vw, 82px) clamp(28px, 4vw, 42px);
   scroll-behavior: smooth;
 }
 
@@ -548,7 +540,7 @@ textarea {
   padding: 18px 0;
 }
 
-.experience-tree-item + .experience-tree-item {
+.experience-tree-item+.experience-tree-item {
   margin-top: 10px;
 }
 
@@ -823,13 +815,11 @@ textarea {
   border: 1px solid var(--preview-border);
   background:
     linear-gradient(180deg, var(--preview-top), var(--preview-bottom)),
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       rgba(255, 255, 255, 0.08) 0,
       rgba(255, 255, 255, 0.08) 1px,
       transparent 1px,
-      transparent 6px
-    );
+      transparent 6px);
 }
 
 .project-preview::after {
@@ -1109,22 +1099,198 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
   margin-top: 4px;
   color: var(--ink);
   background: transparent;
 }
 
 .project-icon-link svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   display: block;
 }
 
 .project-icon-link:hover,
 .project-icon-link:focus-visible {
   color: var(--muted);
+}
+
+/* ── Demo button (Trash Buddy / simulation link) ── */
+.demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.demo-btn svg {
+  flex-shrink: 0;
+}
+
+.demo-btn:hover,
+.demo-btn:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── Play Store badge ── */
+.play-store-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.play-store-link:hover,
+.play-store-link:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.play-store-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.play-store-sub {
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.play-store-main {
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+/* ── Testing-phase modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(2px);
+  padding: 24px;
+}
+
+.modal-box {
+  width: min(100%, 400px);
+  padding: 28px 28px 22px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.modal-icon {
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.modal-title {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.modal-body {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.modal-body strong {
+  color: var(--ink);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.modal-btn--cancel {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--rule-strong);
+}
+
+.modal-btn--cancel:hover,
+.modal-btn--cancel:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.modal-btn--ok {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.modal-btn--ok:hover,
+.modal-btn--ok:focus-visible {
+  opacity: 0.82;
+}
+
+/* ── Tech stack tag (e.g. Trash Buddy) ── */
+.project-tech-tag {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* ── View more row on home page ── */
+.view-more-row {
+  padding: 16px 0 4px;
+  border-top: 1px solid var(--rule);
+  text-align: right;
 }
 
 .chapter-block {
@@ -1327,6 +1493,7 @@ textarea {
 }
 
 @media (max-width: 900px) {
+
   .home-hero,
   .feature-row,
   .project-row,
@@ -1479,7 +1646,7 @@ textarea {
     border-bottom: 1px solid var(--rule);
   }
 
-  .experience-tree-item + .experience-tree-item {
+  .experience-tree-item+.experience-tree-item {
     margin-top: 0;
   }
 

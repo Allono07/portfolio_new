@@ -22,8 +22,11 @@ export default function PortfolioPage() {
                   Volume {String(index + 1).padStart(2, '0')} · {project.year}
                 </p>
                 <h2 className="library-title">{project.title}</h2>
+                {project.tech && (
+                  <p className="project-tech-tag">{project.tech}</p>
+                )}
                 <p className="library-description">{project.description}</p>
-                <ProjectLinkIcon href={project.link} title={project.title} />
+                <ProjectLinkIcon project={project} />
               </div>
             </article>
           </li>

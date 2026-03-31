@@ -1,13 +1,24 @@
 export const projects = [
   {
+    id: 'trash-buddy',
+    title: 'Trash Buddy',
+    year: '2025',
+    preview: 'backend',
+    tech: 'Node.js · PostgreSQL (PostGIS) · Redis · Socket.io · Flutter · Docker · Firebase',
+    description:
+      'A real-time waste vehicle tracking system that sends notifications when garbage collection vehicles are nearby, built with a live location pipeline and push-alert infrastructure.',
+    simulationLink: 'https://trash-buddy-simulation.vercel.app/',
+    linkLabel: 'View Demo >',
+  },
+  {
     id: 'sonno',
     title: 'Sonno Music Player',
     year: '2025',
-    preview: 'desktop',
+    preview: 'mobile',
     description:
       'A sleep-first music player that lets listeners fade audio out on a timer, schedule quiet hours, and keep playback controls simple enough for tired nights.',
-    link: 'https://github.com/allenThomsonNetcore/music-player-sonno',
-    linkLabel: 'View Project >',
+    playStoreLink: 'https://drive.google.com/file/d/1JFeMZl858jQ0tmwd5FtX6w6s2IqZxTiW/view',
+    linkLabel: 'Get on Play Store >',
   },
   {
     id: 'attendance-composable',
