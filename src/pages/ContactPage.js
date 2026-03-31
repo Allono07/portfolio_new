@@ -13,6 +13,15 @@ export default function ContactPage() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    const isLocalPreview =
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1';
+
+    if (import.meta.env.DEV && isLocalPreview && window.location.port !== '8888') {
+      setSubmissionState('local');
+      return;
+    }
+
     setSubmissionState('sending');
 
     try {
@@ -115,15 +124,22 @@ export default function ContactPage() {
             {submissionState === 'sending' ? 'Sending...' : 'Send Message >'}
           </button>
 
-          {submissionState === 'success' ? (
-            <p className="contact-status">
-              Thank you. Your message has been sent successfully.
-            </p>
-          ) : null}
+        {submissionState === 'success' ? (
+          <p className="contact-status">
+            Thank you. Your message has been sent successfully.
+          </p>
+        ) : null}
 
-          {submissionState === 'error' ? (
-            <p className="contact-status contact-status--error">
-              Something went wrong. Please try again or email me directly.
+        {submissionState === 'local' ? (
+          <p className="contact-status">
+            Local Vite preview does not process Netlify Forms. Test this form on
+            your deployed Netlify site or by running <code>netlify dev</code>.
+          </p>
+        ) : null}
+
+        {submissionState === 'error' ? (
+          <p className="contact-status contact-status--error">
+            Something went wrong. Please try again or email me directly.
             </p>
           ) : null}
         </form>

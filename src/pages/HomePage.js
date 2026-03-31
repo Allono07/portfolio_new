@@ -27,7 +27,7 @@ export default function HomePage() {
         <div className="home-hero-copy">
           <header className="home-heading">
             <h1 className="portfolio-name">Allen Thomson</h1>
-            <p className="portfolio-role">Software Engineer & Developer</p>
+            <p className="portfolio-role">Software Engineer</p>
           </header>
 
           <div className="ink-rule" />
