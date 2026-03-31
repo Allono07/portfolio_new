@@ -1227,11 +1227,15 @@ textarea {
 
 @media (max-width: 900px) {
   .home-hero,
-  .intro-row,
   .feature-row,
   .project-row,
   .home-panels {
     grid-template-columns: 1fr;
+  }
+
+  .intro-row {
+    grid-template-columns: 118px minmax(0, 1fr);
+    gap: 14px;
   }
 
   .experience-tree {
@@ -1270,7 +1274,7 @@ textarea {
   }
 
   .portrait-shell {
-    max-width: 160px;
+    max-width: 118px;
   }
 
   .hero-art-panel,
@@ -1314,6 +1318,21 @@ textarea {
 
   .screen-content {
     padding: 24px 18px 30px;
+  }
+
+  .intro-row {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+  }
+
+  .portrait-shell {
+    max-width: 92px;
+  }
+
+  .intro-copy {
+    font-size: 0.96rem;
+    line-height: 1.52;
   }
 
   .reader-topline,
