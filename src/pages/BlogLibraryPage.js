@@ -30,7 +30,7 @@ export default function BlogLibraryPage() {
               </h2>
               <p className="library-description">{post.excerpt}</p>
               <Link className="text-link" to={`/blog/${post.id}`}>
-                Read on Kindle >
+                Continue Reading >
               </Link>
             </article>
           </li>
