@@ -1,9 +1,20 @@
 export const workExperience = [
+   {
+    id: 'unbxd-backend',
+    role: 'Software Engineer - Backend',
+    company: 'Unbxd',
+    period: 'Mar 2026 - Present',
+    summary:
+      'Developing and maintaining backend services.',
+    details: [
+   'Just Getting Started!!',
+    ],
+  },
   {
     id: 'netcore-mobile',
     role: 'Software Engineer - Mobile',
     company: 'Netcore Cloud',
-    period: 'Sep 2024 - Present',
+    period: 'Sep 2024 - Feb 2026',
     summary:
       'Building mobile SDK and tooling experiences across Android, Flutter, React Native, and internal support workflows.',
     details: [
