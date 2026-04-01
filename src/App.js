@@ -1,14 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import KindleShell from './components/KindleShell.js';
-import AboutPage from './pages/AboutPage.js';
-import BlogLibraryPage from './pages/BlogLibraryPage.js';
-import BlogPostPage from './pages/BlogPostPage.js';
-import ContactPage from './pages/ContactPage.js';
 import HomePage from './pages/HomePage.js';
-import NotFoundPage from './pages/NotFoundPage.js';
-import PortfolioPage from './pages/PortfolioPage.js';
 import { initGtag, GA_MEASUREMENT_ID } from './firebase.js';
+import { initWebVitalsMonitoring } from './utils/webVitals.js';
+
+// Lazy load route components for code splitting
+const BlogLibraryPage = lazy(() => import('./pages/BlogLibraryPage.js'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage.js'));
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage.js'));
+const AboutPage = lazy(() => import('./pages/AboutPage.js'));
+const ContactPage = lazy(() => import('./pages/ContactPage.js'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage.js'));
+
+// Loading fallback component
+function PageFallback() {
+  return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }} />;
+}
 
 function getScreenName(pathname) {
   switch (pathname) {
@@ -33,6 +41,7 @@ export default function App() {
 
   useEffect(() => {
     initGtag();
+    initWebVitalsMonitoring();
   }, []);
 
   useEffect(() => {
@@ -56,12 +65,12 @@ export default function App() {
     <Routes>
       <Route element={<KindleShell />}>
         <Route index element={<HomePage />} />
-        <Route path="portfolio" element={<PortfolioPage />} />
-        <Route path="blog" element={<BlogLibraryPage />} />
-        <Route path="blog/:postId" element={<BlogPostPage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="contact" element={<ContactPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="portfolio" element={<Suspense fallback={<PageFallback />}><PortfolioPage /></Suspense>} />
+        <Route path="blog" element={<Suspense fallback={<PageFallback />}><BlogLibraryPage /></Suspense>} />
+        <Route path="blog/:postId" element={<Suspense fallback={<PageFallback />}><BlogPostPage /></Suspense>} />
+        <Route path="about" element={<Suspense fallback={<PageFallback />}><AboutPage /></Suspense>} />
+        <Route path="contact" element={<Suspense fallback={<PageFallback />}><ContactPage /></Suspense>} />
+        <Route path="*" element={<Suspense fallback={<PageFallback />}><NotFoundPage /></Suspense>} />
       </Route>
     </Routes>
   );

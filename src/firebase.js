@@ -36,20 +36,40 @@ export function initGtag() {
     return; // already initialized
   }
 
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () {
-    window.dataLayer.push(arguments);
+  // Delay GA script loading until browser is idle (performance optimization)
+  const scheduleGtagLoad = () => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => loadGtagScript(), { timeout: 3000 });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(loadGtagScript, 2000);
+    }
   };
 
-  window.gtag('js', new Date());
-  window.gtag('config', GA_MEASUREMENT_ID, {
-    send_page_view: false,
-  });
+  function loadGtagScript() {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, {
+      send_page_view: false,
+      anonymize_ip: true,
+    });
+  }
+
+  // Load gtag after page is interactive but don't block rendering
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleGtagLoad);
+  } else {
+    scheduleGtagLoad();
+  }
 }
 
 export { analytics };

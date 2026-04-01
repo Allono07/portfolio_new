@@ -22,11 +22,35 @@ export default defineConfig({
   server: {
     allowedHosts: ['gogetting-cyril-unstringed.ngrok-free.dev'],
   },
+  build: {
+    target: 'ES2020',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+      mangle: true,
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'firebase': ['firebase'],
+        },
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      },
+    },
+    reportCompressedSize: true,
+    chunkSizeWarningLimit: 500,
+  },
   optimizeDeps: {
     esbuildOptions: {
       loader: {
         '.js': 'jsx',
       },
     },
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
 });
