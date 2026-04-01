@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /*?*
+Allow: /*?utm_*
+
+# Crawl delay (milliseconds) - optional, adjust based on server capacity
+Crawl-delay: 1
+
+# Sitemap (if you generate one during build)
+Sitemap: https://allenthomson.com/sitemap.xml
+
+# Block bad bots
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: DotBot
+User-agent: MJ12bot
+Disallow: /

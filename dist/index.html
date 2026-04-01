@@ -3,14 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Allen Thomson's Kindle-inspired portfolio and blog reader built with React."
-    />
+    <meta name="description" content="Hey there!" />
     <meta name="theme-color" content="#f1f1f1" />
+    <meta name="color-scheme" content="light dark" />
+    
+    <!-- Preconnect to critical domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://firebasestore.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    
+    <!-- Critical CSS inline -->
+    <style>
+      :root {
+        color: #171717;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-synthesis: none;
+        line-height: 1.7;
+        font-weight: 400;
+        --paper: #f3f1ec;
+        --paper-shadow: #e7e3dc;
+        --drawer: #ebe7e0;
+        --ink: #171717;
+        --muted: #58544e;
+        --rule: #c9c4bc;
+        --rule-strong: #a7a096;
+      }
+      body[data-theme='dark'] {
+        --paper: #161616;
+        --paper-shadow: #1d1d1d;
+        --drawer: #1a1a1a;
+        --ink: #efefef;
+      }
+      html {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scrollbar-gutter: stable;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--paper);
+        color: var(--ink);
+      }
+      #root {
+        display: contents;
+      }
+      @keyframes shimmer {
+        0% { opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { opacity: 0.6; }
+      }
+      .skeleton-loader {
+        animation: shimmer 2s infinite;
+      }
+    </style>
+    
     <title>Allen Thomson</title>
-    <script type="module" crossorigin src="/assets/index-EZg11gg_.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-bajMKpQN.css">
+    <script type="module" crossorigin src="/assets/index-DFX4zVWU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BZl5gVyz.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-TLmIfdDe.css">
   </head>
   <body>
     <form

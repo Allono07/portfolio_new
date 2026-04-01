@@ -35,7 +35,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vendor': ['react', 'react-dom', 'react-router-dom'],
-          'firebase': ['firebase'],
         },
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -52,5 +51,6 @@ export default defineConfig({
       },
     },
     include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['firebase'],
   },
 });
