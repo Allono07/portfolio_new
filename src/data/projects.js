@@ -7,7 +7,7 @@ export const projects = [
     tech: 'Node.js · PostgreSQL (PostGIS) · Redis · Socket.io · Flutter · Docker · Firebase',
     description:
       'A real-time waste vehicle tracking system that sends notifications when garbage collection vehicles are nearby, built with a live location pipeline and push-alert infrastructure.',
-    simulationLink: 'https://trashbuddy.allenthomson.com/',
+    simulationLink: 'https://trashbuddy.in/',
     linkLabel: 'View Demo >',
   },
   {
