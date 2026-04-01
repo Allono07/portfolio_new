@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useKindle } from '../context/KindleContext.js';
 import { blogPosts } from '../data/blogPosts.js';
+import { useEffect } from 'react';
 
 function getReadingTime(content) {
   const wordCount = content.join(' ').trim().split(/\s+/).filter(Boolean).length;
@@ -9,6 +10,15 @@ function getReadingTime(content) {
 
 export default function BlogLibraryPage() {
   const { isBookmarked } = useKindle();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      window.gtag('event', 'blog_page_visited', {
+        page_title: document.title,
+        page_path: window.location.pathname,
+      });
+    }
+  }, []);
 
   return (
     <section className="page">
@@ -30,7 +40,7 @@ export default function BlogLibraryPage() {
               </h2>
               <p className="library-description">{post.excerpt}</p>
               <Link className="text-link" to={`/blog/${post.id}`}>
-                Continue Reading >
+                Continue Reading {'>'}
               </Link>
             </article>
           </li>

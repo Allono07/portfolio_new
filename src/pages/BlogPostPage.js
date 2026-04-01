@@ -50,6 +50,10 @@ export default function BlogPostPage() {
 
   useEffect(() => {
     setCurrentPage(0);
+  //   window.gtag('event', 'blog_page_visited', {
+  //   page_title: document.title,
+  //   page_path: window.location.pathname
+  // });
   }, [fontScale, postId]);
 
   if (!post) {

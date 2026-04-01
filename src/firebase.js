@@ -25,4 +25,31 @@ isSupported().then((yes) => {
   }
 });
 
+export const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_ID;
+
+export function initGtag() {
+  if (typeof window === 'undefined' || !GA_MEASUREMENT_ID) {
+    return;
+  }
+
+  if (window.gtag) {
+    return; // already initialized
+  }
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+
+  window.gtag('js', new Date());
+  window.gtag('config', GA_MEASUREMENT_ID, {
+    send_page_view: false,
+  });
+}
+
 export { analytics };
