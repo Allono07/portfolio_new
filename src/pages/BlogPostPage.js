@@ -3,53 +3,19 @@ import { Link, useParams } from 'react-router-dom';
 import { useKindle } from '../context/KindleContext.js';
 import { blogPosts } from '../data/blogPosts.js';
 import { trackEvent } from '../utils/analytics.js';
+import BlogLikeButton from '../components/BlogLikeButton.js';
 import { likeBlogPost, subscribeToBlogLikes, unlikeBlogPost } from '../utils/blogLikes.js';
+import {
+  getStoredLikedPosts,
+  removeLikedPost,
+  storeLikedPost,
+} from '../utils/blogLikeStorage.js';
 
 import mermaid from 'mermaid';
 
 const DEFAULT_INLINE_ZOOM = 1;
 const DEFAULT_MODAL_ZOOM = 2.1;
 const MAX_READER_PAGES = 2;
-const LIKED_POSTS_STORAGE_KEY = 'kindle-liked-posts';
-
-function getStoredLikedPosts() {
-  if (typeof window === 'undefined') return [];
-
-  try {
-    const likedPosts = JSON.parse(window.localStorage.getItem(LIKED_POSTS_STORAGE_KEY) || '[]');
-    return Array.isArray(likedPosts) ? likedPosts : [];
-  } catch {
-    return [];
-  }
-}
-
-function storeLikedPost(postId) {
-  const likedPosts = getStoredLikedPosts();
-
-  if (!likedPosts.includes(postId)) {
-    window.localStorage.setItem(
-      LIKED_POSTS_STORAGE_KEY,
-      JSON.stringify([...likedPosts, postId]),
-    );
-  }
-}
-
-function removeLikedPost(postId) {
-  const likedPosts = getStoredLikedPosts().filter((id) => id !== postId);
-  window.localStorage.setItem(LIKED_POSTS_STORAGE_KEY, JSON.stringify(likedPosts));
-}
-
-function HeartIcon({ filled }) {
-  return (
-    <svg
-      className={`post-like-icon${filled ? ' post-like-icon--filled' : ''}`}
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-    </svg>
-  );
-}
 
 const LIKE_PROMPT = 'If you liked my blog, a like would mean a lot.';
 
@@ -116,17 +82,12 @@ function PostLikeControl({
 }) {
   return (
     <div className={`post-like-control${showPrompt ? ' post-like-control--prompt' : ''}`}>
-      <button
-        className={`post-like-button${liked ? ' post-like-button--liked' : ''}`}
-        onClick={onToggle}
-        type="button"
-        aria-pressed={liked}
-        aria-label={liked ? 'Unlike this post' : 'Like this post'}
-        disabled={isLiking}
-      >
-        <HeartIcon filled={liked} />
-        <span className="post-like-count">{likeCount}</span>
-      </button>
+      <BlogLikeButton
+        liked={liked}
+        likeCount={likeCount}
+        isLiking={isLiking}
+        onToggle={onToggle}
+      />
       {showPrompt ? <TypewriterPrompt animationKey={promptKey} /> : null}
     </div>
   );

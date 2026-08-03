@@ -766,6 +766,18 @@ textarea {
   border-bottom: 1px solid var(--rule);
 }
 
+.library-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+.library-like-button {
+  flex-shrink: 0;
+}
+
 .feature-row {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
