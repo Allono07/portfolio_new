@@ -21,6 +21,13 @@
   --preview-top: #d8d5ce;
   --preview-bottom: #c2beb7;
   --preview-border: rgba(23, 23, 23, 0.48);
+  --code-bg: #eceae4;
+  --code-text: #171717;
+  --code-key: #0550ae;
+  --code-string: #0a3069;
+  --code-number: #116329;
+  --code-boolean: #8250df;
+  --code-null: #8250df;
 }
 
 body[data-theme='dark'] {
@@ -38,6 +45,13 @@ body[data-theme='dark'] {
   --preview-top: #545454;
   --preview-bottom: #363636;
   --preview-border: rgba(255, 255, 255, 0.24);
+  --code-bg: #252525;
+  --code-text: #e8e8e8;
+  --code-key: #79c0ff;
+  --code-string: #a5d6ff;
+  --code-number: #7ee787;
+  --code-boolean: #d2a8ff;
+  --code-null: #d2a8ff;
 }
 
 * {
@@ -1167,8 +1181,12 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 12px;
+}
+
+.post-like-control--prompt .post-like-button {
+  flex-shrink: 0;
 }
 
 .reader-like-footer {
@@ -1178,13 +1196,62 @@ textarea {
 }
 
 .post-like-prompt {
-  display: inline-flex;
-  align-items: center;
+  position: relative;
+  display: inline-block;
   margin: 0;
   min-height: 1.2em;
   font-size: 0.82rem;
   font-style: italic;
   color: var(--muted);
+}
+
+.post-like-prompt-ghost {
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.post-like-prompt-live {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.reader-code-block {
+  margin: 1rem 0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 4px;
+  font-size: 0.9em;
+  line-height: 1.55;
+  background: var(--code-bg);
+  color: var(--code-text);
+  border: 1px solid var(--rule);
+}
+
+.reader-code-block code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  color: inherit;
+  white-space: pre;
+}
+
+.code-token-key {
+  color: var(--code-key);
+}
+
+.code-token-string {
+  color: var(--code-string);
+}
+
+.code-token-number {
+  color: var(--code-number);
+}
+
+.code-token-boolean,
+.code-token-null {
+  color: var(--code-boolean);
 }
 
 .post-like-prompt-text {

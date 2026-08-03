@@ -19,6 +19,47 @@ const MAX_READER_PAGES = 2;
 
 const LIKE_PROMPT = 'If you liked my blog, a like would mean a lot.';
 
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function highlightJson(content) {
+  const escaped = escapeHtml(content);
+
+  return escaped.replace(
+    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+    (match) => {
+      let tokenClass = 'code-token-number';
+
+      if (/^"/.test(match)) {
+        tokenClass = /:$/.test(match) ? 'code-token-key' : 'code-token-string';
+      } else if (/true|false/.test(match)) {
+        tokenClass = 'code-token-boolean';
+      } else if (/null/.test(match)) {
+        tokenClass = 'code-token-null';
+      }
+
+      return `<span class="${tokenClass}">${match}</span>`;
+    },
+  );
+}
+
+function renderCodeContent(content, lang) {
+  if (lang === 'json') {
+    try {
+      const formatted = JSON.stringify(JSON.parse(content), null, 2);
+      return { html: highlightJson(formatted) };
+    } catch {
+      return { text: content };
+    }
+  }
+
+  return { text: content };
+}
+
 function TypewriterPrompt({ animationKey }) {
   const [displayText, setDisplayText] = useState('');
 
@@ -64,10 +105,13 @@ function TypewriterPrompt({ animationKey }) {
 
   return (
     <p className="post-like-prompt" aria-label={LIKE_PROMPT}>
-      <span className="post-like-prompt-text" aria-hidden="true">
-        {displayText}
+      <span className="post-like-prompt-ghost" aria-hidden="true">
+        {LIKE_PROMPT}
       </span>
-      <span className="post-like-prompt-caret" aria-hidden="true" />
+      <span className="post-like-prompt-live" aria-hidden="true">
+        <span className="post-like-prompt-text">{displayText}</span>
+        <span className="post-like-prompt-caret" />
+      </span>
     </p>
   );
 }
@@ -530,9 +574,18 @@ export default function BlogPostPage() {
             return <p key={'txt' + idx} style={{ whiteSpace: 'pre-wrap' }}>{paragraph.content}</p>;
           }
           if (paragraph.type === 'code') {
+            const renderedCode = renderCodeContent(paragraph.content, paragraph.lang);
+
             return (
-              <pre key={'code' + idx} style={{ background: '#f4f4f4', padding: '10px', overflowX: 'auto', borderRadius: '4px', fontSize: '0.9em', margin: '1rem 0' }}>
-                <code>{paragraph.content}</code>
+              <pre
+                key={'code' + idx}
+                className={`reader-code-block${paragraph.lang ? ` reader-code-block--${paragraph.lang}` : ''}`}
+              >
+                {renderedCode.html ? (
+                  <code dangerouslySetInnerHTML={{ __html: renderedCode.html }} />
+                ) : (
+                  <code>{renderedCode.text}</code>
+                )}
               </pre>
             );
           }
