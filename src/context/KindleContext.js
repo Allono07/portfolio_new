@@ -9,8 +9,6 @@ const MAX_FONT_SCALE = 1.1;
 export function KindleProvider({ children }) {
   const [theme, setTheme] = useLocalStorage('kindle-theme', 'light');
   const [fontScale, setFontScale] = useLocalStorage('kindle-font-scale', 0.95);
-  const [bookmarks, setBookmarks] = useLocalStorage('kindle-bookmarks', []);
-
   useEffect(() => {
     document.body.dataset.theme = theme;
   }, [theme]);
@@ -33,23 +31,12 @@ export function KindleProvider({ children }) {
     );
   };
 
-  const toggleBookmark = (postId) => {
-    setBookmarks((previousBookmarks) =>
-      previousBookmarks.includes(postId)
-        ? previousBookmarks.filter((bookmarkId) => bookmarkId !== postId)
-        : [...previousBookmarks, postId],
-    );
-  };
-
   const value = {
     theme,
     fontScale,
-    bookmarks,
     increaseFontSize,
     decreaseFontSize,
     toggleTheme,
-    toggleBookmark,
-    isBookmarked: (postId) => bookmarks.includes(postId),
   };
 
   return (

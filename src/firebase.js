@@ -2,6 +2,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,6 +16,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 // Analytics (only works in browser, not SSR)
 let analytics = null;
@@ -72,4 +74,4 @@ export function initGtag() {
   }
 }
 
-export { analytics };
+export { analytics, db };

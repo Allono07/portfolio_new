@@ -1099,6 +1099,120 @@ textarea {
   color: var(--muted);
 }
 
+.text-button:disabled {
+  color: var(--muted);
+  cursor: default;
+}
+
+.post-like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 150ms ease;
+}
+
+.post-like-button:hover:not(:disabled),
+.post-like-button:focus-visible {
+  color: var(--muted);
+}
+
+.post-like-button:disabled {
+  cursor: default;
+}
+
+.post-like-button--liked {
+  animation: post-like-pop 220ms ease;
+}
+
+.post-like-icon {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  transition: fill 150ms ease, stroke 150ms ease, color 150ms ease;
+}
+
+.post-like-icon--filled {
+  fill: #ed4956;
+  stroke: #ed4956;
+  color: #ed4956;
+}
+
+.post-like-count {
+  min-width: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-like-control--prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.reader-like-footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+
+.post-like-prompt {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  min-height: 1.2em;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.post-like-prompt-text {
+  white-space: nowrap;
+}
+
+.post-like-prompt-caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  margin-left: 2px;
+  background: var(--muted);
+  animation: post-like-caret-blink 0.85s step-end infinite;
+}
+
+@keyframes post-like-caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes post-like-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.18);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 .project-icon-link {
   display: inline-flex;
   align-items: center;
