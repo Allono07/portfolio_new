@@ -2,7 +2,7 @@ export const blogPosts = [
 
   {
     id: 'redis-vs-kafka-trashbuddy',
-    title: 'Why we choose Redis streams over kafka for TrashBuddy',
+    title: 'Why we picked Redis streams over kafka for TrashBuddy',
     date: 'August 3, 2026',
     excerpt: 'Our decision to use Redis streams over Kafka.',
     content: [
