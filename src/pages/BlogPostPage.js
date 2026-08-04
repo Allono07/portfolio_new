@@ -10,6 +10,7 @@ import {
   removeLikedPost,
   storeLikedPost,
 } from '../utils/blogLikeStorage.js';
+import { renderInlineLinks } from '../utils/renderInlineLinks.js';
 
 import mermaid from 'mermaid';
 
@@ -551,7 +552,7 @@ export default function BlogPostPage() {
           {post.date} · {getReadingTime(post.content)} min read
         </p>
         <h1>{post.title}</h1>
-        <p className="reader-excerpt">{post.excerpt}</p>
+        <p className="reader-excerpt">{renderInlineLinks(post.excerpt)}</p>
         {likeError ? <p className="reader-meta">{likeError}</p> : null}
       </header>
 
@@ -571,7 +572,7 @@ export default function BlogPostPage() {
             if (paragraph.content.startsWith('### ')) {
               return <h3 key={'h3' + idx} style={{ marginTop: '2rem', marginBottom: '1rem' }}>{paragraph.content.replace('### ', '')}</h3>;
             }
-            return <p key={'txt' + idx} style={{ whiteSpace: 'pre-wrap' }}>{paragraph.content}</p>;
+            return <p key={'txt' + idx} style={{ whiteSpace: 'pre-wrap' }}>{renderInlineLinks(paragraph.content)}</p>;
           }
           if (paragraph.type === 'code') {
             const renderedCode = renderCodeContent(paragraph.content, paragraph.lang);
@@ -669,7 +670,7 @@ export default function BlogPostPage() {
             Previous Blog >
           </Link>
         ) : (
-          <span className="reader-placeholder">Start of library</span>
+          <span className="reader-placeholder"></span>
         )}
 
         {nextPost ? (
@@ -678,7 +679,7 @@ export default function BlogPostPage() {
             to={`/blog/${nextPost.id}`}
             onClick={() => trackReaderBlogClick(nextPost, 'next_blog')}
           >
-            Next Page >
+           Next Blog >
           </Link>
         ) : (
           <span className="reader-placeholder">Last Blog on device</span>

@@ -9,6 +9,7 @@ import {
   removeLikedPost,
   storeLikedPost,
 } from '../utils/blogLikeStorage.js';
+import { renderInlineLinks } from '../utils/renderInlineLinks.js';
 
 function getReadingTime(content) {
   const text = content
@@ -132,7 +133,7 @@ export default function BlogLibraryPage() {
                   {post.title}
                 </Link>
               </h2>
-              <p className="library-description">{post.excerpt}</p>
+              <p className="library-description">{renderInlineLinks(post.excerpt)}</p>
               <Link
                 className="text-link"
                 to={`/blog/${post.id}`}

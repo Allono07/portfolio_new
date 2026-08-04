@@ -4,7 +4,7 @@ export const blogPosts = [
     id: 'redis-vs-kafka-trashbuddy',
     title: 'Why we picked Redis streams over kafka for TrashBuddy',
     date: 'August 3, 2026',
-    excerpt: 'Our decision to use Redis streams over Kafka.',
+    excerpt: 'Our decision to use Redis streams over Kafka. Checkout TrashBuddy at [trashbuddy.in](https://trashbuddy.in)',
     content: [
       { type: 'text', content: 'TrashBuddy started with a simple promise: help cities and residents know when waste collection is actually happening. Drivers move through city routes, the system tracks their live position, residents get notified when a truck is nearby, and ops teams watch checkpoints, alerts, and route progress in real time. At production scale that is not a quiet dashboard demo — it is a continuous stream of GPS pings, proximity decisions, notification sends, and live map fan-out happening every second across active routes.' },
       { type: 'text', content: 'Early on, most of that lived in a request-response path. A location update came in, we checked nearby residents, fired notifications, and pushed WebSocket updates in the same call stack. Under light load it looked fine. Under production traffic it became fragile: one slow SMS provider delayed map updates, one retry storm amplified load, and every new consumer meant another if branch in the hot path. We needed an event-based architecture — publish what happened once, and let independent workers react at their own pace.' },
