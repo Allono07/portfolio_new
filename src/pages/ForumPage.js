@@ -277,8 +277,6 @@ export default function ForumPage() {
         )}
       </div>
 
-      {statusMessages.auth ? <p className="forum-status">{statusMessages.auth}</p> : null}
-
       <div className="forum-list">
         {forumTopics.map((topic) => {
           const isLiked = Boolean(likedTopics[topic.id]);
