@@ -26,7 +26,10 @@ function getScreenLabel(pathname) {
     return 'Contact';
   }
 
-  return 'Kindle Portfolio';
+    if (pathname === '/forum') {
+    return 'Forum';
+  }
+  return 'Portfolio';
 }
 
 function formatTime(date) {
