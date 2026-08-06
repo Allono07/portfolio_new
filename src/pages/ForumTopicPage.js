@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Link, useParams } from 'react-router-dom';
 import BlogLikeButton from '../components/BlogLikeButton.js';
-import { auth, googleProvider, signInWithPopup, signOut } from '../firebase.js';
+import {
+  auth,
+  completeGoogleRedirectSignIn,
+  signInWithGoogle,
+  signOut,
+} from '../firebase.js';
 import { forumTopics } from '../data/forumTopics.js';
 import {
   addForumComment,
@@ -59,13 +64,31 @@ export default function ForumTopicPage() {
   const [statusMessage, setStatusMessage] = useState('');
 
   useEffect(() => {
+    let isActive = true;
+
+    completeGoogleRedirectSignIn()
+      .then((result) => {
+        if (!isActive || !result?.user) return;
+        setStatusMessage('Signed in with Google.');
+      })
+      .catch((error) => {
+        if (!isActive) return;
+        console.error('Unable to complete Google redirect sign-in', error);
+        setStatusMessage(
+          `Unable to complete Google sign-in (${error?.code || 'unknown'}).`,
+        );
+      });
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.debug('Auth state changed', { user: user ? user.email : null });
       setCurrentUser(user);
       setAuthPending(false);
     });
 
-    return unsubscribe;
+    return () => {
+      isActive = false;
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -112,7 +135,13 @@ export default function ForumTopicPage() {
     try {
       setAuthPending(true);
       console.debug('Google sign-in started', { origin: window.location.origin });
-      const result = await signInWithPopup(auth, googleProvider);
+      const result = await signInWithGoogle();
+
+      if (!result) {
+        setStatusMessage('Redirecting to Google sign-in…');
+        return;
+      }
+
       console.debug('Google sign-in succeeded', {
         user: result.user?.email,
         providerId: result.providerId,

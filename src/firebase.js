@@ -2,7 +2,14 @@
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import {
+  getAuth,
+  getRedirectResult,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -30,6 +37,30 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+const POPUP_FALLBACK_CODES = new Set([
+  'auth/popup-blocked',
+  'auth/popup-closed-by-user',
+  'auth/cancelled-popup-request',
+]);
+
+export async function signInWithGoogle() {
+  try {
+    return await signInWithPopup(auth, googleProvider);
+  } catch (error) {
+    if (POPUP_FALLBACK_CODES.has(error?.code)) {
+      await signInWithRedirect(auth, googleProvider);
+      return null;
+    }
+
+    throw error;
+  }
+}
+
+export async function completeGoogleRedirectSignIn() {
+  return getRedirectResult(auth);
+}
 
 // Analytics (only works in browser, not SSR)
 let analytics = null;
@@ -87,4 +118,4 @@ export function initGtag() {
   }
 }
 
-export { analytics, auth, db, googleProvider, signInWithPopup, signOut };
+export { analytics, auth, db, googleProvider, signOut };

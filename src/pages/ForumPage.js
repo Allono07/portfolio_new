@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import BlogLikeButton from '../components/BlogLikeButton.js';
-import { auth, googleProvider, signInWithPopup, signOut } from '../firebase.js';
+import {
+  auth,
+  completeGoogleRedirectSignIn,
+  signInWithGoogle,
+  signOut,
+} from '../firebase.js';
 import { forumTopics } from '../data/forumTopics.js';
 import {
   addForumComment,
@@ -52,13 +57,35 @@ export default function ForumPage() {
   const [statusMessages, setStatusMessages] = useState({});
 
   useEffect(() => {
+    let isActive = true;
+
+    completeGoogleRedirectSignIn()
+      .then((result) => {
+        if (!isActive || !result?.user) return;
+        setStatusMessages((previous) => ({
+          ...previous,
+          auth: 'Signed in with Google.',
+        }));
+      })
+      .catch((error) => {
+        if (!isActive) return;
+        console.error('Unable to complete Google redirect sign-in', error);
+        setStatusMessages((previous) => ({
+          ...previous,
+          auth: `Unable to complete Google sign-in (${error?.code || 'unknown'}).`,
+        }));
+      });
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.debug('Auth state changed', { user: user ? user.email : null });
       setCurrentUser(user);
       setAuthPending(false);
     });
 
-    return unsubscribe;
+    return () => {
+      isActive = false;
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -91,7 +118,17 @@ export default function ForumPage() {
   const handleGoogleSignIn = async () => {
     try {
       setAuthPending(true);
-      const result = await signInWithPopup(auth, googleProvider);
+      const result = await signInWithGoogle();
+
+      // Redirect flow navigates away; popup flow returns a result.
+      if (!result) {
+        setStatusMessages((previous) => ({
+          ...previous,
+          auth: 'Redirecting to Google sign-in…',
+        }));
+        return;
+      }
+
       console.debug('Google sign-in succeeded', {
         user: result.user?.email,
         providerId: result.providerId,
