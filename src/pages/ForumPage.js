@@ -53,6 +53,7 @@ export default function ForumPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.debug('Auth state changed', { user: user ? user.email : null });
       setCurrentUser(user);
       setAuthPending(false);
     });
@@ -90,11 +91,20 @@ export default function ForumPage() {
   const handleGoogleSignIn = async () => {
     try {
       setAuthPending(true);
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      console.debug('Google sign-in succeeded', {
+        user: result.user?.email,
+        providerId: result.providerId,
+      });
       setStatusMessages((previous) => ({ ...previous, auth: 'Signed in with Google.' }));
     } catch (error) {
       console.error('Unable to sign in with Google', error);
-      setStatusMessages((previous) => ({ ...previous, auth: 'Unable to sign in with Google right now.' }));
+      const errorCode = error?.code || 'unknown';
+      const errorMessage = error?.message || 'Unable to sign in with Google right now.';
+      setStatusMessages((previous) => ({
+        ...previous,
+        auth: `Unable to sign in with Google (${errorCode}): ${errorMessage}`,
+      }));
     } finally {
       setAuthPending(false);
     }
