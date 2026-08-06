@@ -9,6 +9,8 @@ import { initWebVitalsMonitoring } from './utils/webVitals.js';
 const BlogLibraryPage = lazy(() => import('./pages/BlogLibraryPage.js'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage.js'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage.js'));
+const ForumPage = lazy(() => import('./pages/ForumPage.js'));
+const ForumTopicPage = lazy(() => import('./pages/ForumTopicPage.js'));
 const AboutPage = lazy(() => import('./pages/AboutPage.js'));
 const ContactPage = lazy(() => import('./pages/ContactPage.js'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage.js'));
@@ -24,6 +26,8 @@ function getScreenName(pathname) {
       return 'Home';
     case '/portfolio':
       return 'Portfolio';
+    case '/forum':
+      return 'Forum';
     case '/blog':
       return 'BlogLibrary';
     case '/about':
@@ -32,6 +36,7 @@ function getScreenName(pathname) {
       return 'Contact';
     default:
       if (pathname.startsWith('/blog/')) return 'BlogPost';
+      if (pathname.startsWith('/forum/')) return 'ForumTopic';
       return 'Unknown';
   }
 }
@@ -66,6 +71,8 @@ export default function App() {
       <Route element={<KindleShell />}>
         <Route index element={<HomePage />} />
         <Route path="portfolio" element={<Suspense fallback={<PageFallback />}><PortfolioPage /></Suspense>} />
+        <Route path="forum" element={<Suspense fallback={<PageFallback />}><ForumPage /></Suspense>} />
+        <Route path="forum/:topicId" element={<Suspense fallback={<PageFallback />}><ForumTopicPage /></Suspense>} />
         <Route path="blog" element={<Suspense fallback={<PageFallback />}><BlogLibraryPage /></Suspense>} />
         <Route path="blog/:postId" element={<Suspense fallback={<PageFallback />}><BlogPostPage /></Suspense>} />
         <Route path="about" element={<Suspense fallback={<PageFallback />}><AboutPage /></Suspense>} />

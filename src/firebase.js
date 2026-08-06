@@ -2,6 +2,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -17,6 +18,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 // Analytics (only works in browser, not SSR)
 let analytics = null;
@@ -74,4 +77,4 @@ export function initGtag() {
   }
 }
 
-export { analytics, db };
+export { analytics, auth, db, googleProvider, signInWithPopup, signOut };

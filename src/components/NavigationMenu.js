@@ -4,6 +4,7 @@ import { useKindle } from '../context/KindleContext.js';
 const navigationItems = [
   { label: 'Home', to: '/' },
   { label: 'Portfolio', to: '/portfolio' },
+  { label: 'Forum', to: '/forum' },
   { label: 'Blog', to: '/blog' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
