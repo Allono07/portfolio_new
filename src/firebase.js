@@ -15,6 +15,16 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+if (typeof window !== 'undefined') {
+  console.debug('Firebase config loaded', {
+    authDomain: firebaseConfig.authDomain,
+    projectId: firebaseConfig.projectId,
+    appId: firebaseConfig.appId,
+    measurementId: firebaseConfig.measurementId,
+    origin: window.location.origin,
+  });
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
