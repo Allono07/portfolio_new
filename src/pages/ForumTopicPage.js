@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Link, useParams } from 'react-router-dom';
 import BlogLikeButton from '../components/BlogLikeButton.js';
+import Time59Visualization from '../components/Time59Visualization.jsx';
 import {
   auth,
   completeGoogleRedirectSignIn,
@@ -202,7 +203,7 @@ export default function ForumTopicPage() {
     setSubmittingComment(true);
 
     try {
-      await addForumComment(topic.id, trimmedComment);
+      await addForumComment(topic.id, trimmedComment, currentUser?.email || '');
       setCommentDraft('');
       setStatusMessage('Comment posted publicly.');
     } catch (error) {
@@ -335,6 +336,8 @@ export default function ForumTopicPage() {
           ))}
         </div>
 
+        <Time59Visualization />
+
         <form className="forum-form" onSubmit={handleCommentSubmit}>
           <label className="forum-label" htmlFor={`comment-${topic.id}`}>
             Leave a public comment
@@ -385,14 +388,6 @@ export default function ForumTopicPage() {
                         <p>{comment.text}</p>
                         <div className="forum-comment-meta">
                           <span>{formatCommentDate(comment.createdAt?.toDate ? comment.createdAt.toDate() : comment.createdAt)}</span>
-                          <div className="forum-comment-actions">
-                            <button className="forum-submit-button" type="button" onClick={() => startEditingComment(comment)}>
-                              Edit
-                            </button>
-                            <button className="forum-submit-button" type="button" onClick={() => handleDeleteComment(comment.id)} disabled={deletingCommentId === comment.id}>
-                              {deletingCommentId === comment.id ? 'Removing…' : 'Remove'}
-                            </button>
-                          </div>
                         </div>
                       </>
                     )}

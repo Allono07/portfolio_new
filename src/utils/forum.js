@@ -87,7 +87,7 @@ export function subscribeToForumComments(topicId, onChange, onError) {
   );
 }
 
-export function addForumComment(topicId, commentText) {
+export function addForumComment(topicId, commentText, userEmail = '') {
   const trimmedComment = commentText.trim();
 
   if (!trimmedComment) {
@@ -95,9 +95,11 @@ export function addForumComment(topicId, commentText) {
   }
 
   const commentsRef = collection(db, FORUM_TOPICS_COLLECTION, topicId, 'comments');
+  const normalizedEmail = typeof userEmail === 'string' ? userEmail.trim().toLowerCase() : '';
 
   return addDoc(commentsRef, {
     text: trimmedComment,
+    email: normalizedEmail || null,
     createdAt: serverTimestamp(),
   });
 }

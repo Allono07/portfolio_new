@@ -2,7 +2,7 @@ export const forumTopics = [
   {
     id: 'project-59',
     title: 'Project: Time 59',
-    category: 'Time Travelling',
+    category: 'Time Traveling',
     description: '60 minutes to 59 minutes in an hour.',
     tags: ['RTC', 'Frequency', 'Math', 'Time'],
   },

@@ -352,6 +352,460 @@ textarea {
   }
 }
 
+.time59-section {
+  display: grid;
+  gap: 16px;
+  margin: 20px 0 8px;
+}
+
+.time59-intro {
+  display: grid;
+  gap: 8px;
+}
+
+.time59-title {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+}
+
+.time59-lead {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.time59-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.time59-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.time59-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.time59-grid--compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.time59-card {
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.45);
+  display: grid;
+  gap: 14px;
+}
+
+.time59-card--inner {
+  padding: 14px;
+}
+
+body[data-theme='dark'] .time59-card {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.time59-card-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.time59-card-heading h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.time59-card-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.time59-metrics {
+  display: grid;
+  gap: 10px;
+}
+
+.time59-metrics--inline {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.time59-metric,
+.time59-stat {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--paper);
+}
+
+.time59-metric--accent {
+  border-color: var(--accent);
+}
+
+.time59-metric span,
+.time59-stat span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.time59-metric strong,
+.time59-stat strong {
+  font-size: 0.95rem;
+}
+
+.time59-clock-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.time59-compact-card {
+  display: grid;
+  gap: 10px;
+}
+
+.time59-compact-visual {
+  display: grid;
+  grid-template-columns: minmax(120px, 140px) 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.time59-counter-stack {
+  display: grid;
+  gap: 6px;
+}
+
+.time59-counter-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.time59-counter-row strong {
+  color: var(--ink);
+}
+
+.time59-relativity-card {
+  display: grid;
+  gap: 10px;
+}
+
+.time59-relativity-bars {
+  display: grid;
+  gap: 8px;
+}
+
+.time59-relativity-bar {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.time59-clock-card {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.time59-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.time59-clock-svg,
+.time59-graph-svg {
+  width: 100%;
+  height: auto;
+}
+
+.time59-ring {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 3;
+}
+
+.time59-tick {
+  stroke: var(--rule-strong);
+  stroke-width: 1.2;
+}
+
+.time59-tick--major {
+  stroke-width: 2.2;
+}
+
+.time59-hand {
+  stroke: #111111;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.time59-hand--hour {
+  stroke-width: 3.2;
+}
+
+.time59-pivot {
+  fill: var(--accent);
+}
+
+.time59-clock-meta,
+.time59-graph-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.time59-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.time59-controls--wrap {
+  justify-content: flex-start;
+}
+
+.time59-select {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.time59-select--full {
+  width: 100%;
+}
+
+.time59-select input,
+.time59-select select {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.time59-button--active {
+  background: var(--accent);
+  color: white;
+}
+
+.time59-eq {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: grid;
+  gap: 4px;
+}
+
+.time59-eq-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.time59-eq-body {
+  font-size: 0.95rem;
+}
+
+.time59-graph-card {
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--paper);
+  display: grid;
+  gap: 8px;
+}
+
+.time59-axis {
+  stroke: var(--rule-strong);
+  stroke-width: 1.2;
+}
+
+.time59-graph-base {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+
+.time59-graph-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.time59-oscillator {
+  width: 100%;
+  height: auto;
+}
+
+.time59-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.time59-bar-row {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.time59-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--rule);
+}
+
+.time59-bar-fill {
+  height: 100%;
+  background: var(--ink);
+}
+
+.time59-bar-fill--accent {
+  background: var(--accent);
+}
+
+.time59-pulse-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.time59-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.time59-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.time59-chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--code-bg);
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.time59-gear-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.time59-gear {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--rule-strong);
+  font-weight: 700;
+}
+
+.time59-gear--accent {
+  border-color: var(--accent);
+}
+
+.time59-footnote {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.time59-summary-list {
+  display: grid;
+  gap: 10px;
+}
+
+.time59-summary-item {
+  border-left: 2px solid var(--accent);
+  padding-left: 10px;
+}
+
+.time59-summary-item h4 {
+  margin: 0 0 4px;
+}
+
+.time59-summary-item p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.time59-control-stack {
+  display: grid;
+  gap: 12px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 780px) {
+  .time59-grid--two,
+  .time59-grid--three,
+  .time59-grid--compact,
+  .time59-clock-row {
+    grid-template-columns: 1fr;
+  }
+
+  .time59-card {
+    padding: 14px;
+  }
+
+  .time59-controls {
+    align-items: flex-start;
+  }
+
+  .time59-compact-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .time59-relativity-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
 .page {
   width: min(100%, 980px);
   margin: 0 auto;
