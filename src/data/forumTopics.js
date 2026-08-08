@@ -4,7 +4,7 @@ export const forumTopics = [
     title: 'Project: Time 59',
     category: 'Time Traveling',
     description: '60 minutes to 59 minutes in an hour.',
-    tags: ['RTC', 'Frequency', 'Math', 'Time'],
+    tags: ['RTC', 'Frequency', 'Math', 'Time Dialation', ],
   },
 //   {
 //     id: 'community-creator-hub',

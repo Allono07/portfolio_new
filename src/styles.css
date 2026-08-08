@@ -368,10 +368,47 @@ textarea {
   font-size: clamp(1.2rem, 2.2vw, 1.7rem);
 }
 
+.time59-lead-card {
+  display: grid;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 242, 237, 0.95));
+  box-shadow: 0 12px 30px rgba(17, 17, 17, 0.04);
+}
+
 .time59-lead {
   margin: 0;
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 1.01rem;
+}
+
+.time59-lead-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.time59-lead-pill {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(17, 17, 17, 0.03);
+  border: 1px solid rgba(17, 17, 17, 0.06);
+}
+
+.time59-lead-pill strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.time59-lead-pill span {
   color: var(--muted);
-  line-height: 1.7;
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .time59-grid {

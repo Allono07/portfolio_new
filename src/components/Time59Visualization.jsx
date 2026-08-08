@@ -168,7 +168,7 @@ function RelativityPair({ velocityRatio, stationaryElapsed, movingElapsed }) {
 
 export default function Time59Visualization() {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [speedMultiplier, setSpeedMultiplier] = useState(60);
+  const [speedMultiplier, setSpeedMultiplier] = useState(10);
   const [timeRange, setTimeRange] = useState(24);
   const [minutesPerHour, setMinutesPerHour] = useState(59);
   const [secondsPerMinute, setSecondsPerMinute] = useState(60);
@@ -241,9 +241,25 @@ export default function Time59Visualization() {
       <div className="time59-intro">
         <p className="page-kicker">Interactive physics note</p>
         <h2 className="time59-title">59-minute hour: a clock experiment</h2>
-        <p className="time59-lead">
-          The demonstration below separates a unit redefinition from a physical change in time. The animations stay tied to elapsed real seconds so the mathematics can be observed directly.
-        </p>
+        <div className="time59-lead-card">
+          <p className="time59-lead">
+            The goal isn't to change the laws of physics, but to explore how far we can push timekeeping by changing the rules inside the clock.
+          </p>
+          <div className="time59-lead-grid">
+            <div className="time59-lead-pill">
+              <strong>Mathematics</strong>
+              <span>How does a 59-minute hour affect accumulated drift and the passage of time?</span>
+            </div>
+            <div className="time59-lead-pill">
+              <strong>Engineering</strong>
+              <span>What would need to change in a quartz oscillator, digital counter, or mechanical gear train?</span>
+            </div>
+            <div className="time59-lead-pill">
+              <strong>Physics</strong>
+              <span>What changes when we redefine time versus actually altering how time passes?</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="time59-grid time59-grid--two">
