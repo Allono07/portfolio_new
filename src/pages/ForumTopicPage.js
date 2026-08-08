@@ -313,27 +313,29 @@ export default function ForumTopicPage() {
           </div>
         </div>
 
-        <div className="forum-auth-row">
-          {authPending ? (
-            <p className="forum-status">Checking sign-in status…</p>
-          ) : currentUser ? (
-            <>
-              <p className="forum-status">Signed in as {currentUser.email || 'Google user'}</p>
-              <button className="forum-submit-button" type="button" onClick={handleSignOut}>
-                Sign out
+        <div className="forum-meta-row">
+          <div className="forum-auth-row">
+            {authPending ? (
+              <p className="forum-status">Checking sign-in status…</p>
+            ) : currentUser ? (
+              <>
+                <p className="forum-status">Signed in as {currentUser.email || 'Google user'}</p>
+                <button className="forum-submit-button" type="button" onClick={handleSignOut}>
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <button className="forum-submit-button" type="button" onClick={handleGoogleSignIn}>
+                Sign in with Google
               </button>
-            </>
-          ) : (
-            <button className="forum-submit-button" type="button" onClick={handleGoogleSignIn}>
-              Sign in with Google
-            </button>
-          )}
-        </div>
+            )}
+          </div>
 
-        <div className="forum-tags" aria-label="Topic tags">
-          {topic.tags.map((tag) => (
-            <span className="forum-tag" key={tag}>{tag}</span>
-          ))}
+          <div className="forum-tags" aria-label="Topic tags">
+            {topic.tags.map((tag) => (
+              <span className="forum-tag" key={tag}>{tag}</span>
+            ))}
+          </div>
         </div>
 
         <Time59Visualization />

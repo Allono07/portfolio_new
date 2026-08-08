@@ -911,13 +911,21 @@ body[data-theme='dark'] .forum-card {
   gap: 8px;
 }
 
+.forum-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
 .forum-auth-row {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 8px;
 }
 
 .forum-submit-button {
@@ -952,7 +960,7 @@ body[data-theme='dark'] .forum-card {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 16px 0 18px;
+  margin: 0;
 }
 
 .forum-tag {

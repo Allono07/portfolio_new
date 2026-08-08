@@ -239,7 +239,6 @@ export default function Time59Visualization() {
   return (
     <section className="time59-section">
       <div className="time59-intro">
-        <p className="page-kicker">Interactive physics note</p>
         <h2 className="time59-title">59-minute hour: a clock experiment</h2>
         <div className="time59-lead-card">
           <p className="time59-lead">
