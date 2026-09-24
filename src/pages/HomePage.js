@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import MagneticLink from '../components/cinematic/MagneticLink.jsx';
 import Journey from '../components/cinematic/Journey.jsx';
 import Portrait from '../components/cinematic/Portrait.jsx';
