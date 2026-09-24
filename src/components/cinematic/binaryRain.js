@@ -10,21 +10,26 @@ export function getBinarySurface() {
   function draw(time = 0) {
     if (time === lastTime) return;
     lastTime = time;
-    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 768, 160);
-    ctx.font = '13px monospace'; ctx.textAlign = 'center';
-    for (let col = 0; col < 58; col++) {
-      const speed = 0.017 + (col * 13 % 17) * 0.0014;
-      const head = ((time * speed + col * 53) % 258) - 25;
-      for (let row = 0; row < 13; row++) {
-        const y = head - row * 15;
-        if (y < 0 || y > 172) continue;
-        const intensity = Math.max(0.09, 0.88 - row * 0.078) * (0.55 + (col % 5) * 0.1);
-        ctx.fillStyle = `rgba(244,244,242,${intensity})`;
-        ctx.shadowColor = '#ddd'; ctx.shadowBlur = row === 0 ? 4 : 0;
-        ctx.fillText(((col * 7 + row * 11 + Math.floor(time / 350)) % 3) === 0 ? '1' : '0', col * 13.3 + 6, y);
-      }
+    const width = canvas.width;
+    const height = canvas.height;
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, width, height);
+    ctx.font = '46px monospace'; ctx.textAlign = 'center';
+
+    const rowY = height / 2 + 14;
+    const spacing = 46;
+    const streamLength = Math.ceil(width / spacing) + 12;
+    const drift = (time * 0.015) % (spacing * 2);
+
+    for (let i = 0; i < streamLength; i++) {
+      const x = width - ((i * spacing + drift) % (width + spacing * 2)) + 18;
+      if (x < -30 || x > width + 30) continue;
+
+      const bit = (i + Math.floor(time * 0.008)) % 2 === 0 ? '1' : '0';
+      const alpha = 0.8 + ((i % 5) / 10);
+      ctx.fillStyle = `rgba(244,244,242,${alpha})`;
+      ctx.shadowColor = '#ddd'; ctx.shadowBlur = 0;
+      ctx.fillText(bit, x, rowY);
     }
-    ctx.shadowBlur = 0;
   }
   draw(0);
   surface = { canvas, draw };

@@ -52,9 +52,9 @@ const socialLinks = [
   },
 ];
 
-export default function SocialRail() {
+export default function SocialRail({ compact = false }) {
   return (
-    <aside className="social-rail" aria-label="Social links">
+    <aside className={`social-rail${compact ? ' social-rail--compact' : ''}`} aria-label="Social links">
       {socialLinks.map((link) => (
         <a
           key={link.label}

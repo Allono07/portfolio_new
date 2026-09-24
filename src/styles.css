@@ -2287,6 +2287,16 @@ body[data-theme='dark'] .forum-card {
   gap: 10px;
 }
 
+.social-rail--compact {
+  position: static;
+  transform: none;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: 16px;
+  width: fit-content;
+  z-index: auto;
+}
+
 .social-rail-link {
   width: 42px;
   height: 42px;
@@ -2298,6 +2308,20 @@ body[data-theme='dark'] .forum-card {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.social-rail--compact .social-rail-link {
+  width: 30px;
+  height: 30px;
+  color: var(--ink);
+  background: rgba(11, 11, 11, 0.04);
+  border-color: rgba(11, 11, 11, 0.14);
+}
+
+body[data-theme='dark'] .social-rail--compact .social-rail-link {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 .social-rail-link:hover,
@@ -2305,10 +2329,27 @@ body[data-theme='dark'] .forum-card {
   background: rgba(32, 32, 32, 0.96);
 }
 
+.social-rail--compact .social-rail-link:hover,
+.social-rail--compact .social-rail-link:focus-visible {
+  background: rgba(11, 11, 11, 0.08);
+  border-color: rgba(11, 11, 11, 0.2);
+}
+
+body[data-theme='dark'] .social-rail--compact .social-rail-link:hover,
+body[data-theme='dark'] .social-rail--compact .social-rail-link:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .social-rail-link svg {
   width: 18px;
   height: 18px;
   display: block;
+}
+
+.social-rail--compact .social-rail-link svg {
+  width: 14px;
+  height: 14px;
 }
 
 .reader-topline,

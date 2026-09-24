@@ -9,6 +9,7 @@ import { blogPosts } from '../data/blogPosts.js';
 import { forumTopics } from '../data/forumTopics.js';
 import ExperienceList from '../components/ExperienceList.js';
 import ProjectLinkIcon from '../components/ProjectLinkIcon.js';
+import SocialRail from '../components/SocialRail.js';
 import { renderInlineLinks } from '../utils/renderInlineLinks.js';
 import engineeringVideo from '../data/video/engineeringvideo.webm';
 
@@ -27,9 +28,19 @@ export default function HomePage() {
     <section className="hero" aria-labelledby="hero-name">
       <div className="hero-topline mono"><span>SOFTWARE ENGINEER & TINKERER</span><span>PERSONAL PORTFOLIO / SELECTED WORK</span></div>
       <h1 id="hero-name" className="hero-name">ALL<span className="reversed-e">E</span>N<br className="mobile-name-break"/> THOMSON<span className="name-asterisk">✳</span></h1>
-      <div className="hero-orbit" aria-hidden="true"/><span className="hero-cross cross-left" aria-hidden="true">+</span><span className="hero-cross cross-right" aria-hidden="true">+</span>
+      <div className="hero-orbit" aria-hidden="true">
+        <span className="orbit-satellite planet-a" />
+        <span className="orbit-satellite planet-b" />
+        <span className="orbit-satellite planet-c" />
+      </div>
+      <span className="hero-cross cross-left" aria-hidden="true">+</span><span className="hero-cross cross-right" aria-hidden="true">+</span>
       <Portrait/>
-      <div className="hero-copy"><span className="mono eyebrow">HELLO, I’M ALLEN.</span><h2>I build software.<br/>And what’s next.</h2><p>A software engineer.<br/>A builder. A founder in progress.</p><MagneticLink href="#work" className="primary-cta magnetic">View my work <span aria-hidden="true">↗</span></MagneticLink></div>
+      <div className="hero-copy">
+        {/* <span className="mono eyebrow">HELLO, I’M ALLEN.</span> */}
+      <h2>I build software.<br/>And what’s next.</h2>
+      {/* <p>A software engineer.<br/>A builder. A founder in progress.</p> */}
+      <MagneticLink href="#work" className="primary-cta magnetic">View my work <span aria-hidden="true">↗</span></MagneticLink>
+      <SocialRail compact /></div>
       <div className="hero-note"><span className="mono">A LITTLE CURIOSITY.<br/>A LOT OF BUILDING.</span><p>From backend systems<br/>to ideas worth exploring.</p><span className="hero-spark" aria-hidden="true">✳</span></div>
       <div className="hero-bottom mono"><span>01 — THE HUMAN BEHIND THE CODE</span><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span className="hero-coordinate">&lt; ALWAYS IN PROGRESS /&gt;</span></div>
     </section>
