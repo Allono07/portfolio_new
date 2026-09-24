@@ -125,20 +125,20 @@ export default function ContactPage() {
           </button>
 
         {submissionState === 'success' ? (
-          <p className="contact-status">
+          <p className="contact-status" role="status">
             Thank you. Your message has been sent successfully.
           </p>
         ) : null}
 
         {submissionState === 'local' ? (
-          <p className="contact-status">
+          <p className="contact-status" role="status">
             Local Vite preview does not process Netlify Forms. Test this form on
             your deployed Netlify site or by running <code>netlify dev</code>.
           </p>
         ) : null}
 
         {submissionState === 'error' ? (
-          <p className="contact-status contact-status--error">
+          <p className="contact-status contact-status--error" role="alert">
             Something went wrong. Please try again or email me directly.
             </p>
           ) : null}

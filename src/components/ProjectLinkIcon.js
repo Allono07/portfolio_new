@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Renders the appropriate link / button for a project.
@@ -10,6 +10,13 @@ import { useState } from 'react';
  */
 export default function ProjectLinkIcon({ project }) {
   const [showModal, setShowModal] = useState(false);
+  const dialogRef = useRef(null);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!showModal || !dialog) return;
+    dialog.showModal();
+    return () => dialog.close();
+  }, [showModal]);
 
   if (project.simulationLink) {
     return (
@@ -52,7 +59,7 @@ export default function ProjectLinkIcon({ project }) {
         </button>
 
         {showModal && (
-          <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+          <dialog ref={dialogRef} className="modal-overlay" aria-labelledby="modal-title" onCancel={() => setShowModal(false)}>
             <div className="modal-box">
               {/* Play Store icon */}
               <div className="modal-icon">
@@ -94,7 +101,7 @@ export default function ProjectLinkIcon({ project }) {
                 </a>
               </div>
             </div>
-          </div>
+          </dialog>
         )}
       </>
     );

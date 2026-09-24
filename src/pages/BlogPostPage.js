@@ -1,3 +1,4 @@
+import useReducedMotion from '../hooks/useReducedMotion.js';
 import { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useKindle } from '../context/KindleContext.js';
@@ -62,9 +63,11 @@ function renderCodeContent(content, lang) {
 }
 
 function TypewriterPrompt({ animationKey }) {
+  const reduced = useReducedMotion();
   const [displayText, setDisplayText] = useState('');
 
   useEffect(() => {
+    if (reduced) { setDisplayText(LIKE_PROMPT); return; }
     let cancelled = false;
     const typeDelay = 42;
     const deleteDelay = 20;
@@ -102,7 +105,7 @@ function TypewriterPrompt({ animationKey }) {
     return () => {
       cancelled = true;
     };
-  }, [animationKey]);
+  }, [animationKey, reduced]);
 
   return (
     <p className="post-like-prompt" aria-label={LIKE_PROMPT}>
@@ -174,6 +177,7 @@ function makeSvgFillContainer(container) {
 function Mermaid({ chart }) {
   const containerRef = useRef(null);
   const modalContainerRef = useRef(null);
+  const dialogRef = useRef(null);
   const scrollContainerRef = useRef(null);
   const modalScrollContainerRef = useRef(null);
   const dragStateRef = useRef({
@@ -186,13 +190,19 @@ function Mermaid({ chart }) {
   });
   
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!isOpen || !dialog) return;
+    dialog.showModal();
+    return () => dialog.close();
+  }, [isOpen]);
   const [zoom, setZoom] = useState(DEFAULT_MODAL_ZOOM);
   const [inlineZoom, setInlineZoom] = useState(DEFAULT_INLINE_ZOOM);
   const [diagramSize, setDiagramSize] = useState({ width: 900, height: 520 });
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
     const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
     mermaid.render(id, chart)
       .then(({ svg }) => {
@@ -307,7 +317,7 @@ function Mermaid({ chart }) {
          <button onClick={(e) => { e.stopPropagation(); setIsOpen(true); setZoom(DEFAULT_MODAL_ZOOM); }} style={{...iconButtonStyle, borderBottom: 'none'}} title="Fullscreen">⛶</button>
       </div>
       {isOpen && (
-        <div style={{
+        <dialog ref={dialogRef} aria-label="Expanded architecture diagram" className="diagram-modal" onCancel={() => setIsOpen(false)} style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 9999,
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyItems: 'center'
@@ -316,7 +326,7 @@ function Mermaid({ chart }) {
              <button onClick={() => setZoom(z => z + 0.2)} style={{ padding: '8px 16px', fontSize: '16px', cursor: 'pointer', borderRadius: '4px', border: 'none' }}>Zoom In (+)</button>
              <button onClick={() => setZoom(z => Math.max(0.6, z - 0.2))} style={{ padding: '8px 16px', fontSize: '16px', cursor: 'pointer', borderRadius: '4px', border: 'none' }}>Zoom Out (-)</button>
              <button onClick={() => setZoom(DEFAULT_MODAL_ZOOM)} style={{ padding: '8px 16px', fontSize: '16px', cursor: 'pointer', borderRadius: '4px', border: 'none' }}>Reset</button>
-             <button onClick={() => setIsOpen(false)} style={{ padding: '8px 16px', fontSize: '16px', cursor: 'pointer', marginLeft: '20px', backgroundColor: '#e74c3c', color: 'white', borderRadius: '4px', border: 'none' }}>Close</button>
+             <button onClick={() => setIsOpen(false)} style={{ padding: '8px 16px', fontSize: '16px', cursor: 'pointer', marginLeft: '20px', backgroundColor: '#333333', color: 'white', borderRadius: '4px', border: 'none' }}>Close</button>
           </div>
           <div
             ref={modalScrollContainerRef}
@@ -345,7 +355,7 @@ function Mermaid({ chart }) {
               }} 
             />
           </div>
-        </div>
+        </dialog>
       )}
     </div>
   );

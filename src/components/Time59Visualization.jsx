@@ -1,3 +1,4 @@
+import useReducedMotion from '../hooks/useReducedMotion.js';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   angularVelocity,
@@ -87,11 +88,13 @@ function ClockSvg({ title, tickCount, minuteSeconds, hourSeconds, minuteAngle, h
 }
 
 function PeriodFrequencyVisualizer({ periodSeconds }) {
+  const reduced = useReducedMotion();
   const [phase, setPhase] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const startRef = useRef(null);
 
   useEffect(() => {
+    if (reduced) return;
     let frameId = 0;
 
     const frame = (timestamp) => {
@@ -111,7 +114,7 @@ function PeriodFrequencyVisualizer({ periodSeconds }) {
       window.cancelAnimationFrame(frameId);
       startRef.current = null;
     };
-  }, [periodSeconds]);
+  }, [periodSeconds, reduced]);
 
   const frequency = 1 / periodSeconds;
   const cycles = elapsedTime / periodSeconds;
@@ -167,7 +170,9 @@ function RelativityPair({ velocityRatio, stationaryElapsed, movingElapsed }) {
 }
 
 export default function Time59Visualization() {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const reduced = useReducedMotion();
+  const [isPlaying, setIsPlaying] = useState(() => !reduced);
+  useEffect(() => { if (reduced) setIsPlaying(false); }, [reduced]);
   const [speedMultiplier, setSpeedMultiplier] = useState(10);
   const [timeRange, setTimeRange] = useState(24);
   const [minutesPerHour, setMinutesPerHour] = useState(59);

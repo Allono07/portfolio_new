@@ -1,6 +1,6 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import KindleShell from './components/KindleShell.js';
+import CinematicShell from './components/CinematicShell.jsx';
 import HomePage from './pages/HomePage.js';
 import { initGtag, GA_MEASUREMENT_ID } from './firebase.js';
 import { initWebVitalsMonitoring } from './utils/webVitals.js';
@@ -68,7 +68,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route element={<KindleShell />}>
+      <Route element={<CinematicShell />}>
         <Route index element={<HomePage />} />
         <Route path="portfolio" element={<Suspense fallback={<PageFallback />}><PortfolioPage /></Suspense>} />
         <Route path="forum" element={<Suspense fallback={<PageFallback />}><ForumPage /></Suspense>} />

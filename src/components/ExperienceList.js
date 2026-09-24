@@ -43,6 +43,7 @@ export default function ExperienceList({ items, initialOpenId = null }) {
               <div
                 className={`experience-panel${isOpen ? ' is-open' : ''}`}
                 id={panelId}
+                aria-hidden={!isOpen}
               >
                 <div className="experience-panel-inner">
                   <ul className="experience-details">
