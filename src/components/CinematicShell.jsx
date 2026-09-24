@@ -35,7 +35,7 @@ export default function CinematicShell() {
     <a className="skip-link" href="#main-content">Skip to content</a>
     <header className="site-header">
       <Link to="/" className="wordmark" aria-label="Allen Thomson home">
-        <img src="/assets/astraunaut.png" alt="Allen Thomson home" className="wordmark-mark" />
+        <img src="/assets/astraunaut.webp" alt="Allen Thomson home" className="wordmark-mark" />
       </Link>
       <span className="header-caption mono">ENGINEER. BUILDER. ALWAYS CURIOUS.</span>
       {location.pathname === '/' && <div className="site-audio" aria-label="Background music">
