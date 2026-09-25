@@ -28,8 +28,9 @@ export default function HomePage() {
     <div className="hero-track">
     <section className="hero" aria-labelledby="hero-name">
       <div className="hero-topline mono"><span>SOFTWARE ENGINEER & TINKERER</span><span>LIFE & PHILOSOPHY</span></div>
-      <h1 id="hero-name" className="hero-name">ALL<span className="reversed-e">E</span>N<br className="mobile-name-break"/> THOMSON<span className="name-asterisk">✳</span></h1>
+      <h1 id="hero-name" className="hero-name">ALL<span className="reversed-e">E</span>N<br className="mobile-name-break"/> THOMSON<span className="name-asterisk" aria-hidden="true"><svg viewBox="0 0 24 24" className="hero-symbol" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 14 5" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg></span></h1>
       <div className="hero-orbit" aria-hidden="true">
+        <img className="orbit-blackhole" src="/assets/planets/blackhole.png" alt="" width="148" height="148" />
         <span className="orbit-satellite planet-a"><img src="/assets/planets/mars.webp" alt="" /></span>
         <span className="orbit-satellite planet-b"><img src="/assets/planets/jupiter.webp" alt="" /></span>
         <span className="orbit-satellite planet-c"><img src="/assets/planets/saturn.webp" alt="" /></span>
@@ -42,9 +43,9 @@ export default function HomePage() {
         {/* <span className="mono eyebrow">HELLO, I’M ALLEN.</span> */}
       <h2>Beyond Silicon<br/>& Binary</h2>
       {/* <p>A software engineer.<br/>A builder. A founder in progress.</p> */}
-      <MagneticLink href="#work" className="primary-cta magnetic">View my work <span aria-hidden="true">↗</span></MagneticLink>
+      <MagneticLink href="#work" className="primary-cta magnetic">View my work <svg className="cta-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 20 4M5 4h15v15" fill="none" stroke="currentColor" strokeWidth="1.4"/></svg></MagneticLink>
       <SocialRail compact /></div>
-      <div className="hero-note"><span className="mono">A LITTLE CURIOSITY.<br/>A LOT OF BUILDING.</span><p>From backend systems<br/>to ideas worth exploring.</p><span className="hero-spark" aria-hidden="true">✳</span></div>
+      <div className="hero-note"><span className="mono">A LITTLE CURIOSITY.<br/>A LOT OF BUILDING.</span><p>From backend systems<br/>to ideas worth exploring.</p><span className="hero-spark" aria-hidden="true"><svg viewBox="0 0 24 24" className="hero-symbol" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 14 5" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg></span></div>
       <div className="hero-bottom mono"><span>01 — THE HUMAN BEHIND THE CODE</span><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span className="hero-coordinate">&lt; ALWAYS IN PROGRESS /&gt;</span></div>
     </section>
     </div>
