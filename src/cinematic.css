@@ -36,6 +36,7 @@ html{scrollbar-gutter:auto;scroll-padding-top:90px}body{background:var(--paper);
 @media(max-width:760px){.hero-orbit{--orbit-size:85vw}.orbit-satellite{width:26px;height:26px;margin-left:-13px;margin-top:-13px}.planet-b{width:32px;height:32px;margin-left:-16px;margin-top:-16px}.planet-c{width:36px;height:36px;margin-left:-18px;margin-top:-18px}}
 .hero-orbit{--orbit-size:min(49vw,88svh);width:var(--orbit-size);height:var(--orbit-size);max-width:none;max-height:none}
 @media(max-width:760px){.hero-orbit{--orbit-size:85vw}}
+@media(max-width:760px){.hero-bottom a{font-size:0;background:none;padding:0}.hero-bottom a span{font-size:16px;margin-left:0}}
 
 /* Match the full PNG coordinate system used by the eye bar and helmet. */
 .portrait-stage{max-width:none}
