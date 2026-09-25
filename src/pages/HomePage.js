@@ -30,9 +30,11 @@ export default function HomePage() {
       <div className="hero-topline mono"><span>SOFTWARE ENGINEER & TINKERER</span><span>PERSONAL PORTFOLIO / SELECTED WORK</span></div>
       <h1 id="hero-name" className="hero-name">ALL<span className="reversed-e">E</span>N<br className="mobile-name-break"/> THOMSON<span className="name-asterisk">✳</span></h1>
       <div className="hero-orbit" aria-hidden="true">
-        <span className="orbit-satellite planet-a" />
-        <span className="orbit-satellite planet-b" />
-        <span className="orbit-satellite planet-c" />
+        <span className="orbit-satellite planet-a"><img src="/assets/planets/mars.webp" alt="" /></span>
+        <span className="orbit-satellite planet-b"><img src="/assets/planets/jupiter.webp" alt="" /></span>
+        <span className="orbit-satellite planet-c"><img src="/assets/planets/saturn.webp" alt="" /></span>
+        <span className="orbit-satellite planet-d"><img src="/assets/planets/moon.webp" alt="" /></span>
+          <span className="orbit-satellite planet-e"><img src="/assets/planets/uranus.webp" alt="" /></span>
       </div>
       <span className="hero-cross cross-left" aria-hidden="true">+</span><span className="hero-cross cross-right" aria-hidden="true">+</span>
       <Portrait/>
