@@ -3,7 +3,8 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { createAstronaut } from './astronaut.js';
+import { createAstronaut, SUIT_DIMENSIONS } from './astronaut.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { getBinarySurface } from './binaryRain.js';
 import { EYE_BAR, HEAD, JOURNEY } from './calibration.js';
 
@@ -29,12 +30,22 @@ export default function JourneyScene({ reduced }) {
     try { renderer=new THREE.WebGLRenderer({alpha:true,antialias:window.innerWidth>760,powerPreference:'low-power',preserveDrawingBuffer:reduced}); }
     catch {setFailed(true);window.removeEventListener('keydown',onDebug);return;}
     renderer.setClearColor(0x000000,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure=1.02;
     host.appendChild(renderer.domElement);renderer.domElement.setAttribute('aria-hidden','true');
     const scene=new THREE.Scene();
+    // Local procedural studio reflections: no HDR download or third-party asset.
+    const room=new RoomEnvironment();
+    const pmrem=new THREE.PMREMGenerator(renderer);
+    const environmentTarget=pmrem.fromScene(room,.035);
+    scene.environment=environmentTarget.texture;scene.environmentIntensity=.48;
+    scene.environmentRotation.set(.12,.65,0);
+    room.dispose();pmrem.dispose();
     const camera=new THREE.OrthographicCamera(-1,1,1,-1,.1,5000);camera.position.set(0,0,1600);
-    scene.add(new THREE.HemisphereLight(0xffffff,0x686868,2.4));
-    const key=new THREE.DirectionalLight(0xffffff,3.5);key.position.set(-500,700,900);scene.add(key);
-    const fill=new THREE.DirectionalLight(0xffffff,1);fill.position.set(700,0,400);scene.add(fill);
+    scene.add(new THREE.HemisphereLight(0xffffff,0x454545,.5));
+    const key=new THREE.DirectionalLight(0xffffff,1.9);key.position.set(-500,700,900);scene.add(key);
+    const fill=new THREE.DirectionalLight(0xffffff,.4);fill.position.set(700,0,400);scene.add(fill);
+    const rim=new THREE.DirectionalLight(0xffffff,1.6);rim.position.set(300,400,-700);scene.add(rim);
     const astronaut=createAstronaut();scene.add(astronaut.root);
     const rain=getBinarySurface();
     const shadowCanvas=document.createElement('canvas');shadowCanvas.width=128;shadowCanvas.height=128;
@@ -50,16 +61,27 @@ export default function JourneyScene({ reduced }) {
     const state={environmentOpacity:0,active:0};
     let timeline, lenis, frame=0, lastFrame=0, stopped=false, resizeTimer, width=0,height=0,resizeObserver;
     let visible=true;
+    const performanceSample={start:0,frames:0};
     let contentHeight=0;
     const latchRest=astronaut.latches.map(ring=>ring.position.clone());
     const rest=new Map();for(const [name,node] of Object.entries(astronaut.parts))rest.set(name,node.position.clone());
     function render(time=0) {
       if(stopped)return;
       const mobile=width<761;
-      if(visible&&!document.hidden&&(reduced||time-lastFrame>=(mobile?1000/JOURNEY.mobileFps:15))){
+      if(visible&&!document.hidden&&(reduced||time-lastFrame>=(mobile?1000/JOURNEY.mobileFps:1000/60)-.7)){
         lastFrame=time;rain.draw(reduced?0:time);astronaut.texture.needsUpdate=true;
         gridMaterial.opacity=state.environmentOpacity;
+        environment.visible=!reduced&&state.environmentOpacity>.001;
+        for(const node of Object.values(astronaut.parts))node.visible=node.userData.materials.some(material=>material.opacity>.001);
         renderer.render(scene,camera);
+        if(import.meta.env.DEV){
+          performanceSample.frames++;
+          if(time-performanceSample.start>=1000){
+            host.dataset.fps=String(Math.round(performanceSample.frames*1000/(time-performanceSample.start)));
+            host.dataset.drawCalls=String(renderer.info.render.calls);
+            performanceSample.start=time;performanceSample.frames=0;
+          }
+        }
       }
       if(!reduced&&visible&&!document.hidden)frame=requestAnimationFrame(render);
     }
@@ -71,16 +93,19 @@ export default function JourneyScene({ reduced }) {
       width=window.innerWidth;height=window.innerHeight;
       renderer.setPixelRatio(Math.min(devicePixelRatio,width<761?JOURNEY.mobileDpr:JOURNEY.desktopDpr));
       renderer.setSize(width,height);camera.left=-width/2;camera.right=width/2;camera.top=height/2;camera.bottom=-height/2;camera.zoom=1;camera.updateProjectionMatrix();
-      for(const [name,node] of Object.entries(astronaut.parts)){node.position.copy(rest.get(name));node.rotation.set(0,0,0);node.scale.setScalar(1);node.userData.materials.forEach(m=>{m.opacity=1;if(m.emissive)m.emissive.set(0);});}
+      for(const [name,node] of Object.entries(astronaut.parts)){node.position.copy(rest.get(name));node.rotation.set(0,0,0);node.scale.setScalar(1);node.userData.materials.forEach(m=>{m.opacity=1;if(m.emissive){m.emissive.copy(m.userData.restEmissive);m.emissiveIntensity=m.userData.restEmissiveIntensity;}});}
       Object.values(astronaut.joints).forEach(j=>j.rotation.set(0,0,0));
+      for(const side of ['L','R'])astronaut.joints[`shoulder_${side}`].position.y=.59;
       astronaut.latches.forEach((ring,i)=>ring.position.copy(latchRest[i]));
       astronaut.root.rotation.set(0,0,0);astronaut.root.visible=true;
       if(reduced){
         host.classList.add('scene-still');
-        const size= Math.min(landing.clientHeight/8.4,60);
+        const size=Math.min((landing.clientHeight-105)/(SUIT_DIMENSIONS.crownY-SUIT_DIMENSIONS.soleY),landing.clientWidth/4,60);
         renderer.setSize(landing.clientWidth,landing.clientHeight);
         camera.left=-landing.clientWidth/2;camera.right=landing.clientWidth/2;camera.top=landing.clientHeight/2;camera.bottom=-landing.clientHeight/2;camera.updateProjectionMatrix();
-        astronaut.root.scale.setScalar(size);astronaut.root.position.set(0,size*.48,0);
+        const floor=85-landing.clientHeight/2;
+        astronaut.root.scale.setScalar(size);astronaut.root.position.set(0,floor-SUIT_DIMENSIONS.soleY*size,0);
+        shadow.position.set(0,floor-2,-20);shadow.scale.set(size*3.6,size*.6,1);shadow.material.opacity=.9;
         astronaut.joints.shoulder_L.rotation.z=-.13;astronaut.joints.shoulder_R.rotation.z=.16;
         environment.visible=false;render(0);
         // A true still of the same assembled procedural model, with no ongoing renderer.
@@ -92,22 +117,22 @@ export default function JourneyScene({ reduced }) {
       const heroBounds=hero.getBoundingClientRect(),p=portrait.getBoundingClientRect();
       const eyeX=p.left+p.width*(EYE_BAR.x+EYE_BAR.w/2)/100;
       const eyeY=p.top-heroBounds.top+p.height*(EYE_BAR.y+EYE_BAR.h/2)/100;
-      const scale=p.width*(EYE_BAR.w/100)/1.52;
-      astronaut.visorScreen.scale.y=(p.height*EYE_BAR.h/100/scale)/.5;
+      // Fit an enclosing pressure helmet without stretching it into the portrait's shape.
+      const scale=Math.max(
+        p.width*HEAD.w/100/SUIT_DIMENSIONS.helmetWidth,
+        p.height*HEAD.h/100/SUIT_DIMENSIONS.helmetHeight,
+        p.width*EYE_BAR.w/100/1.66,
+      )*1.12;
+      astronaut.calibrateEye(p.width*EYE_BAR.w/100/scale,p.height*EYE_BAR.h/100/scale);
       shadow.material.opacity=0;state.environmentOpacity=0;
-      // HEAD calibration controls the shell; EYE_BAR controls the opaque visor lock.
-      const helmet=astronaut.parts.helmet;
-      const helmetWidth=p.width*HEAD.w/100/scale;
-      const helmetHeight=p.height*HEAD.h/100/scale;
-      const helmetShell=helmet.children.find(n=>n.isMesh);
-      helmetShell.scale.set(helmetWidth/2,helmetHeight/2,.87);
-      helmetShell.position.y=((EYE_BAR.y+EYE_BAR.h/2)-(HEAD.y+HEAD.h/2))*p.height/100/scale;
       const shoulderY=height/2-(p.top-heroBounds.top+p.height*HEAD.shoulderY/100);
-      const rootX=eyeX-width/2,rootY=height/2-eyeY-1.93*scale;
+      const rootX=eyeX-width/2,rootY=height/2-eyeY-SUIT_DIMENSIONS.visorY*scale;
       astronaut.root.position.set(rootX,rootY,0);astronaut.root.scale.setScalar(scale);
       // The shoulder calibration adjusts the chest assembly relative to the photo.
       const chestOffset=(shoulderY-rootY)/scale-.9;
-      astronaut.parts.chest.position.y=.05+Math.max(-.4,Math.min(.4,chestOffset));
+      const torsoOffset=Math.max(-.12,Math.min(.12,chestOffset));
+      astronaut.parts.chest.position.y=.03+torsoOffset;
+      for(const side of ['L','R'])astronaut.joints[`shoulder_${side}`].position.y=.59+torsoOffset;
       const assembly=height*JOURNEY.assemblyScreens;
       const total=Math.max(assembly+height,home.scrollHeight-height);
       const smallScale=width<761?12:Math.min(39,width*.026);
@@ -123,12 +148,17 @@ export default function JourneyScene({ reduced }) {
         const start=index===6?[0,8,0]:index===7?[0,0,8]:[direction?(direction*7):(index%2?6:-6),index%2?3:-3,3];
         const at=height*(.18+index*.17+side*.035);
         const duration=height*.43;
-        timeline.fromTo(node.position,{x:target.x+start[0],y:target.y+start[1],z:target.z+start[2]},{x:target.x,y:target.y,z:target.z,duration,ease:'back.out(1.12)'},at);
+        timeline.fromTo(node.position,{x:target.x+start[0],y:target.y+start[1],z:target.z+start[2]},{x:target.x,y:target.y,z:target.z,duration,ease:'power3.out'},at);
         timeline.fromTo(node.rotation,{x:.3,y:direction*.8,z:direction*.7},{x:0,y:0,z:0,duration,ease:'power3.out'},at);
-        timeline.fromTo(node.scale,{x:1.15,y:1.15,z:1.15},{x:1,y:1,z:1,duration,ease:'power3.out'},at);
+        timeline.fromTo(node.scale,{x:1.04,y:1.04,z:1.04},{x:1,y:1,z:1,duration,ease:'power3.out'},at);
         node.userData.materials.forEach(material=>{
           timeline.fromTo(material,{opacity:0},{opacity:1,duration:height*.14},at);
-          if(material.emissive){timeline.to(material,{emissiveIntensity:1.4,duration:height*.04},at+duration*.8);material.emissive.set(0x555555);timeline.to(material,{emissiveIntensity:0,duration:height*.14},at+duration);}
+          // A brief glint on hardware only; fabric never glows like plastic.
+          if(material.emissive&&material.metalness>.5){
+            material.emissive.set(0x777777);material.emissiveIntensity=0;
+            timeline.to(material,{emissiveIntensity:.55,duration:height*.035},at+duration*.85);
+            timeline.to(material,{emissiveIntensity:0,duration:height*.1},at+duration);
+          }
         });
       }));
       astronaut.latches.forEach((ring,i)=>timeline.fromTo(ring.position,{y:ring.position.y+.18},{y:ring.position.y,duration:height*.15,ease:'power3.out'},height*(1.35+i*.09)));
@@ -158,7 +188,7 @@ export default function JourneyScene({ reduced }) {
       const landScale=Math.min(width<761?34:54,landing.clientHeight/7.5);
       const landX=landBounds.left+landBounds.width/2-width/2;
       const floorY=height/2-(landTop-total+landing.clientHeight-85);
-      const landY=floorY+3.9*landScale;
+      const landY=floorY-SUIT_DIMENSIONS.soleY*landScale;
       timeline.to(astronaut.root.position,{x:landX,y:landY,duration:height*.5,ease:'power2.out'},journeyEnd);
       timeline.to(astronaut.root.scale,{x:landScale,y:landScale,z:landScale,duration:height*.5,ease:'power2.out'},journeyEnd);
       timeline.to(astronaut.root.rotation,{x:0,y:Math.PI*2,z:-Math.PI*2,duration:height*.5,ease:'power2.out'},journeyEnd);
@@ -201,7 +231,7 @@ export default function JourneyScene({ reduced }) {
       timeline?.scrollTrigger?.kill();timeline?.kill();lenis?.destroy();gsap.ticker.remove(ticker);
       gsap.set([photo,...home.querySelectorAll('.hero-copy,.hero-note,.hero-topline,.hero-bottom,.hero-name,.reveal-line')],{clearProps:'opacity,transform'});
       home.classList.remove('journey-enabled');landing.querySelector('.astronaut-still')?.remove();
-      astronaut.dispose();shadow.geometry.dispose();shadow.material.dispose();shadowTexture.dispose();environment.children.forEach(n=>n.geometry.dispose());gridMaterial.dispose();renderer.dispose();renderer.domElement.remove();
+      astronaut.dispose();environmentTarget.dispose();shadow.geometry.dispose();shadow.material.dispose();shadowTexture.dispose();environment.children.forEach(n=>n.geometry.dispose());gridMaterial.dispose();renderer.dispose();renderer.domElement.remove();
     };
   },[reduced]);
   return <><div className="scene-mount"><div ref={container} className="journey-scene" aria-hidden="true">{!ready&&!failed&&<span className="scene-loader mono">ASSEMBLING THE POSSIBILITIES…</span>}{failed&&<span className="scene-loader mono">3D unavailable · explore the portfolio below</span>}</div></div>{import.meta.env.DEV&&debug&&!reduced&&<nav className="journey-debug" aria-label="Journey calibration checkpoints">{['start','chest','helmet','suit','about','work','landing'].map(stage=><button type="button" key={stage} onClick={()=>seek.current(stage)}>{stage}</button>)}</nav>}</>;
