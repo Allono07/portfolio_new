@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import BinaryEyeBar from './BinaryEyeBar.jsx';
 import { EYE_BAR, HEAD, PORTRAIT } from './calibration.js';
 import useReducedMotion from '../../hooks/useReducedMotion.js';
@@ -6,6 +6,25 @@ export default function Portrait() {
   const ref = useRef(null);
   const reduced = useReducedMotion();
   const [debug, setDebug] = useState(false);
+  useLayoutEffect(() => {
+    const stage = ref.current.parentElement;
+    const hero = stage.closest('.hero');
+    const alignOrbit = () => {
+      // Use portrait coordinates so tall and folded screens cannot expose the glow.
+      const eyeY = stage.offsetTop + stage.offsetHeight * (EYE_BAR.y + EYE_BAR.h / 2) / 100;
+      hero.style.setProperty('--portrait-eye-y', `${eyeY}px`);
+      hero.style.setProperty('--blackhole-size', `${stage.offsetWidth * .30}px`);
+    };
+    alignOrbit();
+    const observer = new ResizeObserver(alignOrbit);
+    observer.observe(stage);
+    observer.observe(hero);
+    return () => {
+      observer.disconnect();
+      hero.style.removeProperty('--portrait-eye-y');
+      hero.style.removeProperty('--blackhole-size');
+    };
+  }, []);
   useEffect(() => {
     if (!import.meta.env.DEV) return;
     const onKey = event => { if (event.key.toLowerCase() === 'd' && !/INPUT|TEXTAREA/.test(event.target.tagName)) setDebug(value => !value); };

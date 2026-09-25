@@ -65,3 +65,12 @@ html{scrollbar-gutter:auto;scroll-padding-top:90px}body{background:var(--paper);
   .site-header .site-audio-toggle--expanded .site-audio-credit{max-width:none;margin:0;visibility:visible;opacity:1}
   .site-header .menu-toggle,.site-header .theme-switch{flex-shrink:0}
 }
+
+/* Center the rings on the face and keep the entire glow inside its silhouette. */
+.hero-orbit{top:var(--portrait-eye-y,51%)}
+.orbit-blackhole{width:var(--blackhole-size,0px);height:auto;aspect-ratio:1}
+/* Give the SVG star its own space above the last letter. */
+.name-asterisk{font-size:.2em;top:-25px;right:0;line-height:1}
+@media(max-width:760px){
+  .name-asterisk{font-size:.42em;top:0;right:0}
+}
