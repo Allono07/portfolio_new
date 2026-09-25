@@ -12,7 +12,7 @@ export default function Portrait() {
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, []);
   useEffect(() => {
-    if (reduced || !matchMedia('(pointer: fine)').matches) return;
+    if (reduced || !matchMedia('(pointer: fine) and (min-width: 761px)').matches) return;
     const visual = ref.current;
     const hero = visual.closest('.hero');
     const move = e => { if(window.scrollY > 100) { visual.style.transform = ''; return; } const bounds = hero.getBoundingClientRect(); visual.style.transform = `translate(${(e.clientX / bounds.width - .5) * 5}px,${(e.clientY / bounds.height - .5) * 3}px)`; };
@@ -20,5 +20,5 @@ export default function Portrait() {
     hero.addEventListener('pointermove', move); hero.addEventListener('pointerleave', reset);
     return () => { hero.removeEventListener('pointermove', move); hero.removeEventListener('pointerleave', reset); reset(); };
   }, [reduced]);
-  return <div className="portrait-stage"><div ref={ref} className="portrait-visual"><img className="hero-portrait" src={PORTRAIT.src} alt="Allen Thomson, monochrome portrait with a binary eye bar" width={PORTRAIT.width} height={PORTRAIT.height} fetchpriority="high"/><BinaryEyeBar/></div>{debug && <div className="calibration-debug" aria-hidden="true">{Object.entries({ HEAD, EYE_BAR }).map(([name,box])=><div key={name} style={{left:`${box.x}%`,top:`${box.y}%`,width:`${box.w}%`,height:`${box.h}%`}}>{name}</div>)}<span style={{top:`${HEAD.shoulderY}%`}}>SHOULDER / PRESS D TO HIDE</span></div>}</div>;
+  return <div className="portrait-stage" style={{ aspectRatio: `${PORTRAIT.width} / ${PORTRAIT.height}` }}><div ref={ref} className="portrait-visual"><img className="hero-portrait" src={PORTRAIT.src} alt="Allen Thomson, monochrome portrait with a binary eye bar" width={PORTRAIT.width} height={PORTRAIT.height} fetchpriority="high"/><BinaryEyeBar/></div>{debug && <div className="calibration-debug" aria-hidden="true">{Object.entries({ HEAD, EYE_BAR }).map(([name,box])=><div key={name} style={{left:`${box.x}%`,top:`${box.y}%`,width:`${box.w}%`,height:`${box.h}%`}}>{name}</div>)}<span style={{top:`${HEAD.shoulderY}%`}}>SHOULDER / PRESS D TO HIDE</span></div>}</div>;
 }
