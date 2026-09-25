@@ -58,6 +58,9 @@ html{scrollbar-gutter:auto;scroll-padding-top:90px}body{background:var(--paper);
 /* SVG symbols stay monochrome on platforms that render Unicode as emoji. */
 .hero-symbol{display:block;width:1em;height:1em}
 .ui-arrow{display:inline-block;width:.9em;height:.9em;flex-shrink:0;vertical-align:-.12em}
+.nav-contact .ui-arrow{margin-left:24px}
+.primary-cta .ui-arrow{width:20px;height:20px}
+.footer-signature .ui-arrow{width:.65em;height:.65em}
 .cta-arrow{width:20px;height:20px;flex-shrink:0}
 @media(max-width:760px){
   .site-header .site-audio{position:relative;flex:0 0 34px;width:34px;height:34px}
