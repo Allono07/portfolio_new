@@ -1,0 +1,54 @@
+.orbit-reel{--reel-paper:#f4f4f0;--reel-ink:#11120f;--reel-rule:#c9cac2;min-height:100svh;background:var(--reel-paper);color:var(--reel-ink);font-family:'Helvetica Neue',Arial,sans-serif;overflow:hidden;isolation:isolate}
+.reel-frame{width:min(100%,510px);min-height:100svh;margin:auto;padding:calc(24px + env(safe-area-inset-top)) 26px calc(22px + env(safe-area-inset-bottom));display:flex;flex-direction:column;box-sizing:border-box}
+.reel-masthead,.reel-subline,.reel-coordinate,.reel-feature-label,.reel-baseline,.reel-orbit-label{font-family:var(--mono);font-size:8px;letter-spacing:.06em;line-height:1.4}
+.reel-masthead{display:flex;justify-content:space-between;border-top:2px solid var(--reel-ink);padding-top:11px;gap:10px}
+.reel-title{font-size:clamp(48px,15.5vw,80px);font-weight:800;line-height:.85;letter-spacing:-.075em;margin:31px 0 18px}
+.reel-title>span{display:block;white-space:nowrap}.reel-title i{font-style:normal;font-weight:400}.reel-title-dot{color:#a95328}
+.reel-subline{display:flex;justify-content:space-between;gap:12px;font-size:7px}
+.reel-universe{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:290px;margin:15px -10px 14px}
+.reel-system{position:relative;width:100%;aspect-ratio:1;max-width:420px}
+.reel-ring{position:absolute;border:1px solid var(--reel-rule);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.reel-ring-1{width:32%;height:32%}.reel-ring-2{width:51%;height:51%}.reel-ring-3{width:72%;height:72%}.reel-ring-4{width:94%;height:94%;border-style:dashed;opacity:.65}
+.reel-axis{position:absolute;background:var(--reel-rule);opacity:.4}.reel-axis-x{left:0;right:0;height:1px;top:50%}.reel-axis-y{top:0;bottom:0;width:1px;left:50%}
+.reel-core{position:absolute;width:32%;aspect-ratio:1;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;mix-blend-mode:multiply;animation:reel-breathe 6s ease-in-out infinite}
+.reel-core img{display:block;width:100%;height:100%}
+.reel-trajectory{position:absolute;inset:0;animation:reel-orbit var(--period) linear infinite;transform:rotate(var(--phase));pointer-events:none}
+.reel-planet{position:absolute;width:var(--planet-size);height:var(--planet-size);left:calc(50% + var(--radius));top:50%;margin-left:calc(var(--planet-size) / -2);margin-top:calc(var(--planet-size) / -2)}
+.reel-planet img{display:block;width:100%;height:100%;object-fit:contain;animation:reel-counterorbit var(--period) linear infinite;filter:drop-shadow(2px 4px 3px #0002)}
+.reel-trajectory-1{--radius:16%}.reel-trajectory-2{--radius:25.5%}.reel-trajectory-3{--radius:36%}.reel-trajectory-4{--radius:47%}
+.reel-coordinate{position:absolute;left:0;right:0;display:flex;justify-content:space-between;align-items:center;font-size:15px;color:#707469}.reel-coordinate span{font-size:7px}.reel-coordinate-top{top:0}.reel-coordinate-bottom{bottom:0}.reel-orbit-label{position:absolute;bottom:16%;right:1%;font-size:6px;writing-mode:vertical-rl;color:#707469}
+.reel-footer{border-top:1px solid var(--reel-ink);padding-top:13px}
+.reel-feature-label{display:flex;justify-content:space-between;align-items:center;font-size:7px}.reel-live-dot{width:5px;height:5px;border-radius:50%;background:#a95328;box-shadow:0 0 0 3px #a9532815}
+.reel-feature{font-size:clamp(28px,8.7vw,45px);font-weight:750;letter-spacing:-.055em;line-height:1;margin:12px 0 9px}.reel-feature>span{font-weight:300;color:#777d70;padding:0 .1em}
+.reel-caption{font-size:12px;line-height:1.4;margin:0 0 19px;color:#53584f}
+.reel-baseline{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--reel-rule);padding-top:12px;font-size:6px}.reel-signal{display:flex;align-items:center;height:18px;gap:2px}.reel-signal i{display:block;width:2px;height:12px;background:#878e7c;animation:reel-signal 2s ease-in-out var(--delay) infinite}
+@keyframes reel-orbit{to{transform:rotate(calc(var(--phase) + 360deg))}}@keyframes reel-counterorbit{from{transform:rotate(calc(-1 * var(--phase)))}to{transform:rotate(calc(-1 * var(--phase) - 360deg))}}@keyframes reel-breathe{50%{opacity:.75;transform:translate(-50%,-50%) scale(.94)}}@keyframes reel-signal{50%{transform:scaleY(.25)}}
+@media(max-height:740px) and (max-width:600px){.reel-frame{padding:18px 22px}.reel-title{font-size:14vw;margin:23px 0 14px}.reel-universe{min-height:230px;margin:10px -8px}.reel-system{width:min(100%,36svh)}.reel-caption{font-size:10px;margin-bottom:10px}.reel-feature{font-size:29px;margin:9px 0 7px}.reel-footer{padding-top:9px}}
+@media(min-width:600px){.orbit-reel{background:#deded7}.reel-frame{background:var(--reel-paper);box-shadow:0 0 80px #00000008}}
+@media(prefers-reduced-motion:reduce){.orbit-reel *{animation:none!important}}
+
+.reel-feature{display:flex;justify-content:space-between;align-items:center}.reel-feature svg{width:.8em;height:.8em;color:#777d70}
+
+/* A centered statement bridges the headline and the moving orbital study. */
+.reel-title{margin-bottom:22px}
+.reel-statement{text-align:center}
+.reel-statement-kicker{display:flex;align-items:center;gap:12px;font:7px var(--mono);letter-spacing:.12em;color:#777d70}
+.reel-statement-kicker>span{flex:1;height:1px;background:var(--reel-rule)}
+.reel-statement h2{font-size:clamp(24px,7.3vw,36px);font-weight:800;letter-spacing:-.045em;line-height:1.07;margin:13px -6px 9px}
+.reel-statement h2 em{font-style:normal;color:#a95328}
+.reel-statement p{margin:0;font:8px var(--mono);letter-spacing:.025em;color:#53584f}
+.reel-universe{margin-top:20px;min-height:280px}
+.reel-process{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:17px}
+.reel-process>span{font-size:21px;font-weight:700;letter-spacing:-.04em;line-height:1.3}
+.reel-process>span+span{border-left:1px solid var(--reel-rule);padding-left:14px}
+.reel-process small{display:block;font:6px var(--mono);letter-spacing:.04em;color:#707469;margin-bottom:5px}
+@media(max-height:740px) and (max-width:600px){
+ .reel-title{margin-top:18px;margin-bottom:17px;font-size:13vw}
+ .reel-statement h2{font-size:25px;margin-top:9px;margin-bottom:7px}
+ .reel-statement p{font-size:7px}
+ .reel-universe{min-height:215px;margin-top:14px}
+ .reel-system{width:min(100%,34svh)}
+ .reel-process{margin-bottom:10px}.reel-process>span{font-size:18px}
+ .reel-baseline{padding-top:8px}
+}
+@media(min-height:741px) and (max-width:600px){.reel-system{width:min(100%,39svh)}.reel-title{margin-top:26px}}

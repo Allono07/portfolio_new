@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage.js';
 import { initGtag, GA_MEASUREMENT_ID } from './firebase.js';
 import { initWebVitalsMonitoring } from './utils/webVitals.js';
 
+const OrbitReel = lazy(() => import('./pages/OrbitReel.jsx'));
+
 // Lazy load route components for code splitting
 const BlogLibraryPage = lazy(() => import('./pages/BlogLibraryPage.js'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage.js'));
@@ -68,6 +70,7 @@ export default function App() {
 
   return (
     <Routes>
+      <Route path="instagram" element={<Suspense fallback={<PageFallback />}><OrbitReel /></Suspense>} />
       <Route element={<CinematicShell />}>
         <Route index element={<HomePage />} />
         <Route path="portfolio" element={<Suspense fallback={<PageFallback />}><PortfolioPage /></Suspense>} />
