@@ -1,11 +1,11 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { DESIGN_KEY, PLANETS, SHOP_ASSETS, SHOP_PRICE, formatShopPrice, designSummary, readDesign } from '../components/shop/shopConfig.js';
 import './ShopPage.css';
 
-const ShirtViewer = lazy(() => import('../components/shop/ShirtViewer.jsx'));
 const productPath = '/shop/oxford';
 const A = SHOP_ASSETS;
+const phonePattern = Array.from({ length: 12 }, (_, index) => ({ image: index % 3 + 1, position: index + 1 }));
 function Arrow({ down = false }) {
   return <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true" style={down ? { transform: 'rotate(90deg)' } : undefined}><path d="M4 12h15M12 5l7 7-7 7" /></svg>;
 }
@@ -28,7 +28,7 @@ function ShopShell({ children, product }) {
   const [motion, setMotion] = useState(true);
   useEffect(() => {
     const previous = document.title;
-    document.title = product ? 'The Orbit Oxford — Beyond' : 'Beyond — An otherworldly Oxford';
+    document.title = product ? 'The Orbit Oxford — After Life Theory Labs' : 'After Life Theory Labs — The Orbit Oxford';
     window.scrollTo(0, 0);
     return () => { document.title = previous; };
   }, [pathname, product]);
@@ -43,21 +43,21 @@ function ShopShell({ children, product }) {
   return <div className={`shop ${motion ? '' : 'shop-motion-paused'}`} ref={root}>
     <a className="shop-skip" href="#shop-main">Skip to content</a>
     <header className="shop-header">
-      <Link to="/shop" className="shop-brand" aria-label="Beyond shop home"><OrbitMark/><span>BEYOND<small>SILICON & BINARY</small></span></Link>
+      <Link to="/shop" className="shop-brand" aria-label="After Life Theory Labs shop home"><OrbitMark/><span>AFTER LIFE THEORY LABS</span></Link>
       <nav aria-label="Shop navigation"><Link to="/shop" aria-current={!product ? 'page' : undefined}>The collection</Link><Link to={productPath} className="shop-nav-cta">Make it yours <Arrow/></Link></nav>
     </header>
     <main id="shop-main">{children}</main>
-    <footer className="shop-footer"><div className="shop-footer-top"><Link to="/shop" className="shop-brand"><OrbitMark/><span>BEYOND<small>SILICON & BINARY</small></span></Link><p>For those who never quite<br/>felt from around here.</p><Link to={productPath}>Find your orbit <Arrow/></Link></div><div className="shop-footer-bottom"><Link to="/">An exploration by Allen Thomson <span>↗</span></Link><span>COLLECTION 001 / CONCEPT EDITION</span><button onClick={() => setMotion(!motion)} aria-pressed={!motion}>{motion ? 'Pause' : 'Resume'} ambient motion</button></div></footer>
+    <footer className="shop-footer"><div className="shop-footer-top"><Link to="/shop" className="shop-brand"><OrbitMark/><span>AFTER LIFE THEORY LABS</span></Link><p>For those who never quite<br/>felt from around here.</p><Link to={productPath}>Find your orbit <Arrow/></Link></div><div className="shop-footer-bottom"><Link to="/">An exploration by Allen Thomson <span>↗</span></Link><span>COLLECTION 001 / CONCEPT EDITION</span><button onClick={() => setMotion(!motion)} aria-pressed={!motion}>{motion ? 'Pause' : 'Resume'} ambient motion</button></div></footer>
   </div>;
 }
 
 function Collection() {
   return <ShopShell>
-    <section className="shop-hero">
-      <div className="shop-hero-copy"><p className="shop-eyebrow"><span className="shop-dot"/> COLLECTION 001 — THE ORBIT OXFORD</p><h1>Earthly form.<br/><em>Otherworldly</em><br/>details.</h1><p className="shop-intro">A familiar Oxford. A different kind of energy.<br/>Angel wings at the collar. A world of your own.</p><ShopPrice/><Link className="shop-button shop-button-dark" to={productPath}>Discover your Oxford <Arrow/></Link><div className="shop-hero-edition"><span>01 / 01</span><span>ONE SHIRT.<br/>YOUR UNIVERSE.</span></div></div>
+    <section className="shop-hero"><div className="shop-hero-phone-pattern" aria-hidden="true">{phonePattern.map(({ image, position }) => <img key={position} className={`phone-pattern-${position}`} src={`${A}phone${image}.png`} alt="" width="1122" height="1402"/>)}</div>
+      <div className="shop-hero-copy"><p className="shop-eyebrow"><span className="shop-dot"/> COLLECTION 001 — THE ORBIT OXFORD</p><h1>Earthly form.<br/><em>Otherworldly</em><br/>details.</h1><p className="shop-intro">A different kind of energy.<br/>Angel wings and a world of your own.</p><ShopPrice/><Link className="shop-button shop-button-dark" to={productPath}>Discover yours <Arrow/></Link><div className="shop-hero-edition"><span>01 / 01</span><span>ONE SHIRT.<br/>YOUR UNIVERSE.</span></div></div>
       <div className="shop-hero-stage"><div className="shop-orbit shop-orbit-one"/><div className="shop-orbit shop-orbit-two"/><span className="shop-stage-top shop-eyebrow">OBJECT OF CURIOSITY — 001</span><div className="shop-floating-shirt"><img src={`${A}shirt.png`} alt="Forest-green Oxford with ivory embroidered collar wings and a Jupiter button" fetchpriority="high"/><span className="shop-shirt-label"><i/> FOREST GREEN / OXFORD</span></div><div className="shop-orbit-dot"><Planet id="jupiter"/></div><span className="shop-stage-cross">+</span><span className="shop-stage-bottom shop-eyebrow">FAMILIAR, UNTIL YOU LOOK CLOSER.</span><a href="#shop-details" className="shop-scroll" aria-label="Explore the details"><Arrow down/></a></div>
     </section>
-    <div className="shop-manifesto-strip"><span>A CLASSIC, REIMAGINED.</span><span>EMBROIDERED WINGS</span><OrbitMark/><span>YOUR PLANET. YOUR SIGNATURE.</span><span>BEYOND THE ORDINARY.</span></div>
+    <div className="shop-manifesto-strip"><span>A CLASSIC, REIMAGINED.</span><span>EMBROIDERED WINGS</span><OrbitMark/><span>YOUR PLANET. YOUR SIGNATURE.</span><span>AFTER THE ORDINARY.</span></div>
     <section className="shop-details" id="shop-details">
       <div className="shop-section-heading" data-shop-reveal><p className="shop-eyebrow">01 / A CLOSER ENCOUNTER</p><h2>The difference<br/>is in the <em>details.</em></h2><p>Some things belong to you<br/>before they ever have your name on them.</p></div>
       <div className="shop-detail-grid">
@@ -86,7 +86,6 @@ function Product() {
     return PLANETS.some(p => p.id === planet) ? { ...saved, planet } : saved;
   });
   const [active, setActive] = useState(0);
-  const [model, setModel] = useState(false);
   const [status, setStatus] = useState('');
   const selected = PLANETS.find(p => p.id === design.planet);
   const choose = change => { setDesign(d => ({ ...d, ...change })); setStatus(''); };
@@ -96,16 +95,15 @@ function Product() {
   };
   const download = () => {
     const url = URL.createObjectURL(new Blob([designSummary(design)], { type: 'text/plain' }));
-    const link = document.createElement('a'); link.href = url; link.download = 'beyond-orbit-oxford.txt'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    const link = document.createElement('a'); link.href = url; link.download = 'after-life-theory-labs-orbit-oxford.txt'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
   return <ShopShell product>
     <div className="shop-product-topline"><Link to="/shop">← The collection</Link><span>OBJECT 001 / THE ORBIT OXFORD</span></div>
     <section className="shop-product">
-      <div className="shop-gallery"><div className={`shop-gallery-main ${model ? 'is-model' : ''}`}>
-        {model ? <Suspense fallback={<div className="shop-model-message" role="status">Opening the 3D study…</div>}><ShirtViewer wings={design.wings} planet={design.planet}/></Suspense> : <img key={active} src={`${A}${gallery[active].src}`} alt={gallery[active].alt} fetchpriority="high"/>}
-        <div className="shop-view-switch" role="group" aria-label="Product view"><button aria-pressed={!model} onClick={() => setModel(false)}>Photography</button><button aria-pressed={model} onClick={() => setModel(true)}>3D prototype <span>↗</span></button></div>
-        {!model && <span className="shop-gallery-label shop-eyebrow">{String(active + 1).padStart(2, '0')} / {gallery[active].name.toUpperCase()}</span>}
-      </div><div className="shop-thumbnails" role="group" aria-label="Product photographs">{gallery.map((photo, index) => <button key={photo.src} onClick={() => { setActive(index); setModel(false); }} aria-pressed={active === index && !model} aria-label={`Show ${photo.name.toLowerCase()}`}><img src={`${A}${photo.src}`} alt=""/><span>{photo.name}</span></button>)}</div><p className="shop-gallery-note">Photos show the Wings + Jupiter concept. The structural 3D prototype previews your choices; its shape and materials are not the final garment.</p></div>
+      <div className="shop-gallery"><div className="shop-gallery-main">
+        <img key={active} src={`${A}${gallery[active].src}`} alt={gallery[active].alt} fetchpriority="high"/>
+        <span className="shop-gallery-label shop-eyebrow">{String(active + 1).padStart(2, '0')} / {gallery[active].name.toUpperCase()}</span>
+      </div><div className="shop-thumbnails" role="group" aria-label="Product photographs">{gallery.map((photo, index) => <button key={photo.src} onClick={() => setActive(index)} aria-pressed={active === index} aria-label={`Show ${photo.name.toLowerCase()}`}><img src={`${A}${photo.src}`} alt=""/><span>{photo.name}</span></button>)}</div><p className="shop-gallery-note">Product photographs show the Wings + Jupiter concept; explore the gallery for the embroidery and button details.</p></div>
       <div className="shop-config"><p className="shop-eyebrow"><span className="shop-dot"/> COLLECTION 001 / DESIGN PREVIEW</p><h1>The Orbit<br/><em>Oxford.</em></h1><ShopPrice/><p className="shop-product-description">An everyday silhouette with a universe of its own. Forest-green Oxford, an easy regular-to-relaxed fit, and details that make it unmistakably yours.</p><div className="shop-color-line"><i/> Forest green <span>01 / 01</span></div>
         <fieldset className="shop-option"><legend><span>01</span> The collar</legend><div className="shop-wings-options"><button aria-pressed={design.wings} onClick={() => choose({ wings: true })}><span>Angel wings</span><small>Ivory embroidery</small></button><button aria-pressed={!design.wings} onClick={() => choose({ wings: false })}><span>Keep it classic</span><small>Plain collar</small></button></div></fieldset>
         <fieldset className="shop-option"><legend><span>02</span> Your planet <strong>{selected.name}</strong></legend><div className="shop-planet-options">{PLANETS.map(p => <button key={p.id} aria-pressed={design.planet === p.id} aria-label={`${p.name} button`} onClick={() => choose({ planet: p.id })}><Planet id={p.id}/><span>{p.name}</span></button>)}</div><p className="shop-option-caption">{selected.caption} <span>Magnetic detail · Second button position.</span></p></fieldset>

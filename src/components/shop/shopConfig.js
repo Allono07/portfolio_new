@@ -25,5 +25,5 @@ export function readDesign(storage) {
 }
 export function designSummary({ planet, wings }) {
   const name = PLANETS.find(p => p.id === planet)?.name || 'Jupiter';
-  return `BEYOND — THE ORBIT OXFORD\n\nCurrent price: ${formatShopPrice(SHOP_PRICE.current)}\nRegular price: ${formatShopPrice(SHOP_PRICE.regular)}\nSavings: ${formatShopPrice(SHOP_PRICE.regular - SHOP_PRICE.current)}\nCurrency: ${SHOP_PRICE.currency}\n\nColor: Forest green\nFit direction: Regular / relaxed\nCollar: ${wings ? 'Ivory angel-wing embroidery' : 'Plain'}\nMagnetic button: ${name}\nPlacement: Second button, counting the collar-band button as first\n\nConcept configuration only. This is not an order.\nSizing, availability, and final construction are to be confirmed.\n`;
+  return `AFTER LIFE THEORY LABS — THE ORBIT OXFORD\n\nCurrent price: ${formatShopPrice(SHOP_PRICE.current)}\nRegular price: ${formatShopPrice(SHOP_PRICE.regular)}\nSavings: ${formatShopPrice(SHOP_PRICE.regular - SHOP_PRICE.current)}\nCurrency: ${SHOP_PRICE.currency}\n\nColor: Forest green\nFit direction: Regular / relaxed\nCollar: ${wings ? 'Ivory angel-wing embroidery' : 'Plain'}\nMagnetic button: ${name}\nPlacement: Second button, counting the collar-band button as first\n\nConcept configuration only. This is not an order.\nSizing, availability, and final construction are to be confirmed.\n`;
 }
