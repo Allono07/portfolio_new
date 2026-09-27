@@ -74,3 +74,49 @@
  .shop-hero-phone-pattern .phone-pattern-11{height:14%;left:68%;top:70%}
  .shop-hero-phone-pattern .phone-pattern-12{height:14%;left:36%;top:84%}
 }
+
+/* A slow editorial dissolve moves from the garment study to the worn look. */
+.shop-hero-reel{aspect-ratio:1183/1329;overflow:hidden;box-shadow:none}
+.shop-hero-reel .shop-reel-frame{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;will-change:opacity,transform}
+.shop-hero-reel .shop-reel-shirt{opacity:1;animation:shop-reel-shirt 14s ease-in-out infinite}
+.shop-hero-reel .shop-reel-model{opacity:0;object-fit:contain;object-position:center center;mask-image:none;animation:shop-reel-model 14s ease-in-out infinite}
+.shop-hero-reel .shop-shirt-label{z-index:4;transition:none}
+.shop-hero-reel .shop-shirt-label-shirt{animation:shop-reel-label-shirt 14s ease-in-out infinite}
+.shop-hero-reel .shop-shirt-label-model{opacity:0;animation:shop-reel-label-model 14s ease-in-out infinite}
+@keyframes shop-reel-shirt{0%,34%{opacity:1;transform:scale(1)}43%,91%{opacity:0;transform:scale(.975)}100%{opacity:1;transform:scale(1)}}
+@keyframes shop-reel-model{0%,34%{opacity:0}44%,89%{opacity:1}100%{opacity:0}}
+@keyframes shop-reel-label-shirt{0%,34%{opacity:1}43%,91%{opacity:0}100%{opacity:1}}
+@keyframes shop-reel-label-model{0%,34%{opacity:0}44%,89%{opacity:1}100%{opacity:0}}
+@media(max-width:700px){.shop-hero-reel{width:68%;max-width:340px}}
+.shop-hero-stage{min-height:720px}
+.shop-floating-shirt.shop-hero-reel{width:80%;max-width:500px;overflow:visible;animation:none}
+.shop-hero-reel .shop-reel-model{inset:auto;left:50%;top:50%;width:100%;height:126%;max-width:none;transform:translate(-50%,-50%)}
+.shop-orbit-three{width:68%;transform:rotateX(18deg) rotateZ(12deg);border-style:solid}
+.shop-orbit-dot--jupiter{width:68%;animation-duration:24s}
+.shop-orbit-dot--mars{width:90%;animation-duration:34s;animation-direction:reverse}
+.shop-orbit-dot--moon{width:120%;animation-duration:48s}
+.shop-orbit-dot--jupiter>.shop-planet{width:34px}
+.shop-orbit-dot--mars>.shop-planet{width:30px}
+.shop-orbit-dot--moon>.shop-planet{width:22px}
+.shop-planet--moon{background-image:url('/assets/planets/moon.webp');background-size:cover;background-position:center}
+@media(max-width:700px){
+ .shop-hero{grid-template-rows:none;align-content:start;background:var(--shop-paper)}
+ .shop-hero-copy{display:contents}
+ .shop-hero-copy>*{position:relative;z-index:3}
+ .shop-hero-copy>.shop-eyebrow{grid-row:1;grid-column:1;padding:35px 24px 0}
+ .shop-hero-copy h1{grid-row:2;grid-column:1;padding:0 24px}
+ .shop-hero-stage{grid-row:3;grid-column:1;height:520px;min-height:0;margin:0 0 8px}
+ .shop-hero-copy>.shop-intro{grid-row:4;grid-column:1;padding:0 24px}
+ .shop-hero-copy>.shop-price{grid-row:5;grid-column:1;margin:17px 24px 0}
+ .shop-hero-copy>.shop-button{grid-row:6;grid-column:1;justify-self:start;margin:20px 24px 0}
+ .shop-hero-copy>.shop-hero-edition{position:relative;grid-row:7;grid-column:1;justify-self:end;margin:7px 24px 28px}
+ .shop-floating-shirt.shop-hero-reel{width:86%;max-width:370px}
+ .shop-orbit-three{width:65%}
+ .shop-orbit-dot--jupiter{width:65%}
+ .shop-orbit-dot--mars{width:85%}
+ .shop-orbit-dot--moon{width:110%}
+ .shop-orbit-dot--jupiter>.shop-planet{width:26px}
+ .shop-orbit-dot--mars>.shop-planet{width:24px}
+ .shop-orbit-dot--moon>.shop-planet{width:18px}
+}
+@media(max-width:360px){.shop-hero-stage{height:460px}.shop-floating-shirt.shop-hero-reel{width:86%;max-width:340px}}
