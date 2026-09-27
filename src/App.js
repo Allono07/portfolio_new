@@ -6,6 +6,7 @@ import { initGtag, GA_MEASUREMENT_ID } from './firebase.js';
 import { initWebVitalsMonitoring } from './utils/webVitals.js';
 
 const OrbitReel = lazy(() => import('./pages/OrbitReel.jsx'));
+const ShopPage = lazy(() => import('./pages/ShopPage.jsx'));
 
 // Lazy load route components for code splitting
 const BlogLibraryPage = lazy(() => import('./pages/BlogLibraryPage.js'));
@@ -26,6 +27,10 @@ function getScreenName(pathname) {
   switch (pathname) {
     case '/':
       return 'Home';
+    case '/shop':
+      return 'Shop';
+    case '/shop/oxford':
+      return 'OrbitOxford';
     case '/portfolio':
       return 'Portfolio';
     case '/forum':
@@ -70,6 +75,8 @@ export default function App() {
 
   return (
     <Routes>
+      <Route path="shop" element={<Suspense fallback={<PageFallback />}><ShopPage /></Suspense>} />
+      <Route path="shop/oxford" element={<Suspense fallback={<PageFallback />}><ShopPage /></Suspense>} />
       <Route path="instagram" element={<Suspense fallback={<PageFallback />}><OrbitReel /></Suspense>} />
       <Route element={<CinematicShell />}>
         <Route index element={<HomePage />} />

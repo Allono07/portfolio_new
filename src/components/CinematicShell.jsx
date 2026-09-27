@@ -56,7 +56,7 @@ export default function CinematicShell() {
     <footer className="editorial-footer">
       <Link className="footer-signature" to="/">Allen Thomson<ArrowIcon /></Link>
       <div className="footer-row"><p className="mono">SOFTWARE ENGINEER & TINKERER</p><SocialRail /></div>
-      <div className="footer-row footer-baseline"><p>© allenthomson.com</p><div className="footer-links"><Link to="/">Home</Link><Link to="/about">About</Link><Link to="/contact">Contact</Link><a href={resume} download>Résumé ↓</a><details className="reading-settings"><summary>Reading settings</summary><div><button onClick={decreaseFontSize} aria-label="Decrease reading text size">A−</button><button onClick={increaseFontSize} aria-label="Increase reading text size">A+</button><StatusBar /></div></details></div></div>
+      <div className="footer-row footer-baseline"><p>© allenthomson.com</p><div className="footer-links"><Link to="/">Home</Link><Link to="/about">About</Link><Link to="/contact">Contact</Link><Link to="/shop">Shop</Link><a href={resume} download>Résumé ↓</a><details className="reading-settings"><summary>Reading settings</summary><div><button onClick={decreaseFontSize} aria-label="Decrease reading text size">A−</button><button onClick={increaseFontSize} aria-label="Increase reading text size">A+</button><StatusBar /></div></details></div></div>
     </footer>
   </div>;
 }
