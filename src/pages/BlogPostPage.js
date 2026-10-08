@@ -446,6 +446,8 @@ export default function BlogPostPage() {
   const { postId } = useParams();
   const { fontScale } = useKindle();
   const [currentPage, setCurrentPage] = useState(0);
+  const readerContentRef = useRef(null);
+  const hasMountedPageRef = useRef(false);
   const [likeCount, setLikeCount] = useState(0);
   const [likedPosts, setLikedPosts] = useState(getStoredLikedPosts);
   const [likeError, setLikeError] = useState('');
@@ -457,6 +459,15 @@ export default function BlogPostPage() {
     setCurrentPage(0);
     setLikeError('');
   }, [fontScale, postId]);
+
+  useEffect(() => {
+    if (!hasMountedPageRef.current) {
+      hasMountedPageRef.current = true;
+      return;
+    }
+
+    readerContentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentPage]);
 
   useEffect(() => {
     if (!post) return undefined;
@@ -574,6 +585,7 @@ export default function BlogPostPage() {
       </div>
 
       <article
+        ref={readerContentRef}
         className="reader-page-sheet"
         style={{ fontSize: '1.02rem' }}
       >
@@ -582,8 +594,18 @@ export default function BlogPostPage() {
             return <p key={paragraph.slice(0, 32) + idx} style={{ whiteSpace: 'pre-wrap' }}>{paragraph}</p>;
           }
           if (paragraph.type === 'text') {
-            if (paragraph.content.startsWith('### ')) {
-              return <h3 key={'h3' + idx} style={{ marginTop: '2rem', marginBottom: '1rem' }}>{paragraph.content.replace('### ', '')}</h3>;
+            const headingMatch = paragraph.content.match(/^(#{2,3})\s+(.+)$/);
+            if (headingMatch) {
+              const Heading = headingMatch[1].length === 2 ? 'h2' : 'h3';
+              return (
+                <Heading
+                  key={`heading-${idx}`}
+                  className="reader-subheading"
+                  style={{ marginTop: '2rem', marginBottom: '1rem' }}
+                >
+                  {renderInlineLinks(headingMatch[2])}
+                </Heading>
+              );
             }
             return <p key={'txt' + idx} style={{ whiteSpace: 'pre-wrap' }}>{renderInlineLinks(paragraph.content)}</p>;
           }

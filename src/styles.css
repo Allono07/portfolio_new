@@ -2392,6 +2392,10 @@ body[data-theme='dark'] .social-rail--compact .social-rail-link:focus-visible {
   margin: 0 0 18px;
 }
 
+.reader-page-sheet .reader-subheading {
+  font-weight: 700;
+}
+
 .reader-footer {
   margin-top: 22px;
 }

@@ -130,6 +130,8 @@ export default function BlogLibraryPage() {
   return (
     <section className="page journal-page">
       <header className="journal-masthead">
+         <h1>BLOGS<span>.</span></h1>
+        
         {/* <div className="journal-overline"><span>THE JOURNAL / ALLEN THOMSON</span><span>{String(orderedPosts.length).padStart(2, '0')} ARTICLES & COUNTING</span></div> */}
         <div className="journal-introduction"><p>Ideas, experiments, and lessons from building software.</p></div>
       </header>
