@@ -48,7 +48,7 @@ export default function CinematicShell() {
       </div>}
       <button className="menu-toggle mono" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-nav">{menuOpen ? 'CLOSE −' : 'MENU +'}</button>
       <nav id="main-nav" className={`main-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Primary navigation">
-      <NavLink to="">Home</NavLink>  <NavLink to="/about">About</NavLink><NavLink to="/portfolio">Work</NavLink><Link to="/forum">Building</Link><NavLink to="/blog">Blogs</NavLink><NavLink to="/forum">Forum</NavLink><NavLink to="/contact" className="nav-contact">Let’s talk <ArrowIcon /></NavLink>
+      <NavLink to="">Home</NavLink>  <NavLink to="/about">About</NavLink><NavLink to="/portfolio">Work</NavLink><Link to="/forum">Building</Link><NavLink to="/blog">Blogs</NavLink><NavLink to="/forum">Forum</NavLink><NavLink to="/contact" className="nav-contact">Let’s talk </NavLink>
       </nav>
       <button className="theme-switch" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>{theme === 'dark' ? '◑' : '◐'}</button>
     </header>
