@@ -1,6 +1,21 @@
 export const blogPosts = [
 
   {
+    id: 'meili-map-matching-trashbuddy',
+    title: 'Meili for map matching at TrashBuddy',
+    date: 'October 8, 2026',
+    excerpt: 'Using road-aware map matching to separate a nearby vehicle from one that is actually approaching a resident. Checkout TrashBuddy at [trashbuddy.in](https://trashbuddy.in)',
+    content: [
+      { type: 'text', content: 'TrashBuddy helps residents know when a waste collection vehicle is close enough to matter. The challenge is not only distance — it is whether the vehicle is actually on the road serving that resident.' },
+      { type: 'text', content: 'A simple radius check can produce false positives in dense neighbourhoods. If three parallel roads sit within the same proximity circle, a truck moving along one lane can still look close to residents living on nearby lanes. That is why we are exploring Valhalla’s Meili map-matching engine to add road context to the decision.' },
+      { type: 'image', src: '/assets/docs/road-aware-alerts/01-parallel-road-problem.svg', alt: 'Three parallel streets with a proximity circle causing false-positive alerts.' },
+      { type: 'text', content: 'Meili does not treat each GPS point as a standalone coordinate. It evaluates a short sequence of observations and compares multiple candidate roads in order to find the path that best fits the movement. In practice, that lets us distinguish a vehicle that is actually travelling toward a resident from one that merely happens to be nearby.' },
+      { type: 'image', src: '/assets/docs/road-aware-alerts/04-map-matching-step-by-step.svg', alt: 'Map matching visual showing road candidates and the selected most likely path.' },
+      { type: 'text', content: 'For TrashBuddy, this is useful because the backend still owns the final policy: route context, direction, preferences, duplicates, and cooldowns all matter. The road match can improve the signal, but it should not replace the product decision logic. We want to test recorded journeys through parallel roads, intersections, and apartment entrances before turning this into a production alerting rule.' },
+      { type: 'text', content: 'The goal is simple: use map matching to answer a better question. Not “is a vehicle near me?” but “is this vehicle likely coming to me?”' },
+    ],
+  },
+  {
     id: 'redis-vs-kafka-trashbuddy',
     title: 'Why we picked Redis streams over kafka for TrashBuddy',
     date: 'August 3, 2026',

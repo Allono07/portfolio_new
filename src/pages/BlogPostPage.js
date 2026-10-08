@@ -368,6 +368,9 @@ function getParagraphWordCount(paragraph) {
   if (paragraph.type === 'text') {
     return paragraph.content.split(/\s+/).filter(Boolean).length;
   }
+  if (paragraph.type === 'image') {
+    return 5;
+  }
   if (paragraph.type === 'code') {
     return 10; // drastically reduce code block weight so it fits better
   }
@@ -583,6 +586,18 @@ export default function BlogPostPage() {
               return <h3 key={'h3' + idx} style={{ marginTop: '2rem', marginBottom: '1rem' }}>{paragraph.content.replace('### ', '')}</h3>;
             }
             return <p key={'txt' + idx} style={{ whiteSpace: 'pre-wrap' }}>{renderInlineLinks(paragraph.content)}</p>;
+          }
+          if (paragraph.type === 'image') {
+            return (
+              <figure key={'img' + idx} style={{ margin: '2rem 0', textAlign: 'center' }}>
+                <img
+                  src={paragraph.src}
+                  alt={paragraph.alt || ''}
+                  style={{ maxWidth: '100%', height: 'auto', borderRadius: '12px', display: 'block', margin: '0 auto' }}
+                />
+                {paragraph.caption ? <figcaption style={{ marginTop: '0.75rem', fontSize: '0.85rem', opacity: 0.8 }}>{paragraph.caption}</figcaption> : null}
+              </figure>
+            );
           }
           if (paragraph.type === 'code') {
             const renderedCode = renderCodeContent(paragraph.content, paragraph.lang);
